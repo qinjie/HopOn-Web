@@ -4,12 +4,8 @@
 ```
 CODE_INCORRECT_USERNAME = 0;
 CODE_INCORRECT_PASSWORD = 1;
-CODE_INCORRECT_DEVICE = 2;
 CODE_UNVERIFIED_EMAIL = 3;
-CODE_UNVERIFIED_DEVICE = 4;
-CODE_UNVERIFIED_EMAIL_DEVICE = 5;
 CODE_INVALID_ACCOUNT = 6;
-CODE_DUPLICATE_DEVICE = 7;
 CODE_INVALID_PASSWORD = 8;
 ```
 ###Common HTTP status
@@ -113,8 +109,7 @@ reset password successfully
     username: '1234',
     password: '123456',
     email: '123@mail.com',
-    role: (10: role user, 20: role student, 30: role teacher),
-    device_hash
+    role: (10: role user)
 }
 ```
 ####Response:
