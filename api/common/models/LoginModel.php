@@ -10,15 +10,13 @@ class LoginModel extends Model
 {
     public $username;
     public $password;
-    public $device_hash;
     private $_user;
 
     public function rules()
     {
         return [
-            [['username', 'password', 'device_hash'], 'required'],
+            [['username', 'password'], 'required'],
             ['password', 'validatePassword'],
-            ['device_hash', 'validateDevice'],
         ];
     }
 
@@ -27,13 +25,6 @@ class LoginModel extends Model
         $user = $this->getUser();
         if (!$this->errors && !$user->validatePassword($this->password)) {
             $this->addError($attribute, 'Incorrect password.');
-        }
-    }
-
-    public function validateDevice($attribute, $params) {
-        $user = $this->getUser();
-        if (!$this->errors && !$user->validateDevice($this->device_hash)) {
-            $this->addError($attribute, 'Incorrect device.');
         }
     }
 

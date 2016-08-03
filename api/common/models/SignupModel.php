@@ -14,7 +14,6 @@ class SignupModel extends Model
     public $password;
     public $role;
     public $profileImg;
-    public $device_hash;
 
     /**
      * @return array the validation rules.
@@ -35,9 +34,6 @@ class SignupModel extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
-            
-            ['device_hash', 'required'],
-            ['device_hash', 'string', 'max' => 255],
         ];
     }
 
@@ -52,7 +48,6 @@ class SignupModel extends Model
             $user->status = User::STATUS_WAIT_EMAIL_DEVICE;
             $user->role = $this->role;
             $user->name = User::$roles[$this->role];
-            $user->device_hash = $this->device_hash;
 
             if ($user->save()) {
                 $token = TokenHelper::createUserToken($user->id, TokenHelper::TOKEN_ACTION_ACTIVATE_ACCOUNT);
