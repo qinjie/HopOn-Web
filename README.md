@@ -30,8 +30,7 @@ CODE_INVALID_PASSWORD = 8;
 ```
 {
     username: '1234',
-    password: '123456',
-    device_hash
+    password: '123456'
 }
 ```
 ####Response:
@@ -47,10 +46,7 @@ CODE_INVALID_PASSWORD = 8;
   code: (
     0: CODE_INCORRECT_USERNAME,
     1: CODE_INCORRECT_PASSWORD,
-    2: CODE_INCORRECT_DEVICE,
     3: CODE_UNVERIFIED_EMAIL,
-    4: CODE_UNVERIFIED_DEVICE,
-    5: CODE_UNVERIFIED_EMAIL_DEVICE,
     6: CODE_INVALID_ACCOUNT
   )
 }
@@ -142,36 +138,4 @@ Authorization: 'Bearer <token>'
 ####Response:
 ```
 logout successfully
-```
-
-***
-
-###POST ```user/register-device```
-```
-=> Register new device for a user
-```
-####Header: None
-####Request:
-```
-{
-    username: '1234',
-    password: '123456',
-    device_hash
-}
-```
-####Response:
-- Success: 200
-```
-{}
-```
-- Error: 400
-```
-{
-  code: (
-    0: CODE_INCORRECT_USERNAME,
-    1: CODE_INCORRECT_PASSWORD,
-    6: CODE_INVALID_ACCOUNT,
-    7: CODE_DUPLICATE_DEVICE
-  )
-}
 ```
