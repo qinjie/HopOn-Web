@@ -10,17 +10,17 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-DROP DATABASE /*!32312 IF EXISTS*/`hop_on`;
+DROP DATABASE /*!32312 IF EXISTS*/`hop_on_test`;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `hop_on`
+-- Database: `hop_on_test`
 --
-CREATE DATABASE IF NOT EXISTS `hop_on` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `hop_on`;
+CREATE DATABASE IF NOT EXISTS `hop_on_test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `hop_on_test`;
 
 -- --------------------------------------------------------
 
@@ -71,46 +71,6 @@ CREATE TABLE IF NOT EXISTS `bicycle` (
   KEY `beacon_id` (`beacon_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `bicycle`
---
-
-INSERT INTO `bicycle` (`id`, `serial`, `bicycle_type_id`, `desc`, `station_id`, `beacon_id`, `created_at`, `updated_at`) VALUES
-(1, 'SG11111', 1, 'Hybrid', 1, 1, 1461214049, 1461926225),
-(2, 'SG11112', 1, 'Road', 1, 1, 1461214049, 1461926225),
-(3, 'SG11113', 21, 'Road', 1, 1, 1461214049, 1461926225),
-(4, 'SG11114', 2, 'Hybrid', 1, 2, 1461214049, 1461926225),
-(5, 'SG11115', 22, 'Road', 2, 2, 1461214049, 1461926225),
-(6, 'SG11116', 2, 'Hybrid', 2, 2, 1461214049, 1461926225),
-(7, 'SG11117', 3, 'Road', 2, 3, 1461214049, 1461926225),
-(8, 'SG11118', 23, 'Hybrid', 2, 3, 1461214049, 1461926225),
-(9, 'SG11119', 3, 'Road', 3, 4, 1461214049, 1461926225),
-(10, 'SG11121', 4, 'Hybrid', 3, 4, 1461214049, 1461926225),
-(11, 'SG11122', 24, 'BMX', 3, 4, 1461214049, 1461926225),
-(12, 'SG11123', 4, 'Road', 3, 4, 1461214049, 1461926225),
-(13, 'SG11124', 5, 'Hybrid', 4, 5, 1461214049, 1461926225),
-(14, 'SG11125', 25, 'Kids Bicycles', 4, 5, 1461214049, 1461926225),
-(15, 'SG11126', 5, 'Road', 4, 5, 1461214049, 1461926225),
-(16, 'SG11127', 6, 'Hybrid', 4, 5, 1461214049, 1461926225),
-(17, 'SG11128', 26, 'Road', 4, 1, 1461214049, 1461926225),
-(18, 'SG11129', 6, 'BMX', 4, 1, 1461214049, 1461926225),
-(19, 'SG11131', 7, 'Road', 1, 1, 1461214049, 1461926225),
-(20, 'SG11132', 7, 'Kids Bicycles', 1, 2, 1461214049, 1461926225),
-(21, 'SG11133', 7, 'Electric', 1, 2, 1461214049, 1461926225),
-(22, 'SG11134', 8, 'Kids Bicycles', 1, 2, 1461214049, 1461926225),
-(23, 'SG11135', 8, 'Electric', 2, 3, 1461214049, 1461926225),
-(24, 'SG11136', 8, 'Road', 2, 4, 1461214049, 1461926225),
-(25, 'SG11137', 9, 'Hybrid', 2, 3, 1461214049, 1461926225),
-(26, 'SG11138', 9, 'Kids Bicycles', 2, 3, 1461214049, 1461926225),
-(27, 'SG11139', 9, 'Kids Bicycles', 2, 3, 1461214049, 1461926225),
-(28, 'SG11141', 10, 'Kids Bicycles', 2, 3, 1461214049, 1461926225),
-(29, 'SG11142', 11, 'Kids Bicycles', 2, 3, 1461214049, 1461926225),
-(30, 'SG11143', 12, 'Kids Bicycles', 2, 3, 1461214049, 1461926225),
-(31, 'SG11144', 13, 'Kids Bicycles', 3, 3, 1461214049, 1461926225),
-(32, 'SG11145', 14, 'Kids Bicycles', 3, 5, 1461214049, 1461926225),
-(33, 'SG11146', 15, 'Kids Bicycles', 3, 5, 1461214049, 1461926225),
-(34, 'SG11147', 16, 'Kids Bicycles', 3, 5, 1461214049, 1461926225);
-
 -- --------------------------------------------------------
 
 --
@@ -145,38 +105,6 @@ CREATE TABLE IF NOT EXISTS `bicycle_type` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `bicycle_type`
---
--- Get from this: http://www.bicycle-and-bikes.com/bicycle-brands.html
-INSERT INTO `bicycle_type` (`id`, `brand`, `model`, `created_at`, `updated_at`) VALUES
-(1, 'Apollo Bikes', 'Hybrid', 1461214049, 1461926225),
-(2, 'Apollo Bikes', 'Road', 1461214049, 1461926225),
-(3, 'Avanti Bikes', 'Road', 1461214049, 1461926225),
-(4, 'Avanti Bikes', 'Hybrid', 1461214049, 1461926225),
-(5, 'Bianchi', 'Road', 1461214049, 1461926225),
-(6, 'Bianchi', 'Hybrid', 1461214049, 1461926225),
-(7, 'Cannondale', 'Road', 1461214049, 1461926225),
-(8, 'Cannondale', 'Hybrid', 1461214049, 1461926225),
-(9, 'Felt', 'Road', 1461214049, 1461926225),
-(10, 'Felt', 'Hybrid', 1461214049, 1461926225),
-(11, 'Felt', 'BMX', 1461214049, 1461926225),
-(12, 'Gary Fisher Bicycles', 'Road', 1461214049, 1461926225),
-(13, 'Gary Fisher Bicycles', 'Hybrid', 1461214049, 1461926225),
-(14, 'Fuji', 'Kids Bicycles', 1461214049, 1461926225),
-(15, 'Fuji', 'Road', 1461214049, 1461926225),
-(16, 'Fuji', 'Hybrid', 1461214049, 1461926225),
-(17, 'Giant', 'Road', 1461214049, 1461926225),
-(18, 'Giant', 'BMX', 1461214049, 1461926225),
-(19, 'Klein', 'Road', 1461214049, 1461926225),
-(20, 'Kona', 'Kids Bicycles', 1461214049, 1461926225),
-(21, 'Merida Bikes', 'Electric', 1461214049, 1461926225),
-(22, 'Merida Bikes', 'Kids Bicycles', 1461214049, 1461926225),
-(23, 'Raleigh Bicycles', 'Electric', 1461214049, 1461926225),
-(24, 'Specialized Bikes', 'Road', 1461214049, 1461926225),
-(25, 'Specialized Bikes', 'Hybrid', 1461214049, 1461926225),
-(26, 'Trek Bicycles', 'Kids Bicycles', 1461214049, 1461926225);
-
 -- --------------------------------------------------------
 
 --
@@ -195,10 +123,10 @@ CREATE TABLE IF NOT EXISTS `fcm_token` (
 -- Dumping data for table `fcm_token`
 --
 
--- INSERT INTO `fcm_token` (`id`, `mac_address`, `fcm_token`) VALUES
--- (1, 'f8:32:e4:5f:73:f5', 'dc86n3BhgNA:APA91bEvPWTIYfEsrslMqssHMfaYhVxzS-AZUfQVB_C-5wARMGEopGAGrygGWVyNWdqyHrRP3J1Eqi-QhzXIEoyq0ooAOD77i4DznhHs_9vOkIjrlPdfGigDzK-9unNXRmL1VeSXhx2d'),
--- (2, 'f8:32:e4:5f:77:4f', 'djleq6HkaI4:APA91bEo4zJcTajz6bGd408A1GiJlmqu8NLNet2LwEbiscxiB5QZQqiXbQyemJG0TImcuiwDfCHMh25pLxJrkUZxgzM6A0ZhmxJ3SqAO5ZHmiT7cC8yNjh5w39QNzyOyFAAtD6u818Dd'),
--- (3, 'f8:32:e4:5f:6f:35', 'f5CiuKWGqv8:APA91bHql73GfkH0U6yHeBg21EQpKH7iC3X17uoPyUhp3Wy3cAlWX7DEsKvq3njV-Z-pDvXVk0aggf9spkKodpr6NA4H-TCasmVytU_ghn54O1T0GX7UHf4YAUh1IPn3TZaGxm03i0aP');
+INSERT INTO `fcm_token` (`id`, `mac_address`, `fcm_token`) VALUES
+(1, 'f8:32:e4:5f:73:f5', 'dc86n3BhgNA:APA91bEvPWTIYfEsrslMqssHMfaYhVxzS-AZUfQVB_C-5wARMGEopGAGrygGWVyNWdqyHrRP3J1Eqi-QhzXIEoyq0ooAOD77i4DznhHs_9vOkIjrlPdfGigDzK-9unNXRmL1VeSXhx2d'),
+(2, 'f8:32:e4:5f:77:4f', 'djleq6HkaI4:APA91bEo4zJcTajz6bGd408A1GiJlmqu8NLNet2LwEbiscxiB5QZQqiXbQyemJG0TImcuiwDfCHMh25pLxJrkUZxgzM6A0ZhmxJ3SqAO5ZHmiT7cC8yNjh5w39QNzyOyFAAtD6u818Dd'),
+(3, 'f8:32:e4:5f:6f:35', 'f5CiuKWGqv8:APA91bHql73GfkH0U6yHeBg21EQpKH7iC3X17uoPyUhp3Wy3cAlWX7DEsKvq3njV-Z-pDvXVk0aggf9spkKodpr6NA4H-TCasmVytU_ghn54O1T0GX7UHf4YAUh1IPn3TZaGxm03i0aP');
 
 -- --------------------------------------------------------
 
@@ -256,16 +184,6 @@ CREATE TABLE IF NOT EXISTS `station` (
   PRIMARY KEY (`id`),
   KEY `beacon_id` (`beacon_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `station`
---
-
-INSERT INTO `station` (`id`, `name`, `address`, `latitude`, `longitude`, `postal`, `beacon_id`, `bicycle_count`, `created_at`, `updated_at`) VALUES
-(1, 'Ang Mo Kio', 'Ang Mo Kio MRT', 1.370015, 103.849446, '', 1, 30, 1461214049, 1461926225),
-(2, 'Mayflower', '253 Ang Mo Kio Street 21', 1.369732, 103.835231, '560253', 2, 20, 1461214049, 1461926225),
-(3, 'Yio Chu Kang', '3000 Ang Mo Kio Avenue 8', 1.381841, 103.844959, '569813', 3, 30, 1461214049, 1461926225),
-(4, 'Ang Mo Kio Garden', 'Opposite Ang Mo Kio Town Library, Ang Mo Kio Avenue 6', 1.374542, 103.843353, '567740', 4, 25, 1461214049, 1461926225);
 
 -- --------------------------------------------------------
 
@@ -325,8 +243,8 @@ CREATE TABLE IF NOT EXISTS `user_token` (
 -- Dumping data for table `user_token`
 --
 
--- INSERT INTO `user_token` (`id`, `user_id`, `token`, `title`, `ip_address`, `expire_date`, `created_date`, `updated_date`, `action`) VALUES
--- (25, 1, '5f6DYh6wbpMx2t9jR0j44lXJLKmQ0Kbk', 'ACTION_ACCESS', '116.99.174.136', '2016-09-01 15:24:56', '2016-08-02 15:24:56', '2016-08-02 15:24:56', 4);
+INSERT INTO `user_token` (`id`, `user_id`, `token`, `title`, `ip_address`, `expire_date`, `created_date`, `updated_date`, `action`) VALUES
+(25, 1, '5f6DYh6wbpMx2t9jR0j44lXJLKmQ0Kbk', 'ACTION_ACCESS', '116.99.174.136', '2016-09-01 15:24:56', '2016-08-02 15:24:56', '2016-08-02 15:24:56', 4);
 
 --
 -- Constraints for dumped tables
