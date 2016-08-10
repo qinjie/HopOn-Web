@@ -106,9 +106,10 @@ reset password successfully
 ####Request:
 ```
 {
-    username: '1234',
+    fullname: 'Tan Ah Boy',
     password: '123456',
     email: '123@mail.com',
+    mobile: '91234123',
     role: (10: role user)
 }
 ```
@@ -134,3 +135,78 @@ Authorization: 'Bearer <token>'
 ```
 logout successfully
 ```
+
+***
+
+###GET ```user/info```
+```
+=> Get info of current user
+```
+####Header:
+```
+Authorization: 'Bearer <token>'
+```
+####Request: None
+####Response:
+```
+{
+  "currentDate": "2016-08-10",
+  "fullname": "ADRIAN YOO",
+  "username": "1111",
+  "email": "1111@gmail.com"
+}
+```
+
+***
+
+###GET ```station/list-station```
+```
+=> Get list of stations
+```
+####Header:
+```
+Authorization: 'Bearer <token>'
+```
+####Request: None
+####Response:
+```
+[
+  {
+    "id": "1",
+    "name": "Ang Mo Kio",
+    "address": "Ang Mo Kio MRT",
+    "latitude": "1.370015",
+    "longitude": "103.849446",
+    "postal": "",
+    "bicycle_count": "30"
+  },
+  {
+    "id": "2",
+    "name": "Mayflower",
+    "address": "253 Ang Mo Kio Street 21",
+    "latitude": "1.369732",
+    "longitude": "103.835231",
+    "postal": "560253",
+    "bicycle_count": "20"
+  },
+  {
+    "id": "3",
+    "name": "Yio Chu Kang",
+    "address": "3000 Ang Mo Kio Avenue 8",
+    "latitude": "1.381841",
+    "longitude": "103.844959",
+    "postal": "569813",
+    "bicycle_count": "30"
+  },
+  {
+    "id": "4",
+    "name": "Ang Mo Kio Garden",
+    "address": "Opposite Ang Mo Kio Town Library, Ang Mo Kio Avenue 6",
+    "latitude": "1.374542",
+    "longitude": "103.843353",
+    "postal": "567740",
+    "bicycle_count": "25"
+  }
+]
+```
+

@@ -4,8 +4,6 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $user common\models\User */
-
-$confirmLink = Yii::$app->params['API_BASEURL'].'v1/user/confirm-email?token='.$token;
 ?>
 
 <!DOCTYPE html>
@@ -45,6 +43,9 @@ $confirmLink = Yii::$app->params['API_BASEURL'].'v1/user/confirm-email?token='.$
                 <td align="left" style="font-size: 20px; font-weight: bold;">
                   <?= Html::encode(Yii::$app->name) ?>
                 </td>
+                <td align="right">
+                  <img src="http://i.imgur.com/HOofG19.png" width="50" height="50" />
+                </td>
               </tr>
             </table>
           </td>
@@ -65,7 +66,7 @@ $confirmLink = Yii::$app->params['API_BASEURL'].'v1/user/confirm-email?token='.$
             <table border="0" cellpadding="0" cellspacing="0"  width="100%" style="font-weight: bold; font-size: 20px">
               <tr>
                 <td>
-                  Hi, <?= Html::encode($user->username) ?>!
+                  Dear, <?= Html::encode($user->fullname) ?>!
                 </td>
               </tr>
             </table>
@@ -85,16 +86,26 @@ $confirmLink = Yii::$app->params['API_BASEURL'].'v1/user/confirm-email?token='.$
         <tr>
           <td>
           	<p>
-            	Follow the link below to confirm your email address:
+            	Thank you for registering Hop On System. Please use the information below to activate your account:
             </p>
 						
 						<p>
-						<?= Html::a(Html::encode('Confirm Your Email'), $confirmLink) ?>
+              <strong>Activation Code: <?= $token ?></strong>
 						</p>
+
+            <p>
+              To contact Hop On Team, please email us at <?= Yii::$app->params['supportEmail'] ?>.
+            </p>
 
 						<p>
 							If you have not registered on our app, then simply delete this email.
 						</p>
+
+            <p>
+              Sincerely,<br />
+              Hop On Team<br />
+              <img src="http://i.imgur.com/HOofG19.png" width="50" height="50" style="margin-top: 10px" />
+            </p>
           </td>
         </tr>
       </table>

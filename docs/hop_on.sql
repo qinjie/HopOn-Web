@@ -265,7 +265,8 @@ INSERT INTO `station` (`id`, `name`, `address`, `latitude`, `longitude`, `postal
 (1, 'Ang Mo Kio', 'Ang Mo Kio MRT', 1.370015, 103.849446, '', 1, 30, 1461214049, 1461926225),
 (2, 'Mayflower', '253 Ang Mo Kio Street 21', 1.369732, 103.835231, '560253', 2, 20, 1461214049, 1461926225),
 (3, 'Yio Chu Kang', '3000 Ang Mo Kio Avenue 8', 1.381841, 103.844959, '569813', 3, 30, 1461214049, 1461926225),
-(4, 'Ang Mo Kio Garden', 'Opposite Ang Mo Kio Town Library, Ang Mo Kio Avenue 6', 1.374542, 103.843353, '567740', 4, 25, 1461214049, 1461926225);
+(4, 'Ang Mo Kio Garden', 'Opposite Ang Mo Kio Town Library, Ang Mo Kio Avenue 6', 1.374542, 103.843353, '567740', 4, 25, 1461214049, 1461926225),
+(5, 'NP Main Gate', '535 Clementi Road', 1.334284, 103.776649, '234235', 5, 10, 1461214049, 1461926225);
 
 -- --------------------------------------------------------
 
@@ -275,12 +276,11 @@ INSERT INTO `station` (`id`, `name`, `address`, `latitude`, `longitude`, `postal
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `fullname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `mobile` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `profileImg` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` smallint(6) NOT NULL DEFAULT '10',
   `role` smallint(6) NOT NULL DEFAULT '10',
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -288,17 +288,17 @@ CREATE TABLE IF NOT EXISTS `user` (
   `updated_at` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=53 ;
+  UNIQUE KEY `mobile` (`mobile`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=53;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `email`, `mobile`, `profileImg`, `status`, `role`, `name`, `created_at`, `updated_at`) VALUES
-(1, '1111', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '1111@gmail.com', NULL, NULL, 10, 10, 'user', 1461214049, 1461926225),
-(2, '2222', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '2222@gmail.com', NULL, NULL, 10, 10, 'user', 1461214049, 1461926225),
-(3, '3333', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '3333@gmail.com', NULL, NULL, 10, 10, 'user', 1461214049, 1461926225);
+INSERT INTO `user` (`id`, `fullname`, `auth_key`, `password_hash`, `email`, `mobile`, `status`, `role`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'ADRIAN YOO', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '1@mail.com', '1111', 10, 10, 'user', 1461214049, 1461926225),
+(2, 'MICHAEL YOO', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '2@mail.com', '2222', 10, 10, 'user', 1461214049, 1461926225),
+(3, 'ANTHONY CHEN', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '3@mail.com', '3333', 10, 10, 'user', 1461214049, 1461926225);
 
 -- --------------------------------------------------------
 

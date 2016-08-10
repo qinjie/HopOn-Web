@@ -36,7 +36,8 @@ class UserController extends CustomActiveController
 
         $behaviors['authenticator'] = [
             'class' => HttpBearerAuth::className(),
-            'except' => ['login', 'signup', 'confirm-email', 'reset-password'],
+            'except' => ['login', 'signup', 'confirm-email', 'reset-password',
+                'resend-email'],
         ];
 
         $behaviors['access'] = [
@@ -46,12 +47,13 @@ class UserController extends CustomActiveController
             ],
             'rules' => [
                 [   
-                    'actions' => ['login', 'signup', 'confirm-email', 'reset-password'],
+                    'actions' => ['login', 'signup', 'confirm-email', 'reset-password',
+                        'resend-email'],
                     'allow' => true,
                     'roles' => ['?'],
                 ],
                 [
-                    'actions' => ['logout', 'change-password'],
+                    'actions' => ['logout', 'change-password', 'info'],
                     'allow' => true,
                     'roles' => ['@'],
                 ]
@@ -105,7 +107,8 @@ class UserController extends CustomActiveController
     	$bodyParams = Yii::$app->request->bodyParams;
 
     	$model = new SignupModel();
-    	$model->username = $bodyParams['username'];
+    	$model->fullname = $bodyParams['fullname'];
+        $model->mobile = $bodyParams['mobile'];
     	$model->email = $bodyParams['email'];
     	$model->password = $bodyParams['password'];
         $model->role = isset($bodyParams['role']) ? $bodyParams['role'] : User::ROLE_USER;
@@ -115,6 +118,24 @@ class UserController extends CustomActiveController
                 'token' => $token->token,
             ];
 		}
+        throw new BadRequestHttpException('Invalid data');
+    }
+
+    public function actionResendEmail() {
+        $bodyParams = Yii::$app->request->bodyParams;
+        $email = $bodyParams['email'];
+        $user = User::findOne(['email' => $email]);
+        if ($user) {
+            $userToken = UserToken::findOne(['user_id' => $user->id, 'action' => TokenHelper::TOKEN_ACTION_ACTIVATE_ACCOUNT]);
+            if ($userToken) {
+                Yii::$app->mailer->compose(['html' => '@common/mail/emailConfirmToken-html'], ['user' => $user, 'token' => $userToken->token])
+                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                    ->setTo($email)
+                    ->setSubject('Email confirmation for ' . Yii::$app->name)
+                    ->send();
+                return 'resend email';
+            }
+        }
         throw new BadRequestHttpException('Invalid data');
     }
 
@@ -177,6 +198,15 @@ class UserController extends CustomActiveController
             return $this->redirect(Yii::$app->params['WEB_BASEURL'].'site/confirmation-success');
         }
         return $this->redirect(Yii::$app->params['WEB_BASEURL'].'site/confirmation-error');
+    }
+
+    public function actionInfo() {
+        $user = Yii::$app->user->identity;
+        return [
+            'currentDate' => date('Y-m-d'),
+            'username' => $user->username,
+            'email' => $user->email,
+        ];
     }
 
     // public function afterAction($action, $result)

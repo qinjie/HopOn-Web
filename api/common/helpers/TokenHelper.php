@@ -29,7 +29,9 @@ class TokenHelper
     {
         $model = new UserToken();
         $model->user_id = $userId;
-        $model->token = self::generateToken();
+        $length = 32;
+        if ($action == TokenHelper::TOKEN_ACTION_ACTIVATE_ACCOUNT) $length = 6;
+        $model->token = self::generateToken($length);
         $interval = 30 * 24 * 60 * 60;
         $model->expire_date = date('Y-m-d H:i:s', time() + $interval);
         $model->action = is_null($action) ? self::TOKEN_ACTION_ACCESS : $action;

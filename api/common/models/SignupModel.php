@@ -9,11 +9,11 @@ use Yii;
 
 class SignupModel extends Model
 {
-    public $username;
+    public $fullname;
     public $email;
     public $password;
     public $role;
-    public $profileImg;
+    public $mobile;
 
     /**
      * @return array the validation rules.
@@ -21,16 +21,19 @@ class SignupModel extends Model
     public function rules()
     {
         return [
-            ['username', 'filter', 'filter' => 'trim'],
-            ['username', 'required'],
-            ['username', 'unique', 'targetClass' => 'api\common\models\User', 'message' => 'This username has already been taken.'],
-            ['username', 'string', 'min' => 4, 'max' => 255],
+            ['fullname', 'filter', 'filter' => 'trim'],
+            ['fullname', 'required'],
+            ['fullname', 'string', 'min' => 4, 'max' => 255],
 
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => 'api\common\models\User', 'message' => 'This email address has already been taken.'],
+
+            ['mobile', 'filter', 'filter' => 'trim'],
+            ['mobile', 'required'],
+            ['mobile', 'unique', 'targetClass' => 'api\common\models\User', 'message' => 'This mobile phone has already been taken.'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
@@ -41,11 +44,11 @@ class SignupModel extends Model
     {
         if ($this->validate()) {
             $user = new User();
-            $user->username = $this->username;
+            $user->fullname = $this->fullname;
             $user->email = $this->email;
+            $user->mobile = $this->mobile;
             $user->setPassword($this->password);
-            $user->generateAuthKey();
-            $user->status = User::STATUS_WAIT_EMAIL_DEVICE;
+            $user->status = User::STATUS_WAIT_EMAIL;
             $user->role = $this->role;
             $user->name = User::$roles[$this->role];
 
@@ -59,9 +62,6 @@ class SignupModel extends Model
                     ->send();
 
                 return $user;
-            } else {
-                $errors = $user->getErrors();
-                return $errors;
             }
         }
 

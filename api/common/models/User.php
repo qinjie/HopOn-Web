@@ -15,7 +15,6 @@ use yii\db\Expression;
 class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_WAIT_EMAIL = 2;
-
     const STATUS_ACTIVE = 10;
     const STATUS_BLOCKED = 11;
     const STATUS_DELETED = 12;
@@ -49,16 +48,18 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['username', 'required', 'message' => 'Please enter an username.'],
-            ['username', 'match', 'pattern' => '#^[\w_-]+$#i', 'message' => 'Invalid username. Only alphanumeric characters are allowed.'],
-            ['username', 'unique', 'targetClass' => self::className(), 'message' => 'This username has already been taken.'],
-            ['username', 'string', 'min' => 4, 'max' => 255, 'message' => 'Min 4 characters; Max 255 characters.'],
+            ['fullname', 'required', 'message' => 'Please enter an fullname.'],
+            ['fullname', 'string', 'min' => 4, 'max' => 255, 'message' => 'Min 4 characters; Max 255 characters.'],
 
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required', 'message' => 'Please enter an email.'],
             ['email', 'email', 'message' => 'Invalid email address.'],
             ['email', 'unique', 'targetClass' => self::className(), 'message' => 'This email address has already been taken.'],
             ['email', 'string', 'max' => 255, 'message' => 'Max 255 characters.'],
+
+            ['mobile', 'filter', 'filter' => 'trim'],
+            ['mobile', 'required'],
+            ['mobile', 'unique', 'targetClass' => self::className(), 'message' => 'This mobile phone has already been taken.'],
             
             ['status', 'integer'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
@@ -102,11 +103,6 @@ class User extends ActiveRecord implements IdentityInterface
         } else {
             return null;
         }
-    }
-
-    public static function findByUsername($username)
-    {
-        return static::findOne(['username' => $username]);
     }
 
     public function getId()
