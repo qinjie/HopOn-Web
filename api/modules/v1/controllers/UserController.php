@@ -37,7 +37,7 @@ class UserController extends CustomActiveController
         $behaviors['authenticator'] = [
             'class' => HttpBearerAuth::className(),
             'except' => ['login', 'signup', 'confirm-email', 'reset-password',
-                'resend-email'],
+                'resend-email', 'activate'],
         ];
 
         $behaviors['access'] = [
@@ -48,7 +48,7 @@ class UserController extends CustomActiveController
             'rules' => [
                 [   
                     'actions' => ['login', 'signup', 'confirm-email', 'reset-password',
-                        'resend-email'],
+                        'resend-email', 'activate'],
                     'allow' => true,
                     'roles' => ['?'],
                 ],
@@ -113,10 +113,7 @@ class UserController extends CustomActiveController
     	$model->password = $bodyParams['password'];
         $model->role = isset($bodyParams['role']) ? $bodyParams['role'] : User::ROLE_USER;
 		if ($user = $model->signup()) {
-			$token = TokenHelper::createUserToken($user->id);
-			return [
-                'token' => $token->token,
-            ];
+            return 'register successfully';
 		}
         throw new BadRequestHttpException('Invalid data');
     }
@@ -137,6 +134,26 @@ class UserController extends CustomActiveController
             }
         }
         throw new BadRequestHttpException('Invalid data');
+    }
+
+    public function actionActivate() {
+        $bodyParams = Yii::$app->request->bodyParams;
+        $token = $bodyParams['token'];
+        $userId = TokenHelper::authenticateToken($token, true, TokenHelper::TOKEN_ACTION_ACTIVATE_ACCOUNT);
+        $user = User::findOne([
+            'id' => $userId, 
+            'status' => User::STATUS_WAIT_EMAIL,
+        ]);
+        if (!$user) throw new BadRequestHttpException('Invalid token');
+        $user->status = User::STATUS_ACTIVE;
+        UserToken::removeEmailConfirmToken($user->id);
+        if ($user->save()) {
+            $token = TokenHelper::createUserToken($user->id);
+            return [
+                'token' => $token->token,
+            ];
+        }
+        throw new BadRequestHttpException('Cannot change user status');
     }
 
     public function actionLogout() {
