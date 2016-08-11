@@ -64,7 +64,10 @@ CODE_INVALID_PASSWORD = 8;
 ```
 => Change password
 ```
-####Header: None
+####Header:
+```
+Authorization: 'Bearer <token>'
+```
 ####Request:
 ```
 {
