@@ -11,6 +11,7 @@ use api\common\models\SignupModel;
 use api\common\models\LoginModel;
 use api\common\models\ChangePasswordModel;
 use api\common\models\PasswordResetModel;
+use api\modules\v1\models\Bicycle;
 
 use Yii;
 use yii\filters\auth\HttpBearerAuth;
@@ -68,9 +69,14 @@ class StationController extends CustomActiveController
                    latitude, 
                    longitude, 
                    postal, 
-                   bicycle_count 
+                   bicycle_count, 
+                   (select count(bicycle.id)
+                    from bicycle
+                    where station_id = station.id 
+                    and status = :status) as available_bicycle 
              from station
         ')
+        ->bindValue(':status', Bicycle::STATUS_FREE)
         ->queryAll();
         $destinations = '';
         for ($iter = 0; $iter < count($listStation); ++$iter) {

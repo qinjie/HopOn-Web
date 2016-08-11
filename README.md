@@ -1,6 +1,14 @@
 #Hop On
 **Server**: ```128.199.209.229/hopon-web/api/web/index.php/v1/```
 ##CODES
+###Status of bicycles:
+```
+STATUS_FREE = 0;
+STATUS_MAINTENANCE = 1;
+STATUS_LOCKED = 2;
+STATUS_UNLOCKED = 3;
+STATUS_BOOKED = 4;
+```
 ###Error code in 400
 ```
 CODE_INCORRECT_USERNAME = 0;
@@ -224,6 +232,7 @@ Authorization: 'Bearer <token>'
     "longitude": "103.849446",
     "postal": "",
     "bicycle_count": "30",
+    "available_bicycle": "12",
     "distance": {
       "text": "1 m",
       "value": 0
@@ -237,6 +246,7 @@ Authorization: 'Bearer <token>'
     "longitude": "103.843353",
     "postal": "567740",
     "bicycle_count": "25",
+    "available_bicycle": "12",
     "distance": {
       "text": "1.2 km",
       "value": 1217
