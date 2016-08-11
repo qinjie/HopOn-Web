@@ -92,6 +92,7 @@ class UserController extends CustomActiveController
                 $token = TokenHelper::createUserToken($user->id);
                 return [
                     'token' => $token->token,
+                    'fullname' => $user->fullname,
                 ];
             } else throw new BadRequestHttpException(null, self::CODE_INVALID_ACCOUNT);
     	} else {
@@ -151,6 +152,7 @@ class UserController extends CustomActiveController
             $token = TokenHelper::createUserToken($user->id);
             return [
                 'token' => $token->token,
+                'fullname' => $user->fullname,
             ];
         }
         throw new BadRequestHttpException('Cannot change user status');

@@ -33,7 +33,8 @@ CODE_INVALID_PASSWORD = 8;
 - Success: 200
 ```
 {
-    token: '3kj2rh3k2rhk2j3hkj42hk43h2kh4j32'
+    token: '3kj2rh3k2rhk2j3hkj42hk43h2kh4j32',
+    fullname: 'Tan Ah Boy'
 }
 ```
 - Error: 400
@@ -152,7 +153,8 @@ resend email
 ####Response:
 ```
 {
-  "token": "TakSpFYW4eS-w5_58NA9Uc0U-X5ko8ON"
+  "token": "TakSpFYW4eS-w5_58NA9Uc0U-X5ko8ON",
+  "fullname": "Tan Ah Boy"
 }
 ```
 
