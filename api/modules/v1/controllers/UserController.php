@@ -53,7 +53,7 @@ class UserController extends CustomActiveController
                     'roles' => ['?'],
                 ],
                 [
-                    'actions' => ['logout', 'change-password', 'info'],
+                    'actions' => ['logout', 'change-password', 'profile'],
                     'allow' => true,
                     'roles' => ['@'],
                 ]
@@ -219,12 +219,12 @@ class UserController extends CustomActiveController
         return $this->redirect(Yii::$app->params['WEB_BASEURL'].'site/confirmation-error');
     }
 
-    public function actionInfo() {
+    public function actionProfile() {
         $user = Yii::$app->user->identity;
         return [
-            'currentDate' => date('Y-m-d'),
-            'username' => $user->username,
+            'fullname' => $user->fullname,
             'email' => $user->email,
+            'mobile' => $user->mobile,
         ];
     }
 

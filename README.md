@@ -176,9 +176,9 @@ logout successfully
 
 ***
 
-###GET ```user/info```
+###GET ```user/profile```
 ```
-=> Get info of current user
+=> Get profile of current user
 ```
 ####Header:
 ```
@@ -188,10 +188,9 @@ Authorization: 'Bearer <token>'
 ####Response:
 ```
 {
-  "currentDate": "2016-08-10",
-  "fullname": "ADRIAN YOO",
-  "username": "1111",
-  "email": "1111@gmail.com"
+  "fullname": "Tan Ah Boy",
+  "email": "canhnht1709@gmail.com",
+  "mobile": "1"
 }
 ```
 
