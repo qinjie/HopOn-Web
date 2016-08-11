@@ -229,6 +229,7 @@ CREATE TABLE IF NOT EXISTS `rental` (
   `book_at` datetime NOT NULL,
   `pickup_at` datetime DEFAULT NULL,
   `return_at` datetime DEFAULT NULL,
+  `return_station_id` int(11) unsigned DEFAULT NULL,
   `duration` int(11) DEFAULT NULL,
   `created_at` int(11) unsigned NOT NULL,
   `updated_at` int(11) unsigned NOT NULL,

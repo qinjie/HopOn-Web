@@ -37,7 +37,7 @@ class RentalController extends CustomActiveController
             ],
             'rules' => [
                 [
-                    'actions' => ['current-booking'],
+                    'actions' => ['current-booking', 'history'],
                     'allow' => true,
                     'roles' => ['@'],
                 ]
@@ -62,6 +62,8 @@ class RentalController extends CustomActiveController
                    station.name as pickup_station_name,
                    station.address as pickup_station_address,
                    station.postal as pickup_station_postal,
+                   station.latitude as pickup_station_lat,
+                   station.longitude as pickup_station_lng,
                    rental.book_at,
                    rental.pickup_at,
                    b1.uuid as beacon_station_uuid,
@@ -84,6 +86,33 @@ class RentalController extends CustomActiveController
         $currentBooking['book_at'] = date('h:i A, d M Y', $time);
         return $currentBooking;
     }
+
+    public function actionHistory() {
+        $userId = Yii::$app->user->identity->id;
+        $history = Yii::$app->db->createCommand('
+            select rental.id as booking_id,
+                   bicycle_id,
+                   bicycle.serial as bicycle_serial,
+                   bicycle.desc,
+                   bicycle_type.brand,
+                   bicycle_type.model,
+                   station.name as pickup_station_name,
+                   station.address as pickup_station_address,
+                   station.postal as pickup_station_postal,
+                   rental.book_at,
+                   rental.pickup_at,
+                   rental.duration
+             from rental join bicycle on rental.bicycle_id = bicycle.id
+             join bicycle_type on bicycle.bicycle_type_id = bicycle_type.id
+             join station on bicycle.station_id = station.id
+             where user_id = :userId
+             and return_at is not null
+        ')
+        ->bindValue(':userId', $userId)
+        ->queryOne();
+        return $history;
+    }
+
     // public function afterAction($action, $result)
     // {
     //     $result = parent::afterAction($action, $result);

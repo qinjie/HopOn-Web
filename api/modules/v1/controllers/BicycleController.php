@@ -9,6 +9,7 @@ use api\common\models\User;
 use api\common\components\AccessRule;
 use api\modules\v1\models\Bicycle;
 use api\modules\v1\models\Rental;
+use api\modules\v1\models\Station;
 
 use Yii;
 use yii\filters\auth\HttpBearerAuth;
@@ -84,16 +85,34 @@ class BicycleController extends CustomActiveController
     public function actionReturn() {
         $bodyParams = Yii::$app->request->bodyParams;
         $bicycleId = $bodyParams['bicycleId'];
+
+        $stationBeaconUUID = $bodyParams['stationBeaconUUID'];
+        $stationBeaconMajor = $bodyParams['stationBeaconMajor'];
+        $stationBeaconMinor = $bodyParams['stationBeaconMinor'];
+        $station = Yii::$app->db->createCommand('
+            select station.id
+             from station join beacon on station.beacon_id = beacon.id
+             where uuid = :uuid
+             and major = :major
+             and minor = :minor
+        ')
+        ->bindValue(':uuid', $stationBeaconUUID)
+        ->bindValue(':major', $stationBeaconMajor)
+        ->bindValue(':minor', $stationBeaconMinor)
+        ->queryOne();
+
         $userId = Yii::$app->user->identity->id;
         $rental = Rental::findOne([
             'user_id' => $userId, 
             'return_at' => null,
             'bicycle_id' => $bicycleId,
         ]);
-        if (!$rental) throw new BadRequestHttpException('Cannot return bicycle');
+        if (!$rental) throw new BadRequestHttpException('Invalid rental data');
         $rental->return_at = date('Y-m-d H:i:s');
+        $rental->return_station_id = $station['id'];
         if ($rental->pickup_at)
-            $rental->duration = (strtotime($rental->return_at) - strtotime($rental->pickup_at)) / 1000 / 60;
+            $rental->duration = intval(ceil((strtotime($rental->return_at) - strtotime($rental->pickup_at)) / 60));
+        else throw new BadRequestHttpException('Pickup before return bicycle');
         $bicycle = Bicycle::findOne(['id' => $bicycleId]);
         $bicycle->status = Bicycle::STATUS_FREE;
         if ($rental->save() && $bicycle->save())
