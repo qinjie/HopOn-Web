@@ -196,15 +196,22 @@ Authorization: 'Bearer <token>'
 
 ***
 
-###GET ```station/list-station```
+###POST ```station/search```
 ```
-=> Get list of stations
+=> Get list of stations which are nearest to a position (lat, lng).
+Limit to 10 nearest stations. Sorted ascending by distance.
 ```
 ####Header:
 ```
 Authorization: 'Bearer <token>'
 ```
-####Request: None
+####Request:
+```
+{
+  latitude: 1.339835,
+  longitude: 103.776095
+}
+```
 ####Response:
 ```
 [
@@ -215,25 +222,11 @@ Authorization: 'Bearer <token>'
     "latitude": "1.370015",
     "longitude": "103.849446",
     "postal": "",
-    "bicycle_count": "30"
-  },
-  {
-    "id": "2",
-    "name": "Mayflower",
-    "address": "253 Ang Mo Kio Street 21",
-    "latitude": "1.369732",
-    "longitude": "103.835231",
-    "postal": "560253",
-    "bicycle_count": "20"
-  },
-  {
-    "id": "3",
-    "name": "Yio Chu Kang",
-    "address": "3000 Ang Mo Kio Avenue 8",
-    "latitude": "1.381841",
-    "longitude": "103.844959",
-    "postal": "569813",
-    "bicycle_count": "30"
+    "bicycle_count": "30",
+    "distance": {
+      "text": "1 m",
+      "value": 0
+    }
   },
   {
     "id": "4",
@@ -242,7 +235,11 @@ Authorization: 'Bearer <token>'
     "latitude": "1.374542",
     "longitude": "103.843353",
     "postal": "567740",
-    "bicycle_count": "25"
+    "bicycle_count": "25",
+    "distance": {
+      "text": "1.2 km",
+      "value": 1217
+    }
   }
 ]
 ```

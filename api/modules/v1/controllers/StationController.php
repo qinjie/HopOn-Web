@@ -25,6 +25,9 @@ class StationController extends CustomActiveController
 {
     public $modelClass = '';
 
+    const SEARCHING_RADIUS = 10000; // 10km
+    const NEAREST_LIMIT = 10;
+
     public function behaviors() {
         $behaviors = parent::behaviors();
 
@@ -39,7 +42,7 @@ class StationController extends CustomActiveController
             ],
             'rules' => [
                 [
-                    'actions' => ['list-station', 'detail'],
+                    'actions' => ['search', 'detail'],
                     'allow' => true,
                     'roles' => ['@'],
                 ]
@@ -52,7 +55,12 @@ class StationController extends CustomActiveController
         return $behaviors;
     }
 
-    public function actionListStation() {
+    public function actionSearch() {
+        $bodyParams = Yii::$app->request->bodyParams;
+        $latitude = $bodyParams['latitude'];
+        $longitude = $bodyParams['longitude'];
+        $origin = $latitude.','.$longitude;
+
         $listStation = Yii::$app->db->createCommand('
             select id, 
                    name, 
@@ -64,7 +72,28 @@ class StationController extends CustomActiveController
              from station
         ')
         ->queryAll();
-        return $listStation;
+        $destinations = '';
+        for ($iter = 0; $iter < count($listStation); ++$iter) {
+            $lat = $listStation[$iter]['latitude'];
+            $lng = $listStation[$iter]['longitude'];
+            if ($iter > 0) $destinations = $destinations.'|';
+            $destinations = $destinations.$lat.','.$lng;
+        }
+        
+        $apiKey = 'AIzaSyCKAnkoocOg8ks6ynhCefc5zeVFHdZ2S_Q';
+        $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?language=en&mode=walking&units=metrics&origins='.$origin.'&destinations='.$destinations.'&key='.$apiKey;
+        $json = json_decode(file_get_contents($url));
+        $result = $json->rows[0]->elements;
+
+        for ($iter = 0; $iter < count($listStation); ++$iter) {
+            $listStation[$iter]['distance'] = $result[$iter]->distance;
+        }
+        
+        $cmpStation = function($s1, $s2) {
+            return $s1['distance']->value - $s2['distance']->value;
+        };
+        usort($listStation, $cmpStation);
+        return array_slice($listStation, 0, self::NEAREST_LIMIT);
     }
 
     public function actionDetail($stationId) {
