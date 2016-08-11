@@ -7,10 +7,8 @@ use api\common\helpers\TokenHelper;
 use api\common\models\UserToken;
 use api\common\models\User;
 use api\common\components\AccessRule;
-use api\common\models\SignupModel;
-use api\common\models\LoginModel;
-use api\common\models\ChangePasswordModel;
-use api\common\models\PasswordResetModel;
+use api\modules\v1\models\Bicycle;
+use api\modules\v1\models\Rental;
 
 use Yii;
 use yii\filters\auth\HttpBearerAuth;
@@ -39,7 +37,7 @@ class BicycleController extends CustomActiveController
             ],
             'rules' => [
                 [
-                    'actions' => ['search', 'detail'],
+                    'actions' => ['book', 'return'],
                     'allow' => true,
                     'roles' => ['@'],
                 ]
@@ -50,6 +48,58 @@ class BicycleController extends CustomActiveController
         ];
 
         return $behaviors;
+    }
+
+    private function alreadyBook($userId) {
+        $rental = Rental::findOne(['user_id' => $userId, 'return_at' => null]);
+        return $rental;
+    }
+
+    public function actionBook() {
+        $userId = Yii::$app->user->identity->id;
+        if ($this->alreadyBook($userId)) throw new BadRequestHttpException('You already book a bicycle');
+        $bodyParams = Yii::$app->request->bodyParams;
+        $stationId = $bodyParams['stationId'];
+        $bicycleTypeId = $bodyParams['bicycleTypeId'];
+
+        $listBicycle = Bicycle::findAll([
+            'station_id' => $stationId,
+            'bicycle_type_id' => $bicycleTypeId,
+            'status' => Bicycle::STATUS_FREE,
+        ]);
+        $randomNumber = rand(0, count($listBicycle) - 1);
+        $selectedBicycle = $listBicycle[$randomNumber];
+        $selectedBicycle->status = Bicycle::STATUS_BOOKED;
+
+        $rental = new Rental();
+        $rental->user_id = $userId;
+        $rental->bicycle_id = $selectedBicycle->id;
+        $rental->serial = $selectedBicycle->serial;
+        $rental->book_at = date('Y-m-d H:i:s');
+
+        if ($selectedBicycle->save() && $rental->save())
+            return $selectedBicycle;
+    }
+
+    public function actionReturn() {
+        $bodyParams = Yii::$app->request->bodyParams;
+        $bicycleId = $bodyParams['bicycleId'];
+        $userId = Yii::$app->user->identity->id;
+        $rental = Rental::findOne([
+            'user_id' => $userId, 
+            'return_at' => null,
+            'bicycle_id' => $bicycleId,
+        ]);
+        $rental->return_at = date('Y-m-d H:i:s');
+        $rental->duration = (strtotime($rental->return_at) - strtotime($rental->pickup_at)) / 1000 / 60;
+        $bicycle = Bicycle::findOne(['id' => $bicycleId]);
+        $bicycle->status = Bicycle::STATUS_FREE;
+        if ($rental->save() && $bicycle->save())
+            return $rental;
+    }
+
+    public function actionPickup() {
+        
     }
 
     // public function afterAction($action, $result)

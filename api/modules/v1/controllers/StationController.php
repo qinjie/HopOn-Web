@@ -7,10 +7,6 @@ use api\common\helpers\TokenHelper;
 use api\common\models\UserToken;
 use api\common\models\User;
 use api\common\components\AccessRule;
-use api\common\models\SignupModel;
-use api\common\models\LoginModel;
-use api\common\models\ChangePasswordModel;
-use api\common\models\PasswordResetModel;
 use api\modules\v1\models\Bicycle;
 
 use Yii;
@@ -109,9 +105,11 @@ class StationController extends CustomActiveController
                    model 
              from bicycle_type join bicycle on bicycle.bicycle_type_id = bicycle_type.id
              where station_id = :stationId
+             and status = :status
              group by bicycle_type_id, brand, model
         ')
         ->bindValue(':stationId', $stationId)
+        ->bindValue(':status', Bicycle::STATUS_FREE)
         ->queryAll();
         return $listBikeModel;
     }

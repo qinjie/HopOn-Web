@@ -255,7 +255,9 @@ Authorization: 'Bearer <token>'
 ]
 ```
 
-###POST ```station/detail?stationId=1```
+***
+
+###GET ```station/detail?stationId=1```
 ```
 => Get list of bicycle types in a station.
 ```
@@ -278,5 +280,69 @@ Authorization: 'Bearer <token>'
     "model": "Road"
   }
 ]
+```
+
+***
+
+###POST ```bicycle/book```
+```
+=> Book a bicycle
+```
+####Header:
+```
+Authorization: 'Bearer <token>'
+```
+####Request:
+```
+{
+  stationId: 4,
+  bicycleTypeId: 26
+}
+```
+####Response:
+```
+{
+  "id": 17,
+  "serial": "SG11128",
+  "bicycle_type_id": 26,
+  "desc": "Road",
+  "status": 4,
+  "station_id": 4,
+  "beacon_id": 1
+}
+```
+
+***
+
+###GET ```rental/current-booking```
+```
+=> Get current booking of current user
+```
+####Header:
+```
+Authorization: 'Bearer <token>'
+```
+####Request: None
+####Response:
+```
+{
+  "booking_id": "13",
+  "bicycle_id": "17",
+  "bicycle_serial": "SG11128",
+  "desc": "Road",
+  "brand": "Trek Bicycles",
+  "model": "Kids Bicycles",
+  "pickup_station_name": "Ang Mo Kio Garden",
+  "pickup_station_address": "Opposite Ang Mo Kio Town Library, Ang Mo Kio Avenue 6",
+  "pickup_station_postal": "567740",
+  "book_at": "02:28 PM, 11 Aug 2016",
+  "beacon_station_uuid": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
+  "beacon_station_major": "33078",
+  "beacon_station_minor": "31465",
+  "beacon_bicycle_uuid": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
+  "beacon_bicycle_major": "52689",
+  "beacon_bicycle_minor": "51570",
+  "pickup_at": null
+}
 ```
 
