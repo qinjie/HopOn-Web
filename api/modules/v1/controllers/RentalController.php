@@ -84,6 +84,10 @@ class RentalController extends CustomActiveController
         ->queryOne();
         $time = strtotime($currentBooking['book_at']);
         $currentBooking['book_at'] = date('h:i A, d M Y', $time);
+        if ($currentBooking['pickup_at']) {
+          $time = strtotime($currentBooking['pickup_at']);
+          $currentBooking['pickup_at'] = date('h:i A, d M Y', $time);
+        }
         return $currentBooking;
     }
 
@@ -96,20 +100,38 @@ class RentalController extends CustomActiveController
                    bicycle.desc,
                    bicycle_type.brand,
                    bicycle_type.model,
-                   station.name as pickup_station_name,
-                   station.address as pickup_station_address,
-                   station.postal as pickup_station_postal,
+                   s1.name as pickup_station_name,
+                   s1.address as pickup_station_address,
+                   s1.postal as pickup_station_postal,
+                   s1.latitude as pickup_station_lat,
+                   s1.longitude as pickup_station_lng,
                    rental.book_at,
                    rental.pickup_at,
-                   rental.duration
+                   rental.return_at,
+                   rental.duration,
+                   s2.name as return_station_name,
+                   s2.address as return_station_address,
+                   s2.postal as return_station_postal,
+                   s2.latitude as return_station_lat,
+                   s2.longitude as return_station_lng
              from rental join bicycle on rental.bicycle_id = bicycle.id
              join bicycle_type on bicycle.bicycle_type_id = bicycle_type.id
-             join station on bicycle.station_id = station.id
+             join station as s1 on bicycle.station_id = s1.id
+             join station as s2 on rental.return_station_id = s2.id
              where user_id = :userId
              and return_at is not null
         ')
         ->bindValue(':userId', $userId)
-        ->queryOne();
+        ->queryAll();
+
+        for ($iter = 0; $iter < count($history); ++$iter) {
+          $time = strtotime($history[$iter]['book_at']);
+          $history[$iter]['book_at'] = date('h:i A, d M Y', $time);
+          $time = strtotime($history[$iter]['pickup_at']);
+          $history[$iter]['pickup_at'] = date('h:i A, d M Y', $time);
+          $time = strtotime($history[$iter]['return_at']);
+          $history[$iter]['return_at'] = date('h:i A, d M Y', $time);
+        }
         return $history;
     }
 
