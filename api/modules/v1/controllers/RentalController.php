@@ -82,6 +82,7 @@ class RentalController extends CustomActiveController
         ')
         ->bindValue(':userId', $userId)
         ->queryOne();
+        if (!$currentBooking) throw new BadRequestHttpException('No booking');
         $time = strtotime($currentBooking['book_at']);
         $currentBooking['book_at'] = date('h:i A, d M Y', $time);
         if ($currentBooking['pickup_at']) {
