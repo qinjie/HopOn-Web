@@ -37,7 +37,7 @@ class BicycleController extends CustomActiveController
             ],
             'rules' => [
                 [
-                    'actions' => ['book', 'return'],
+                    'actions' => ['book', 'return', 'unlock', 'lock'],
                     'allow' => true,
                     'roles' => ['@'],
                 ]
@@ -90,16 +90,56 @@ class BicycleController extends CustomActiveController
             'return_at' => null,
             'bicycle_id' => $bicycleId,
         ]);
+        if (!$rental) throw new BadRequestHttpException('Cannot return bicycle');
         $rental->return_at = date('Y-m-d H:i:s');
-        $rental->duration = (strtotime($rental->return_at) - strtotime($rental->pickup_at)) / 1000 / 60;
+        if ($rental->pickup_at)
+            $rental->duration = (strtotime($rental->return_at) - strtotime($rental->pickup_at)) / 1000 / 60;
         $bicycle = Bicycle::findOne(['id' => $bicycleId]);
         $bicycle->status = Bicycle::STATUS_FREE;
         if ($rental->save() && $bicycle->save())
             return $rental;
+        throw new BadRequestHttpException('Return fail');
     }
 
-    public function actionPickup() {
-        
+    public function actionUnlock() {
+        $bodyParams = Yii::$app->request->bodyParams;
+        $bicycleId = $bodyParams['bicycleId'];
+        $userId = Yii::$app->user->identity->id;
+        $rental = Rental::findOne([
+            'user_id' => $userId, 
+            'return_at' => null,
+            'bicycle_id' => $bicycleId,
+        ]);
+        if (!$rental) throw new BadRequestHttpException('Cannot unlock bicycle');
+        $bicycle = Bicycle::findOne(['id' => $bicycleId]);
+        if ($rental->pickup_at) {
+            $bicycle->status = Bicycle::STATUS_UNLOCKED;
+            if ($bicycle->save())
+                return $rental;
+        } else {
+            $rental->pickup_at = date('Y-m-d H:i:s');
+            $bicycle->status = Bicycle::STATUS_UNLOCKED;
+            if ($rental->save() && $bicycle->save())
+                return $rental;
+        }
+        throw new BadRequestHttpException('unlock fail');
+    }
+
+    public function actionLock() {
+        $bodyParams = Yii::$app->request->bodyParams;
+        $bicycleId = $bodyParams['bicycleId'];
+        $userId = Yii::$app->user->identity->id;
+        $rental = Rental::findOne([
+            'user_id' => $userId, 
+            'return_at' => null,
+            'bicycle_id' => $bicycleId,
+        ]);
+        if (!$rental) throw new BadRequestHttpException('Cannot lock bicycle');
+        $bicycle = Bicycle::findOne(['id' => $bicycleId]);
+        $bicycle->status = Bicycle::STATUS_LOCKED;
+        if ($bicycle->save())
+            return $rental;
+        throw new BadRequestHttpException('unlock fail');
     }
 
     // public function afterAction($action, $result)

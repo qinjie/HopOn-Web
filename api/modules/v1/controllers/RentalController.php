@@ -63,6 +63,7 @@ class RentalController extends CustomActiveController
                    station.address as pickup_station_address,
                    station.postal as pickup_station_postal,
                    rental.book_at,
+                   rental.pickup_at,
                    b1.uuid as beacon_station_uuid,
                    b1.major as beacon_station_major,
                    b1.minor as beacon_station_minor,
@@ -81,7 +82,6 @@ class RentalController extends CustomActiveController
         ->queryOne();
         $time = strtotime($currentBooking['book_at']);
         $currentBooking['book_at'] = date('h:i A, d M Y', $time);
-        $currentBooking['pickup_at'] = null;
         return $currentBooking;
     }
     // public function afterAction($action, $result)

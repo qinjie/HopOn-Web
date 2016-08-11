@@ -336,13 +336,102 @@ Authorization: 'Bearer <token>'
   "pickup_station_address": "Opposite Ang Mo Kio Town Library, Ang Mo Kio Avenue 6",
   "pickup_station_postal": "567740",
   "book_at": "02:28 PM, 11 Aug 2016",
+  "pickup_at": null,
   "beacon_station_uuid": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
   "beacon_station_major": "33078",
   "beacon_station_minor": "31465",
   "beacon_bicycle_uuid": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
   "beacon_bicycle_major": "52689",
-  "beacon_bicycle_minor": "51570",
-  "pickup_at": null
+  "beacon_bicycle_minor": "51570"
 }
 ```
 
+***
+
+###POST ```bicycle/return```
+```
+=> Return a bicycle
+```
+####Header:
+```
+Authorization: 'Bearer <token>'
+```
+####Request:
+```
+{
+  bicycleId: 17
+}
+```
+####Response:
+```
+{
+  "id": 13,
+  "user_id": 1,
+  "bicycle_id": 17,
+  "serial": "SG11128",
+  "book_at": "2016-08-11 14:28:08",
+  "pickup_at": "2016-08-11 14:41:32",
+  "return_at": null,
+  "duration": null
+}
+```
+
+***
+
+###POST ```bicycle/lock```
+```
+=> Lock a bicycle
+```
+####Header:
+```
+Authorization: 'Bearer <token>'
+```
+####Request:
+```
+{
+  bicycleId: 17
+}
+```
+####Response:
+```
+{
+  "id": 13,
+  "user_id": 1,
+  "bicycle_id": 17,
+  "serial": "SG11128",
+  "book_at": "2016-08-11 14:28:08",
+  "pickup_at": "2016-08-11 14:41:32",
+  "return_at": null,
+  "duration": null
+}
+```
+
+***
+
+###POST ```bicycle/unlock```
+```
+=> Unlock a bicycle
+```
+####Header:
+```
+Authorization: 'Bearer <token>'
+```
+####Request:
+```
+{
+  bicycleId: 17
+}
+```
+####Response:
+```
+{
+  "id": 13,
+  "user_id": 1,
+  "bicycle_id": 17,
+  "serial": "SG11128",
+  "book_at": "2016-08-11 14:28:08",
+  "pickup_at": "2016-08-11 14:41:32",
+  "return_at": null,
+  "duration": null
+}
+```
