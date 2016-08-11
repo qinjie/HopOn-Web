@@ -255,3 +255,28 @@ Authorization: 'Bearer <token>'
 ]
 ```
 
+###POST ```station/detail?stationId=1```
+```
+=> Get list of bicycle types in a station.
+```
+####Header:
+```
+Authorization: 'Bearer <token>'
+```
+####Request: None
+####Response:
+```
+[
+  {
+    "bicycle_type_id": "1",
+    "brand": "Apollo Bikes",
+    "model": "Hybrid"
+  },
+  {
+    "bicycle_type_id": "2",
+    "brand": "Apollo Bikes",
+    "model": "Road"
+  }
+]
+```
+

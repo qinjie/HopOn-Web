@@ -106,11 +106,12 @@ class StationController extends CustomActiveController
         $listBikeModel = Yii::$app->db->createCommand('
             select bicycle_type.id as bicycle_type_id, 
                    brand, 
-                   model, 
-                   count(bicycle.id) as number_bicycle 
+                   model 
              from bicycle_type join bicycle on bicycle.bicycle_type_id = bicycle_type.id
+             where station_id = :stationId
              group by bicycle_type_id, brand, model
         ')
+        ->bindValue(':stationId', $stationId)
         ->queryAll();
         return $listBikeModel;
     }
