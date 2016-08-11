@@ -81,13 +81,13 @@ change password successfully
 
 ###POST ```user/reset-password```
 ```
-=> Request a new password
+=> Reset password
 ```
 ####Header: None
 ####Request:
 ```
 {
-    email: 'abc@mail.com'
+    email_mobile: '1234'
 }
 ```
 ####Response:
@@ -107,16 +107,52 @@ reset password successfully
 ```
 {
     fullname: 'Tan Ah Boy',
-    password: '123456',
     email: '123@mail.com',
     mobile: '91234123',
+    password: '123456',
     role: (10: role user)
 }
 ```
 ####Response:
 ```
+register successfully
+```
+
+***
+
+###POST ```user/resend-email```
+```
+=> Resend activation email
+```
+####Header: None
+####Request:
+```
 {
-    token: '3kj2rh3k2rhk2j3hkj42hk43h2kh4j32'
+    email: '123@mail.com'
+}
+```
+####Response:
+```
+resend email
+```
+
+***
+
+###POST ```user/activate```
+```
+=> Activate an account
+```
+####Header: None
+####Request:
+```
+{
+    token: '123456'
+}
+```
+####Response:
+```
+{
+  "token": "TakSpFYW4eS-w5_58NA9Uc0U-X5ko8ON"
 }
 ```
 

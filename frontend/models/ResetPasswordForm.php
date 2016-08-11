@@ -33,11 +33,10 @@ class ResetPasswordForm extends Model
         if (empty($token) || !is_string($token)) {
             throw new InvalidParamException('Password reset token cannot be blank.');
         }
-        // $this->_user = User::findByPasswordResetToken($token);
         $userId = TokenHelper::authenticateToken($token, true, TokenHelper::TOKEN_ACTION_RESET_PASSWORD);
         $this->_user = User::findOne([
             'id' => $userId, 
-            'status' => [User::STATUS_WAIT_DEVICE, User::STATUS_ACTIVE],
+            'status' => User::STATUS_ACTIVE,
         ]);
         if (!$this->_user) {
             throw new InvalidParamException('Wrong password reset token.');
@@ -65,7 +64,6 @@ class ResetPasswordForm extends Model
     {
         $user = $this->_user;
         $user->setPassword($this->password);
-        // $user->removePasswordResetToken();
         UserToken::removeResetPasswordToken($user->id);
 
         return $user->save(false);

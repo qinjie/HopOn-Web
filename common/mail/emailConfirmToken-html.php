@@ -100,12 +100,6 @@ use yii\helpers\Html;
 						<p>
 							If you have not registered on our app, then simply delete this email.
 						</p>
-
-            <p>
-              Sincerely,<br />
-              Hop On Team<br />
-              <img src="http://i.imgur.com/HOofG19.png" width="50" height="50" style="margin-top: 10px" />
-            </p>
           </td>
         </tr>
       </table>
@@ -121,7 +115,9 @@ use yii\helpers\Html;
       <table border="0" cellpadding="0" cellspacing="0" width="600">
         <tr>
           <td style="padding: 30px 0 0 0">
-            Delivered by <a href="http://www.np.edu.sg/">Ngee Ann Polytechnic</a>
+            Sincerely,<br />
+            Hop On Team<br />
+            <img src="http://i.imgur.com/HOofG19.png" width="50" height="50" style="margin-top: 10px" />
           </td>
         </tr>
       </table>

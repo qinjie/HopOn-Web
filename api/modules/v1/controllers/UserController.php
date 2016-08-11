@@ -183,10 +183,10 @@ class UserController extends CustomActiveController
 
     public function actionResetPassword() {
         $bodyParams = Yii::$app->request->bodyParams;
-        $email = $bodyParams['email'];
+        $email_mobile = $bodyParams['email_mobile'];
 
         $model = new PasswordResetModel();
-        $model->email = $email;
+        $model->email_mobile = $email_mobile;
         if ($model->sendEmail()) {
             return 'reset password successfully';
         }

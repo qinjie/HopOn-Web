@@ -45,6 +45,9 @@ $resetLink = Yii::$app->params['WEB_BASEURL'].'site/reset-password?token='.$toke
                 <td align="left" style="font-size: 20px; font-weight: bold;">
                   <?= Html::encode(Yii::$app->name) ?>
                 </td>
+                <td align="right">
+                  <img src="http://i.imgur.com/HOofG19.png" width="50" height="50" />
+                </td>
               </tr>
             </table>
           </td>
@@ -65,7 +68,7 @@ $resetLink = Yii::$app->params['WEB_BASEURL'].'site/reset-password?token='.$toke
             <table border="0" cellpadding="0" cellspacing="0"  width="100%" style="font-weight: bold; font-size: 20px">
               <tr>
                 <td>
-                  Hi, <?= Html::encode($user->username) ?>!
+                  Hi, <?= Html::encode($user->fullname) ?>!
                 </td>
               </tr>
             </table>
@@ -91,6 +94,10 @@ $resetLink = Yii::$app->params['WEB_BASEURL'].'site/reset-password?token='.$toke
 						<p>
 						<?= Html::a(Html::encode('Reset Password'), $resetLink) ?>
 						</p>
+
+            <p>
+              To contact Hop On Team, please email us at <?= Yii::$app->params['supportEmail'] ?>.
+            </p>
           </td>
         </tr>
       </table>
@@ -106,7 +113,9 @@ $resetLink = Yii::$app->params['WEB_BASEURL'].'site/reset-password?token='.$toke
       <table border="0" cellpadding="0" cellspacing="0" width="600">
         <tr>
           <td style="padding: 30px 0 0 0">
-            Delivered by <a href="http://www.np.edu.sg/">Ngee Ann Polytechnic</a>
+            Sincerely,<br />
+            Hop On Team<br />
+            <img src="http://i.imgur.com/HOofG19.png" width="50" height="50" style="margin-top: 10px" />
           </td>
         </tr>
       </table>

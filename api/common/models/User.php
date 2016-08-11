@@ -105,6 +105,12 @@ class User extends ActiveRecord implements IdentityInterface
         }
     }
 
+    public static function findByUsername($username) {
+        return self::find()
+            ->where(['or', ['email' => $username], ['mobile' => $username]])
+            ->one();
+    }
+
     public function getId()
     {
         return $this->id;

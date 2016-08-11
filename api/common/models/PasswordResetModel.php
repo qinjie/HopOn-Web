@@ -2,6 +2,7 @@
 namespace api\common\models;
 
 use api\common\models\User;
+use api\common\models\UserToken;
 use api\common\helpers\TokenHelper;
 use Yii;
 use yii\base\Model;
@@ -9,20 +10,14 @@ use yii\base\Model;
 
 class PasswordResetModel extends Model
 {
-    public $email;
+    public $email_mobile;
 
 
     public function rules()
     {
         return [
-            ['email', 'filter', 'filter' => 'trim'],
-            ['email', 'required'],
-            ['email', 'email'],
-            ['email', 'exist',
-                'targetClass' => 'api\common\models\User',
-                'filter' => ['status' => User::STATUS_ACTIVE],
-                'message' => 'No user with given email'
-            ],
+            ['email_mobile', 'filter', 'filter' => 'trim'],
+            ['email_mobile', 'required'],
         ];
     }
 
@@ -31,33 +26,30 @@ class PasswordResetModel extends Model
         $user = User::find()
             ->where([
                 'and',
-                ['or', ['status' => User::STATUS_ACTIVE], ['status' => User::STATUS_WAIT_DEVICE]],
-                ['email' => $this->email],
+                ['or', ['email' => $this->email_mobile], ['mobile' => $this->email_mobile]],
+                ['status' => User::STATUS_ACTIVE],
             ])
             ->one();
 
         if (!$user) {
             return false;
         }
-
+        UserToken::removeResetPasswordToken($user->id);
         $token = TokenHelper::createUserToken($user->id, TokenHelper::TOKEN_ACTION_RESET_PASSWORD);
 
-        if ($user->save()) {
-            Yii::$app
-                ->mailer
-                ->compose(
-                    ['html' => '@common/mail/passwordResetToken-html'],
-                    [
-                        'user' => $user,
-                        'token' => $token->token,
-                    ]
-                )
-                ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-                ->setTo($this->email)
-                ->setSubject('Password reset for ' . Yii::$app->name)
-                ->send();
-            return $user;
-        }
-        return null;
+        Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => '@common/mail/passwordResetToken-html'],
+                [
+                    'user' => $user,
+                    'token' => $token->token,
+                ]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setTo($user->email)
+            ->setSubject('Password reset for ' . Yii::$app->name)
+            ->send();
+        return $user;
     }
 }
