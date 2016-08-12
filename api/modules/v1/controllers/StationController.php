@@ -87,15 +87,19 @@ class StationController extends CustomActiveController
         $json = json_decode(file_get_contents($url));
         $result = $json->rows[0]->elements;
 
+        $stations = [];
         for ($iter = 0; $iter < count($listStation); ++$iter) {
-            $listStation[$iter]['distance'] = $result[$iter]->distance;
+            if ($result[$iter]->status == 'OK') {
+                $stations[] = $listStation[$iter];
+                $stations[$iter]['distance'] = $result[$iter]->distance;
+            }
         }
         
         $cmpStation = function($s1, $s2) {
             return $s1['distance']->value - $s2['distance']->value;
         };
-        usort($listStation, $cmpStation);
-        return array_slice($listStation, 0, self::NEAREST_LIMIT);
+        usort($stations, $cmpStation);
+        return array_slice($stations, 0, self::NEAREST_LIMIT);
     }
 
     public function actionDetail($stationId) {
