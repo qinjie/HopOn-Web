@@ -66,7 +66,7 @@ use yii\helpers\Html;
             <table border="0" cellpadding="0" cellspacing="0"  width="100%" style="font-weight: bold; font-size: 20px">
               <tr>
                 <td>
-                  Dear, <?= Html::encode($user->fullname) ?>!
+                  Dear, <?= Html::encode($user->fullname) ?>
                 </td>
               </tr>
             </table>
@@ -98,7 +98,7 @@ use yii\helpers\Html;
             </p>
 
 						<p>
-							If you have not registered on our app, then simply delete this email.
+							If you are not the intended recipient, please delete this email.
 						</p>
           </td>
         </tr>

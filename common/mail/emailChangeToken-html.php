@@ -4,14 +4,12 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $user common\models\User */
-
-$resetLink = Yii::$app->params['WEB_BASEURL'].'site/reset-password?token='.$token;
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Reset Password</title>
+<title>Email Address Changed</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <style type="text/css">
@@ -88,20 +86,22 @@ $resetLink = Yii::$app->params['WEB_BASEURL'].'site/reset-password?token='.$toke
         <tr>
           <td>
           	<p>
-            	Follow the link below to reset your password:
+            	Hop On System has recently received a request to change the email address used to log in to your Hop On account.
+              The email address <?= $user->email ?> was specified as the new username for your Hop On account.
+              Please use the information below to activate your new email:
             </p>
 						
 						<p>
-						<?= Html::a(Html::encode('Reset Password'), $resetLink) ?>
+              <strong>Activation Code: <?= $token ?></strong>
 						</p>
 
             <p>
               To contact Hop On Team, please email us at <?= Yii::$app->params['supportEmail'] ?>.
             </p>
 
-            <p>
-              If you are not the intended recipient, please delete this email.
-            </p>
+						<p>
+							If you are not the intended recipient, please delete this email.
+						</p>
           </td>
         </tr>
       </table>

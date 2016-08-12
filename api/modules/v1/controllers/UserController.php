@@ -11,6 +11,7 @@ use api\common\models\SignupModel;
 use api\common\models\LoginModel;
 use api\common\models\ChangePasswordModel;
 use api\common\models\PasswordResetModel;
+use api\common\models\ChangeEmailModel;
 
 use Yii;
 use yii\filters\auth\HttpBearerAuth;
@@ -39,8 +40,8 @@ class UserController extends CustomActiveController
 
         $behaviors['authenticator'] = [
             'class' => HttpBearerAuth::className(),
-            'except' => ['login', 'signup', 'confirm-email', 'reset-password',
-                'resend-email', 'activate'],
+            'except' => ['login', 'signup', 'reset-password',
+                'resend-email', 'activate', 'activate-email'],
         ];
 
         $behaviors['access'] = [
@@ -50,13 +51,14 @@ class UserController extends CustomActiveController
             ],
             'rules' => [
                 [   
-                    'actions' => ['login', 'signup', 'confirm-email', 'reset-password',
-                        'resend-email', 'activate'],
+                    'actions' => ['login', 'signup', 'reset-password',
+                        'resend-email', 'activate', 'activate-email'],
                     'allow' => true,
                     'roles' => ['?'],
                 ],
                 [
-                    'actions' => ['logout', 'change-password', 'profile'],
+                    'actions' => ['logout', 'change-password', 'profile', 
+                        'change-email'],
                     'allow' => true,
                     'roles' => ['@'],
                 ]
@@ -207,28 +209,44 @@ class UserController extends CustomActiveController
         throw new BadRequestHttpException('Invalid data');
     }
 
-    public function actionConfirmEmail($token = null) {
-        if (empty($token) || !is_string($token)) {
-            return $this->redirect(Yii::$app->params['WEB_BASEURL'].'site/confirmation-error');
+    public function actionChangeEmail() {
+        $user = Yii::$app->user->identity;
+        $bodyParams = Yii::$app->request->bodyParams;
+        $newEmail = $bodyParams['newEmail'];
+        $password = $bodyParams['password'];
+
+        $model = new ChangeEmailModel($user);
+        $model->email = $newEmail;
+        $model->password = $password;
+        if ($model->changeEmail()) {
+            return 'change email successfully';
+        } else {
+            if (isset($model->errors['email']))
+                throw new BadRequestHttpException(null, self::CODE_INVALID_EMAIL);
+            if (isset($model->errors['password']))
+                throw new BadRequestHttpException(null, self::CODE_INCORRECT_PASSWORD);
         }
-        $userId = TokenHelper::authenticateToken($token, true, TokenHelper::TOKEN_ACTION_ACTIVATE_ACCOUNT);
+        throw new BadRequestHttpException('Invalid data');
+    }
+
+    public function actionActivateEmail() {
+        $bodyParams = Yii::$app->request->bodyParams;
+        $token = $bodyParams['token'];
+        $userId = TokenHelper::authenticateToken($token, true, TokenHelper::TOKEN_ACTION_CHANGE_EMAIL);
         $user = User::findOne([
             'id' => $userId, 
-            'status' => [User::STATUS_WAIT_EMAIL_DEVICE, User::STATUS_WAIT_EMAIL],
+            'status' => User::STATUS_WAIT_EMAIL,
         ]);
-        if (!$user)
-            return $this->redirect(Yii::$app->params['WEB_BASEURL'].'site/confirmation-error');
-
-        if ($user->status == User::STATUS_WAIT_EMAIL_DEVICE)
-            $user->status = User::STATUS_WAIT_DEVICE;
-        else if ($user->status == User::STATUS_WAIT_EMAIL)
-            $user->status = User::STATUS_ACTIVE;
-        
-        UserToken::removeEmailConfirmToken($user->id);
+        if (!$user) throw new BadRequestHttpException('Invalid token');
+        $user->status = User::STATUS_ACTIVE;
+        UserToken::deleteAll([
+            'user_id' => $user->id, 
+            'action' => [TokenHelper::TOKEN_ACTION_CHANGE_EMAIL, TokenHelper::TOKEN_ACTION_ACCESS],
+        ]);
         if ($user->save()) {
-            return $this->redirect(Yii::$app->params['WEB_BASEURL'].'site/confirmation-success');
+            return 'activate email successfully';
         }
-        return $this->redirect(Yii::$app->params['WEB_BASEURL'].'site/confirmation-error');
+        throw new BadRequestHttpException('Cannot activate email');       
     }
 
     public function actionProfile() {

@@ -113,7 +113,7 @@ reset password successfully
 
 ###POST ```user/signup```
 ```
-=> Sign up new user
+=> Sign up new user. An activation email will be sent.
 ```
 ####Header: None
 ####Request:
@@ -180,6 +180,47 @@ resend email
   "token": "TakSpFYW4eS-w5_58NA9Uc0U-X5ko8ON",
   "fullname": "Tan Ah Boy"
 }
+```
+
+***
+
+###POST ```user/change-email```
+```
+=> Change new email. An activation email will be sent.
+```
+####Header:
+```
+Authorization: 'Bearer <token>'
+```
+####Request:
+```
+{
+    newEmail: 'canhnhtse03860@fpt.edu.vn',
+    password: '123456'
+}
+```
+####Response:
+```
+'change email successfully'
+```
+
+***
+***
+
+###POST ```user/activate-email```
+```
+=> Activate a new email
+```
+####Header: None
+####Request:
+```
+{
+    token: '123456'
+}
+```
+####Response:
+```
+'activate email successfully'
 ```
 
 ***
