@@ -30,6 +30,9 @@ class UserController extends CustomActiveController
     const CODE_UNVERIFIED_EMAIL = 3;
     const CODE_INVALID_ACCOUNT = 6;
     const CODE_INVALID_PASSWORD = 8;
+    const CODE_INVALID_EMAIL = 10;
+    const CODE_INVALID_PHONE = 11;
+    const CODE_INVALID_FULLNAME = 12;
     
     public function behaviors() {
         $behaviors = parent::behaviors();
@@ -115,7 +118,16 @@ class UserController extends CustomActiveController
         $model->role = isset($bodyParams['role']) ? $bodyParams['role'] : User::ROLE_USER;
 		if ($user = $model->signup()) {
             return 'register successfully';
-		}
+		} else {
+            if (isset($model->errors['fullname']))
+                throw new BadRequestHttpException(null, self::CODE_INVALID_FULLNAME);
+            if (isset($model->errors['mobile']))
+                throw new BadRequestHttpException(null, self::CODE_INVALID_PHONE);
+            if (isset($model->errors['email']))
+                throw new BadRequestHttpException(null, self::CODE_INVALID_EMAIL);
+            if (isset($model->errors['password']))
+                throw new BadRequestHttpException(null, self::CODE_INVALID_PASSWORD);
+        }
         throw new BadRequestHttpException('Invalid data');
     }
 

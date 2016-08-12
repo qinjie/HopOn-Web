@@ -127,8 +127,20 @@ reset password successfully
 }
 ```
 ####Response:
+- Success: 200
 ```
 register successfully
+```
+- Error: 400
+```
+{
+  code: (
+    8: CODE_INVALID_PASSWORD,
+    10: CODE_INVALID_EMAIL,
+    11: CODE_INVALID_PHONE,
+    12: CODE_INVALID_FULLNAME
+  )
+}
 ```
 
 ***
