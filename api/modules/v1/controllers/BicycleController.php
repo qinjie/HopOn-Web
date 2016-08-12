@@ -8,6 +8,7 @@ use api\common\models\UserToken;
 use api\common\models\User;
 use api\common\components\AccessRule;
 use api\modules\v1\models\Bicycle;
+use api\modules\v1\models\BicycleLocation;
 use api\modules\v1\models\Rental;
 use api\modules\v1\models\Station;
 
@@ -83,8 +84,11 @@ class BicycleController extends CustomActiveController
     }
 
     public function actionReturn() {
+        $userId = Yii::$app->user->identity->id;
         $bodyParams = Yii::$app->request->bodyParams;
         $bicycleId = $bodyParams['bicycleId'];
+        $latitude = $bodyParams['latitude'];
+        $longitude = $bodyParams['longitude'];
 
         $stationBeaconUUID = $bodyParams['stationBeaconUUID'];
         $stationBeaconMajor = $bodyParams['stationBeaconMajor'];
@@ -101,7 +105,6 @@ class BicycleController extends CustomActiveController
         ->bindValue(':minor', $stationBeaconMinor)
         ->queryOne();
 
-        $userId = Yii::$app->user->identity->id;
         $rental = Rental::findOne([
             'user_id' => $userId, 
             'return_at' => null,
@@ -110,20 +113,27 @@ class BicycleController extends CustomActiveController
         if (!$rental) throw new BadRequestHttpException('Invalid rental data');
         $rental->return_at = date('Y-m-d H:i:s');
         $rental->return_station_id = $station['id'];
-        if ($rental->pickup_at)
-            $rental->duration = intval(ceil((strtotime($rental->return_at) - strtotime($rental->pickup_at)) / 60));
-        else $rental->duration = 0;
+        $rental->duration = intval(ceil((strtotime($rental->return_at) - strtotime($rental->book_at)) / 60));
         $bicycle = Bicycle::findOne(['id' => $bicycleId]);
         $bicycle->status = Bicycle::STATUS_FREE;
-        if ($rental->save() && $bicycle->save())
+
+        $bicycleLocation = new BicycleLocation();
+        $bicycleLocation->bicycle_id = $bicycleId;
+        $bicycleLocation->user_id = $userId;
+        $bicycleLocation->latitude = $latitude;
+        $bicycleLocation->longitude = $longitude;
+        if ($rental->save() && $bicycle->save() && $bicycleLocation->save())
             return $rental;
         throw new BadRequestHttpException('Return fail');
     }
 
     public function actionUnlock() {
+        $userId = Yii::$app->user->identity->id;
         $bodyParams = Yii::$app->request->bodyParams;
         $bicycleId = $bodyParams['bicycleId'];
-        $userId = Yii::$app->user->identity->id;
+        $latitude = $bodyParams['latitude'];
+        $longitude = $bodyParams['longitude'];
+
         $rental = Rental::findOne([
             'user_id' => $userId, 
             'return_at' => null,
@@ -131,23 +141,32 @@ class BicycleController extends CustomActiveController
         ]);
         if (!$rental) throw new BadRequestHttpException('Cannot unlock bicycle');
         $bicycle = Bicycle::findOne(['id' => $bicycleId]);
+
+        $bicycleLocation = new BicycleLocation();
+        $bicycleLocation->bicycle_id = $bicycleId;
+        $bicycleLocation->user_id = $userId;
+        $bicycleLocation->latitude = $latitude;
+        $bicycleLocation->longitude = $longitude;
         if ($rental->pickup_at) {
             $bicycle->status = Bicycle::STATUS_UNLOCKED;
-            if ($bicycle->save())
+            if ($bicycle->save() && $bicycleLocation->save())
                 return $rental;
         } else {
             $rental->pickup_at = date('Y-m-d H:i:s');
             $bicycle->status = Bicycle::STATUS_UNLOCKED;
-            if ($rental->save() && $bicycle->save())
+            if ($rental->save() && $bicycle->save() && $bicycleLocation->save())
                 return $rental;
         }
         throw new BadRequestHttpException('unlock fail');
     }
 
     public function actionLock() {
+        $userId = Yii::$app->user->identity->id;
         $bodyParams = Yii::$app->request->bodyParams;
         $bicycleId = $bodyParams['bicycleId'];
-        $userId = Yii::$app->user->identity->id;
+        $latitude = $bodyParams['latitude'];
+        $longitude = $bodyParams['longitude'];
+
         $rental = Rental::findOne([
             'user_id' => $userId, 
             'return_at' => null,
@@ -156,7 +175,13 @@ class BicycleController extends CustomActiveController
         if (!$rental) throw new BadRequestHttpException('Cannot lock bicycle');
         $bicycle = Bicycle::findOne(['id' => $bicycleId]);
         $bicycle->status = Bicycle::STATUS_LOCKED;
-        if ($bicycle->save())
+
+        $bicycleLocation = new BicycleLocation();
+        $bicycleLocation->bicycle_id = $bicycleId;
+        $bicycleLocation->user_id = $userId;
+        $bicycleLocation->latitude = $latitude;
+        $bicycleLocation->longitude = $longitude;
+        if ($bicycle->save() && $bicycleLocation->save())
             return $rental;
         throw new BadRequestHttpException('unlock fail');
     }

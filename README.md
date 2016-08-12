@@ -376,7 +376,12 @@ Authorization: 'Bearer <token>'
 ####Request:
 ```
 {
-  bicycleId: 17
+  bicycleId: 17,
+  latitude: 1.5,
+  longitude: 103,
+  stationBeaconUUID: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+  stationBeaconMajor: '58949',
+  stationBeaconMinor: '29933'
 }
 ```
 ####Response:
@@ -406,7 +411,9 @@ Authorization: 'Bearer <token>'
 ####Request:
 ```
 {
-  bicycleId: 17
+  bicycleId: 17,
+  latitude: 1.1,
+  longitude: 103
 }
 ```
 ####Response:
@@ -436,7 +443,9 @@ Authorization: 'Bearer <token>'
 ####Request:
 ```
 {
-  bicycleId: 17
+  bicycleId: 17,
+  latitude: 1.1,
+  longitude: 103
 }
 ```
 ####Response:
