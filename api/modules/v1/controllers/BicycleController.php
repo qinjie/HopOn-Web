@@ -112,7 +112,7 @@ class BicycleController extends CustomActiveController
         $rental->return_station_id = $station['id'];
         if ($rental->pickup_at)
             $rental->duration = intval(ceil((strtotime($rental->return_at) - strtotime($rental->pickup_at)) / 60));
-        else throw new BadRequestHttpException('Pickup before return bicycle');
+        else $rental->duration = 0;
         $bicycle = Bicycle::findOne(['id' => $bicycleId]);
         $bicycle->status = Bicycle::STATUS_FREE;
         if ($rental->save() && $bicycle->save())
