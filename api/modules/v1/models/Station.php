@@ -10,7 +10,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 
-class Rental extends ActiveRecord
+class Station extends ActiveRecord
 {
  
     public static function tableName()

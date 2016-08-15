@@ -541,3 +541,42 @@ Authorization: 'Bearer <token>'
   }
 ]
 ```
+
+***
+
+###GET ```station/get-all```
+```
+=> Get all stations
+```
+####Header:
+```
+Authorization: 'Bearer <token>'
+```
+####Request: None
+####Response:
+```
+[
+  {
+    "booking_id": "13",
+    "bicycle_id": "17",
+    "bicycle_serial": "SG11128",
+    "desc": "Road",
+    "brand": "Trek Bicycles",
+    "model": "Kids Bicycles",
+    "pickup_station_name": "Ang Mo Kio Garden",
+    "pickup_station_address": "Opposite Ang Mo Kio Town Library, Ang Mo Kio Avenue 6",
+    "pickup_station_postal": "567740",
+    "pickup_station_lat": "1.374542",
+    "pickup_station_lng": "103.843353",
+    "book_at": "03:24 PM, 11 Aug 2016",
+    "pickup_at": "03:25 PM, 11 Aug 2016",
+    "return_at": "03:25 PM, 11 Aug 2016",
+    "duration": "1",
+    "return_station_name": "NP Main Gate",
+    "return_station_address": "535 Clementi Road",
+    "return_station_postal": "234235",
+    "return_station_lat": "1.334284",
+    "return_station_lng": "103.776649"
+  }
+]
+```

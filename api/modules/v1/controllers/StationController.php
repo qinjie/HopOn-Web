@@ -8,6 +8,7 @@ use api\common\models\UserToken;
 use api\common\models\User;
 use api\common\components\AccessRule;
 use api\modules\v1\models\Bicycle;
+use api\modules\v1\models\Station;
 
 use Yii;
 use yii\filters\auth\HttpBearerAuth;
@@ -39,7 +40,7 @@ class StationController extends CustomActiveController
             ],
             'rules' => [
                 [
-                    'actions' => ['search', 'detail'],
+                    'actions' => ['search', 'detail', 'get-all'],
                     'allow' => true,
                     'roles' => ['@'],
                 ]
@@ -116,6 +117,21 @@ class StationController extends CustomActiveController
         ->bindValue(':status', Bicycle::STATUS_FREE)
         ->queryAll();
         return $listBikeModel;
+    }
+
+    public function actionGetAll() {
+        $listStation = Yii::$app->db->createCommand('
+            select id, 
+                   name, 
+                   address, 
+                   latitude, 
+                   longitude, 
+                   postal, 
+                   bicycle_count
+             from station
+        ')
+        ->queryAll();
+        return $listStation;
     }
 
     // public function afterAction($action, $result)
