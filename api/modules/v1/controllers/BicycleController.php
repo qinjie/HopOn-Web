@@ -79,8 +79,34 @@ class BicycleController extends CustomActiveController
         $rental->serial = $selectedBicycle->serial;
         $rental->book_at = date('Y-m-d H:i:s');
 
-        if ($selectedBicycle->save() && $rental->save())
+        if ($selectedBicycle->save() && $rental->save()) {
+            $bicycle = Yii::$app->db->createCommand('
+                select bicycle.id as bicycle_id,
+                       bicycle.serial,
+                       bicycle_type.brand,
+                       bicycle_type.model,
+                       station.name as station_name,
+                       station.address,
+                       station.postal
+                from bicycle join bicycle_type on bicycle_type_id = bicycle_type.id
+                join station on bicycle.station_id = station.id
+                where bicycle.id = :bicycleId
+            ')
+            ->bindValue(':bicycleId', $selectedBicycle->id)
+            ->queryOne();
+            $user = Yii::$app->user->identity;
+
+            Yii::$app->mailer->compose(['html' => '@common/mail/bookingDetail-html'], [
+                    'bicycle' => $bicycle, 
+                    'rental' => $rental,
+                    'user' => $user,
+                ])
+                ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                ->setTo($user->email)
+                ->setSubject('Booking Detail From ' . Yii::$app->name)
+                ->send();
             return $selectedBicycle;
+        }
     }
 
     public function actionReturn() {
