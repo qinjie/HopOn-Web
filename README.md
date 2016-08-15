@@ -121,7 +121,7 @@ reset password successfully
 {
     fullname: 'Tan Ah Boy',
     email: '123@mail.com',
-    mobile: '91234123',
+    mobile: '12345678',
     password: '123456',
     role: (10: role user)
 }
@@ -171,7 +171,8 @@ resend email
 ####Request:
 ```
 {
-    token: '123456'
+  email,
+  token: '123456'
 }
 ```
 ####Response:

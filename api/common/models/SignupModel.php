@@ -34,6 +34,7 @@ class SignupModel extends Model
             ['mobile', 'filter', 'filter' => 'trim'],
             ['mobile', 'required'],
             ['mobile', 'unique', 'targetClass' => 'api\common\models\User', 'message' => 'This mobile phone has already been taken.'],
+            ['mobile', 'string', 'min' => 8],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],

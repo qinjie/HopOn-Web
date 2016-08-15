@@ -154,16 +154,22 @@ class UserController extends CustomActiveController
     public function actionActivate() {
         $bodyParams = Yii::$app->request->bodyParams;
         $token = $bodyParams['token'];
+        $email = $bodyParams['email'];
         $userId = TokenHelper::authenticateToken($token, true, TokenHelper::TOKEN_ACTION_ACTIVATE_ACCOUNT);
         $user = User::findOne([
             'id' => $userId, 
             'status' => User::STATUS_WAIT_EMAIL,
         ]);
-        if (!$user) throw new BadRequestHttpException('Invalid token');
+        if (!$user || $user->email != $email) throw new BadRequestHttpException('Invalid token');
         $user->status = User::STATUS_ACTIVE;
         UserToken::removeEmailConfirmToken($user->id);
         if ($user->save()) {
             $token = TokenHelper::createUserToken($user->id);
+            Yii::$app->mailer->compose(['html' => '@common/mail/accountCreation-html'], ['user' => $user])
+                ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                ->setTo($user->email)
+                ->setSubject('Congratulates. You have successfully activated your account in ' . Yii::$app->name)
+                ->send();
             return [
                 'token' => $token->token,
                 'fullname' => $user->fullname,

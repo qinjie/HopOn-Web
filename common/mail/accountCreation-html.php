@@ -9,7 +9,7 @@ use yii\helpers\Html;
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Confirmation Email</title>
+<title>Account Creation</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <style type="text/css">
@@ -86,12 +86,8 @@ use yii\helpers\Html;
         <tr>
           <td>
           	<p>
-            	Thank you for registering Hop On System. Please use the information below to activate your account:
+            	Congratulates! You have successfully activated your account in Hop On System.
             </p>
-						
-						<p>
-              <strong>Activation Code: <?= $token ?></strong>
-						</p>
 
             <p>
               To contact Hop On Team, please email us at <?= Yii::$app->params['supportEmail'] ?>.

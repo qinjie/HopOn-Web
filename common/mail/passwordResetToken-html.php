@@ -117,7 +117,7 @@ $resetLink = Yii::$app->params['WEB_BASEURL'].'site/reset-password?token='.$toke
       <table border="0" cellpadding="0" cellspacing="0" width="600">
         <tr>
           <td style="padding: 30px 0 0 0">
-            Sincerely,<br />
+            Kind regards,<br />
             Hop On Team<br />
             <img src="http://i.imgur.com/HOofG19.png" width="50" height="50" style="margin-top: 10px" />
           </td>
