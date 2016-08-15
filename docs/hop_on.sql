@@ -318,7 +318,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`id`, `fullname`, `auth_key`, `password_hash`, `email`, `mobile`, `status`, `role`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'ADRIAN YOO', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '1@mail.com', '1111', 10, 10, 'user', 1461214049, 1461926225),
 (2, 'MICHAEL YOO', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '2@mail.com', '2222', 10, 10, 'user', 1461214049, 1461926225),
-(3, 'ANTHONY CHEN', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '3@mail.com', '3333', 10, 10, 'user', 1461214049, 1461926225);
+(3, 'ANTHONY CHEN', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '3@mail.com', '3333', 10, 10, 'user', 1461214049, 1461926225),
+(4, 'DUCDD', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', 'congaductq@gmail.com', 'dddd', 10, 10, 'user', 1461214049, 1461926225);
 
 -- --------------------------------------------------------
 
