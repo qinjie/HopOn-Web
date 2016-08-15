@@ -282,6 +282,18 @@ Authorization: 'Bearer <token>'
 ```
 [
   {
+    "id": "5",
+    "name": "NP Main Gate",
+    "address": "535 Clementi Road",
+    "latitude": "1.334284",
+    "longitude": "103.776649",
+    "postal": "234235",
+    "bicycle_count": "10",
+    "available_bicycle": "0",
+    "distanceText": "456 km",
+    "distanceValue": 455660
+  },
+  {
     "id": "1",
     "name": "Ang Mo Kio",
     "address": "Ang Mo Kio MRT",
@@ -289,25 +301,9 @@ Authorization: 'Bearer <token>'
     "longitude": "103.849446",
     "postal": "",
     "bicycle_count": "30",
-    "available_bicycle": "12",
-    "distance": {
-      "text": "1 m",
-      "value": 0
-    }
-  },
-  {
-    "id": "4",
-    "name": "Ang Mo Kio Garden",
-    "address": "Opposite Ang Mo Kio Town Library, Ang Mo Kio Avenue 6",
-    "latitude": "1.374542",
-    "longitude": "103.843353",
-    "postal": "567740",
-    "bicycle_count": "25",
-    "available_bicycle": "12",
-    "distance": {
-      "text": "1.2 km",
-      "value": 1217
-    }
+    "available_bicycle": "8",
+    "distanceText": "494 km",
+    "distanceValue": 494497
   }
 ]
 ```

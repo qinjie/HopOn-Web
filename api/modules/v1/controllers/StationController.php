@@ -92,12 +92,13 @@ class StationController extends CustomActiveController
         for ($iter = 0; $iter < count($listStation); ++$iter) {
             if ($result[$iter]->status == 'OK') {
                 $stations[] = $listStation[$iter];
-                $stations[$iter]['distance'] = $result[$iter]->distance;
+                $stations[$iter]['distanceText'] = $result[$iter]->distance->text;
+                $stations[$iter]['distanceValue'] = $result[$iter]->distance->value;
             }
         }
         
         $cmpStation = function($s1, $s2) {
-            return $s1['distance']->value - $s2['distance']->value;
+            return $s1['distanceValue'] - $s2['distanceValue'];
         };
         usort($stations, $cmpStation);
         return array_slice($stations, 0, self::NEAREST_LIMIT);
