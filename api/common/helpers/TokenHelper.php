@@ -29,11 +29,11 @@ class TokenHelper
     {
         $model = new UserToken();
         $model->user_id = $userId;
-        $length = 32;
         if ($action == TokenHelper::TOKEN_ACTION_ACTIVATE_ACCOUNT
             || $action == TokenHelper::TOKEN_ACTION_CHANGE_EMAIL) 
-            $length = 6;
-        $model->token = self::generateToken($length);
+            $model->token = sprintf("%06d", mt_rand(1, 999999));
+        else 
+            $model->token = self::generateToken();
         $interval = 30 * 24 * 60 * 60;
         $model->expire_date = date('Y-m-d H:i:s', time() + $interval);
         $model->action = is_null($action) ? self::TOKEN_ACTION_ACCESS : $action;
