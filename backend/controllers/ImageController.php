@@ -8,6 +8,7 @@ use common\models\ImageSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ImageController implements the CRUD actions for Image model.
@@ -65,8 +66,18 @@ class ImageController extends Controller
     {
         $model = new Image();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+            $model->data = "uploads/images/".$model->name.".".$model->file->extension;
+            if ($model->save()){
+                $model->file->saveAs("uploads/images/".$model->name.".".$model->file->extension);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            else{
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -84,8 +95,18 @@ class ImageController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+            $model->data = "uploads/images/".$model->name;
+            if ($model->save()){
+                $model->file->saveAs("uploads/images/".$model->name);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            else{
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,
