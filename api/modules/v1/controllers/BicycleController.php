@@ -109,27 +109,37 @@ class BicycleController extends CustomActiveController
         }
     }
 
+    private function addBicycleLocation($bicycleId, $latitude, $longitude) {
+        $userId = Yii::$app->user->identity->id;
+        $bicycleLocation = new BicycleLocation();
+        $bicycleLocation->bicycle_id = $bicycleId;
+        $bicycleLocation->user_id = $userId;
+        $bicycleLocation->latitude = $latitude;
+        $bicycleLocation->longitude = $longitude;
+        return $bicycleLocation->save();
+    }
+
     public function actionReturn() {
         $userId = Yii::$app->user->identity->id;
         $bodyParams = Yii::$app->request->bodyParams;
         $bicycleId = $bodyParams['bicycleId'];
         $latitude = $bodyParams['latitude'];
         $longitude = $bodyParams['longitude'];
+        $listBeacons = $bodyParams['listBeacons'];
 
-        $stationBeaconUUID = $bodyParams['stationBeaconUUID'];
-        $stationBeaconMajor = $bodyParams['stationBeaconMajor'];
-        $stationBeaconMinor = $bodyParams['stationBeaconMinor'];
-        $station = Yii::$app->db->createCommand('
-            select station.id
-             from station join beacon on station.beacon_id = beacon.id
-             where uuid = :uuid
-             and major = :major
-             and minor = :minor
-        ')
-        ->bindValue(':uuid', $stationBeaconUUID)
-        ->bindValue(':major', $stationBeaconMajor)
-        ->bindValue(':minor', $stationBeaconMinor)
-        ->queryOne();
+        $sql = 'select station.id from station join beacon on station.beacon_id = beacon.id where ';
+        for ($iter = 0; $iter < count($listBeacons); ++$iter) {
+            $uuid = $listBeacons[$iter]['uuid'];
+            $major = $listBeacons[$iter]['major'];
+            $minor = $listBeacons[$iter]['minor'];
+            if ($iter > 0) $sql = $sql.' or ';
+            $sql = $sql.'(uuid = "'.$uuid.'" and major = "'.$major.'" and minor = "'.$minor.'")';
+        }
+        $sql = $sql.';';
+
+        $station = Yii::$app->db->createCommand($sql)->queryOne();
+        if (!$station)
+            throw new BadRequestHttpException('Invalid beacon data');
 
         $rental = Rental::findOne([
             'user_id' => $userId, 
@@ -143,13 +153,53 @@ class BicycleController extends CustomActiveController
         $bicycle = Bicycle::findOne(['id' => $bicycleId]);
         $bicycle->status = Bicycle::STATUS_FREE;
 
-        $bicycleLocation = new BicycleLocation();
-        $bicycleLocation->bicycle_id = $bicycleId;
-        $bicycleLocation->user_id = $userId;
-        $bicycleLocation->latitude = $latitude;
-        $bicycleLocation->longitude = $longitude;
-        if ($rental->save() && $bicycle->save() && $bicycleLocation->save())
+        if ($rental->save() && $bicycle->save() 
+            && $this->addBicycleLocation($bicycleId, $latitude, $longitude)) {
+            // $result = Yii::$app->db->createCommand('
+            //     select rental.id as booking_id,
+            //            bicycle_id,
+            //            bicycle.serial as bicycle_serial,
+            //            bicycle.desc,
+            //            bicycle_type.brand,
+            //            bicycle_type.model,
+            //            s1.name as pickup_station_name,
+            //            s1.address as pickup_station_address,
+            //            s1.postal as pickup_station_postal,
+            //            s1.latitude as pickup_station_lat,
+            //            s1.longitude as pickup_station_lng,
+            //            rental.book_at,
+            //            rental.pickup_at,
+            //            rental.return_at,
+            //            rental.duration,
+            //            s2.name as return_station_name,
+            //            s2.address as return_station_address,
+            //            s2.postal as return_station_postal,
+            //            s2.latitude as return_station_lat,
+            //            s2.longitude as return_station_lng
+            //      from rental join bicycle on rental.bicycle_id = bicycle.id
+            //      join bicycle_type on bicycle.bicycle_type_id = bicycle_type.id
+            //      join station as s1 on bicycle.station_id = s1.id
+            //      join station as s2 on rental.return_station_id = s2.id
+            //      where user_id = :userId
+            //      and rental.id = :rentalId
+            //      and return_at is not null
+            // ')
+            // ->bindValue(':userId', $userId)
+            // ->bindValue(':rentalId', $rental->id)
+            // ->queryOne();
+            // $user = Yii::$app->user->identity;
+
+            // Yii::$app->mailer->compose(['html' => '@common/mail/bookingDetail-html'], [
+            //         'bicycle' => $bicycle, 
+            //         'rental' => $rental,
+            //         'user' => $user,
+            //     ])
+            //     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+            //     ->setTo($user->email)
+            //     ->setSubject('Booking Detail From ' . Yii::$app->name)
+            //     ->send();
             return $rental;
+        }
         throw new BadRequestHttpException('Return fail');
     }
 
@@ -168,19 +218,15 @@ class BicycleController extends CustomActiveController
         if (!$rental) throw new BadRequestHttpException('Cannot unlock bicycle');
         $bicycle = Bicycle::findOne(['id' => $bicycleId]);
 
-        $bicycleLocation = new BicycleLocation();
-        $bicycleLocation->bicycle_id = $bicycleId;
-        $bicycleLocation->user_id = $userId;
-        $bicycleLocation->latitude = $latitude;
-        $bicycleLocation->longitude = $longitude;
         if ($rental->pickup_at) {
             $bicycle->status = Bicycle::STATUS_UNLOCKED;
-            if ($bicycle->save() && $bicycleLocation->save())
+            if ($bicycle->save() && $this->addBicycleLocation($bicycleId, $latitude, $longitude))
                 return $rental;
         } else {
             $rental->pickup_at = date('Y-m-d H:i:s');
             $bicycle->status = Bicycle::STATUS_UNLOCKED;
-            if ($rental->save() && $bicycle->save() && $bicycleLocation->save())
+            if ($rental->save() && $bicycle->save()
+                && $this->addBicycleLocation($bicycleId, $latitude, $longitude))
                 return $rental;
         }
         throw new BadRequestHttpException('unlock fail');
@@ -202,12 +248,7 @@ class BicycleController extends CustomActiveController
         $bicycle = Bicycle::findOne(['id' => $bicycleId]);
         $bicycle->status = Bicycle::STATUS_LOCKED;
 
-        $bicycleLocation = new BicycleLocation();
-        $bicycleLocation->bicycle_id = $bicycleId;
-        $bicycleLocation->user_id = $userId;
-        $bicycleLocation->latitude = $latitude;
-        $bicycleLocation->longitude = $longitude;
-        if ($bicycle->save() && $bicycleLocation->save())
+        if ($bicycle->save() && $this->addBicycleLocation($bicycleId, $latitude, $longitude))
             return $rental;
         throw new BadRequestHttpException('unlock fail');
     }
