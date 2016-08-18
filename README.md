@@ -411,7 +411,9 @@ Authorization: 'Bearer <token>'
   "beacon_station_minor": "31465",
   "beacon_bicycle_uuid": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
   "beacon_bicycle_major": "52689",
-  "beacon_bicycle_minor": "51570"
+  "beacon_bicycle_minor": "51570",
+  "bicycle_count": "25",
+  "available_bicycle": "1"
 }
 ```
 
