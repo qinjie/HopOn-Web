@@ -336,7 +336,11 @@ Authorization: 'Bearer <token>'
     "model": "Hybrid",
     "desc": "Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.",
     "availableBicycle": "1",
-    "totalBicycle": "2"
+    "totalBicycle": "2",
+    "listImageUrl": [
+      "http://localhost/hopon-web/backend/web/uploads/images/bike-3.jpg",
+      "http://localhost/hopon-web/backend/web/uploads/images/bike-1.jpg"
+    ]
   },
   {
     "bicycle_type_id": "26",
@@ -344,7 +348,11 @@ Authorization: 'Bearer <token>'
     "model": "Kids Bicycles",
     "desc": "Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.",
     "availableBicycle": "1",
-    "totalBicycle": "1"
+    "totalBicycle": "1",
+    "listImageUrl": [
+      "http://localhost/hopon-web/backend/web/uploads/images/bike-3.jpg",
+      "http://localhost/hopon-web/backend/web/uploads/images/bike-1.jpg"
+    ]
   }
 ]
 ```
