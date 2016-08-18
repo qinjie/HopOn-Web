@@ -312,7 +312,7 @@ Authorization: 'Bearer <token>'
 
 ###GET ```station/detail?stationId=1```
 ```
-=> Get list of bicycle types in a station.
+=> Get list of bicycle types in a station. Only bicycle types having availableBicycle > 0 are returned.
 ```
 ####Header:
 ```
@@ -323,14 +323,20 @@ Authorization: 'Bearer <token>'
 ```
 [
   {
-    "bicycle_type_id": "1",
-    "brand": "Apollo Bikes",
-    "model": "Hybrid"
+    "bicycle_type_id": "6",
+    "brand": "Bianchi",
+    "model": "Hybrid",
+    "desc": "Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.",
+    "availableBicycle": "1",
+    "totalBicycle": "2"
   },
   {
-    "bicycle_type_id": "2",
-    "brand": "Apollo Bikes",
-    "model": "Road"
+    "bicycle_type_id": "26",
+    "brand": "Trek Bicycles",
+    "model": "Kids Bicycles",
+    "desc": "Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.",
+    "availableBicycle": "1",
+    "totalBicycle": "1"
   }
 ]
 ```

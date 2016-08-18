@@ -108,11 +108,14 @@ class StationController extends CustomActiveController
         $listBikeModel = Yii::$app->db->createCommand('
             select bicycle_type.id as bicycle_type_id, 
                    brand, 
-                   model 
+                   model, 
+                   bicycle_type.desc,
+                   count(case status when :status then 1 else null end) as availableBicycle,
+                   count(status) as totalBicycle
              from bicycle_type join bicycle on bicycle.bicycle_type_id = bicycle_type.id
              where station_id = :stationId
-             and status = :status
              group by bicycle_type_id, brand, model
+             having availableBicycle > 0
         ')
         ->bindValue(':stationId', $stationId)
         ->bindValue(':status', Bicycle::STATUS_FREE)

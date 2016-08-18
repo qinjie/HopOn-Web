@@ -146,6 +146,7 @@ CREATE TABLE IF NOT EXISTS `bicycle_type` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `brand` varchar(20) NOT NULL,
   `model` varchar(20) NOT NULL,
+  `desc` varchar(1000) DEFAULT NULL,
   `created_at` int(11) unsigned NOT NULL,
   `updated_at` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
@@ -155,33 +156,33 @@ CREATE TABLE IF NOT EXISTS `bicycle_type` (
 -- Dumping data for table `bicycle_type`
 --
 -- Get from this: http://www.bicycle-and-bikes.com/bicycle-brands.html
-INSERT INTO `bicycle_type` (`id`, `brand`, `model`, `created_at`, `updated_at`) VALUES
-(1, 'Apollo Bikes', 'Hybrid', 1461214049, 1461926225),
-(2, 'Apollo Bikes', 'Road', 1461214049, 1461926225),
-(3, 'Avanti Bikes', 'Road', 1461214049, 1461926225),
-(4, 'Avanti Bikes', 'Hybrid', 1461214049, 1461926225),
-(5, 'Bianchi', 'Road', 1461214049, 1461926225),
-(6, 'Bianchi', 'Hybrid', 1461214049, 1461926225),
-(7, 'Cannondale', 'Road', 1461214049, 1461926225),
-(8, 'Cannondale', 'Hybrid', 1461214049, 1461926225),
-(9, 'Felt', 'Road', 1461214049, 1461926225),
-(10, 'Felt', 'Hybrid', 1461214049, 1461926225),
-(11, 'Felt', 'BMX', 1461214049, 1461926225),
-(12, 'Gary Fisher Bicycles', 'Road', 1461214049, 1461926225),
-(13, 'Gary Fisher Bicycles', 'Hybrid', 1461214049, 1461926225),
-(14, 'Fuji', 'Kids Bicycles', 1461214049, 1461926225),
-(15, 'Fuji', 'Road', 1461214049, 1461926225),
-(16, 'Fuji', 'Hybrid', 1461214049, 1461926225),
-(17, 'Giant', 'Road', 1461214049, 1461926225),
-(18, 'Giant', 'BMX', 1461214049, 1461926225),
-(19, 'Klein', 'Road', 1461214049, 1461926225),
-(20, 'Kona', 'Kids Bicycles', 1461214049, 1461926225),
-(21, 'Merida Bikes', 'Electric', 1461214049, 1461926225),
-(22, 'Merida Bikes', 'Kids Bicycles', 1461214049, 1461926225),
-(23, 'Raleigh Bicycles', 'Electric', 1461214049, 1461926225),
-(24, 'Specialized Bikes', 'Road', 1461214049, 1461926225),
-(25, 'Specialized Bikes', 'Hybrid', 1461214049, 1461926225),
-(26, 'Trek Bicycles', 'Kids Bicycles', 1461214049, 1461926225);
+INSERT INTO `bicycle_type` (`id`, `brand`, `model`, `created_at`, `updated_at`, `desc`) VALUES
+(1, 'Apollo Bikes', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(2, 'Apollo Bikes', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(3, 'Avanti Bikes', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(4, 'Avanti Bikes', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(5, 'Bianchi', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(6, 'Bianchi', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(7, 'Cannondale', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(8, 'Cannondale', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(9, 'Felt', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(10, 'Felt', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(11, 'Felt', 'BMX', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(12, 'Gary Fisher Bicycles', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(13, 'Gary Fisher Bicycles', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(14, 'Fuji', 'Kids Bicycles', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(15, 'Fuji', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(16, 'Fuji', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(17, 'Giant', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(18, 'Giant', 'BMX', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(19, 'Klein', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(20, 'Kona', 'Kids Bicycles', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(21, 'Merida Bikes', 'Electric', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(22, 'Merida Bikes', 'Kids Bicycles', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(23, 'Raleigh Bicycles', 'Electric', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(24, 'Specialized Bikes', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(25, 'Specialized Bikes', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+(26, 'Trek Bicycles', 'Kids Bicycles', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.');
 
 -- --------------------------------------------------------
 
