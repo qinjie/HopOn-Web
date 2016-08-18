@@ -71,7 +71,12 @@ class RentalController extends CustomActiveController
                    b1.minor as beacon_station_minor,
                    b2.uuid as beacon_bicycle_uuid,
                    b2.major as beacon_bicycle_major,
-                   b2.minor as beacon_bicycle_minor
+                   b2.minor as beacon_bicycle_minor,
+                   bicycle_count, 
+                   (select count(b1.id)
+                    from bicycle as b1
+                    where b1.station_id = station.id 
+                    and b1.status = :status) as available_bicycle
              from rental join bicycle on rental.bicycle_id = bicycle.id
              join bicycle_type on bicycle.bicycle_type_id = bicycle_type.id
              join station on bicycle.station_id = station.id
@@ -81,6 +86,7 @@ class RentalController extends CustomActiveController
              and return_at is null
         ')
         ->bindValue(':userId', $userId)
+        ->bindValue(':status', Bicycle::STATUS_FREE)
         ->queryOne();
         if (!$currentBooking) throw new BadRequestHttpException('No booking');
         $time = strtotime($currentBooking['book_at']);
