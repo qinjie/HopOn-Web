@@ -152,6 +152,7 @@ class BicycleController extends CustomActiveController
         $rental->duration = intval(ceil((strtotime($rental->return_at) - strtotime($rental->book_at)) / 60));
         $bicycle = Bicycle::findOne(['id' => $bicycleId]);
         $bicycle->status = Bicycle::STATUS_FREE;
+        $bicycle->station_id = $station['id'];
 
         if ($rental->save() && $bicycle->save() 
             && $this->addBicycleLocation($bicycleId, $latitude, $longitude)) {
