@@ -9,6 +9,14 @@ STATUS_LOCKED = 2;
 STATUS_UNLOCKED = 3;
 STATUS_BOOKED = 4;
 ```
+###Issues in feedback:
+```
+ISSUE_OTHERS = 0;
+ISSUE_BREAK_NOT_EFFECTIVE = 1;
+ISSUE_TYRE_FLAT = 2;
+ISSUE_CHAIN_GEARS_FAULTY = 3;
+ISSUE_PARTS_LOOSE = 4;
+```
 ###Error code in 400
 ```
 CODE_INCORRECT_USERNAME = 0;
@@ -582,4 +590,33 @@ Authorization: 'Bearer <token>'
     "bicycle_count": "20"
   }
 ]
+```
+
+***
+
+###POST ```feedback/new```
+```
+=> Submit a feedback. Issue will be one of values:
+0: ISSUE_OTHERS;
+1: ISSUE_BREAK_NOT_EFFECTIVE
+2: ISSUE_TYRE_FLAT
+3: ISSUE_CHAIN_GEARS_FAULTY
+4: ISSUE_PARTS_LOOSE
+```
+####Header:
+```
+Authorization: 'Bearer <token>'
+```
+####Request:
+```
+{
+  rentalId: 10,
+  issue: 1,
+  comment: 'This is a comment',
+  rating: 5
+}
+```
+####Response:
+```
+"Feedback saved"
 ```

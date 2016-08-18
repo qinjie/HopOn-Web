@@ -356,6 +356,40 @@ CREATE TABLE IF NOT EXISTS `user_token` (
 -- INSERT INTO `user_token` (`id`, `user_id`, `token`, `title`, `ip_address`, `expire_date`, `created_date`, `updated_date`, `action`) VALUES
 -- (25, 1, '5f6DYh6wbpMx2t9jR0j44lXJLKmQ0Kbk', 'ACTION_ACCESS', '116.99.174.136', '2016-09-01 15:24:56', '2016-08-02 15:24:56', '2016-08-02 15:24:56', 4);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE IF NOT EXISTS `feedback` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `rental_id` int(11) unsigned NOT NULL,
+  `issue` smallint(6) DEFAULT 0,
+  `comment` varchar(1000) NOT NULL,
+  `rating` smallint(6) NOT NULL,
+  `created_at` int(11) unsigned DEFAULT NULL,
+  `updated_at` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `rental_id` (`rental_id`),
+  KEY `rental_ibfk_3` (`rental_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `rental_id`, `issue`, `comment`, `rating`, `created_at`, `updated_at`) VALUES
+(1, 1, 0, 'Comment 1', 0, 1461214049, 1461926225),
+(2, 2, 1, 'Comment 2', 1, 1461214049, 1461926225),
+(3, 3, 2, 'Comment 3', 2, 1461214049, 1461926225),
+(4, 4, 3, 'Comment 4', 3, 1461214049, 1461926225),
+(5, 5, 4, 'Comment 5', 4, 1461214049, 1461926225),
+(6, 6, 0, 'Comment 6', 5, 1461214049, 1461926225);
+
+-- INSERT INTO `user_token` (`id`, `user_id`, `token`, `title`, `ip_address`, `expire_date`, `created_date`, `updated_date`, `action`) VALUES
+-- (25, 1, '5f6DYh6wbpMx2t9jR0j44lXJLKmQ0Kbk', 'ACTION_ACCESS', '116.99.174.136', '2016-09-01 15:24:56', '2016-08-02 15:24:56', '2016-08-02 15:24:56', 4);
+
 --
 -- Constraints for dumped tables
 --
@@ -393,6 +427,12 @@ ALTER TABLE `station`
 --
 ALTER TABLE `user_token`
   ADD CONSTRAINT `usertoken_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD CONSTRAINT `rental_ibfk_3` FOREIGN KEY (`rental_id`) REFERENCES `rental` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
