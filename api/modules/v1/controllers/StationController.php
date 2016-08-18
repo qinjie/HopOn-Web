@@ -111,8 +111,12 @@ class StationController extends CustomActiveController
                    model, 
                    bicycle_type.desc,
                    count(case status when :status then 1 else null end) as availableBicycle,
-                   count(status) as totalBicycle
+                   count(status) as totalBicycle,
+                   (select group_concat(data separator \' \') 
+                    from image 
+                    where image.bicycle_type_id = bicycle_type.id) as listImageUrl
              from bicycle_type join bicycle on bicycle.bicycle_type_id = bicycle_type.id
+             join image on bicycle_type.id = image.bicycle_type_id
              where station_id = :stationId
              group by bicycle_type_id, brand, model
              having availableBicycle > 0
@@ -120,6 +124,12 @@ class StationController extends CustomActiveController
         ->bindValue(':stationId', $stationId)
         ->bindValue(':status', Bicycle::STATUS_FREE)
         ->queryAll();
+        for ($iter = 0; $iter < count($listBikeModel); ++$iter) {
+            $listBikeModel[$iter]['listImageUrl'] = explode(' ', $listBikeModel[$iter]['listImageUrl']);
+            for ($iterUrl = 0; $iterUrl < count($listBikeModel[$iter]['listImageUrl']); ++$iterUrl) {
+                $listBikeModel[$iter]['listImageUrl'][$iterUrl] = Yii::$app->params['BACKEND_BASEURL'].$listBikeModel[$iter]['listImageUrl'][$iterUrl];
+            }
+        }
         return $listBikeModel;
     }
 

@@ -27,6 +27,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'data')->textInput()->hiddenInput()->label(false) ?>
 
+    <?= $form->field($model, 'bicycle_type_id')->textInput()->hiddenInput()->label(false) ?>
+
     <?= $form->field($model, 'created_at')->textInput()->hiddenInput()->label(false) ?>
 
     <?= $form->field($model, 'updated_at')->textInput()->hiddenInput()->label(false) ?>

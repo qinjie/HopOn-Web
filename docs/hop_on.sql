@@ -84,21 +84,21 @@ CREATE TABLE IF NOT EXISTS `bicycle` (
 INSERT INTO `bicycle` (`id`, `serial`, `bicycle_type_id`, `desc`, `station_id`, `beacon_id`, `created_at`, `updated_at`, `status`) VALUES
 (1, 'SG11111', 1, 'Hybrid', 1, 1, 1461214049, 1461926225,0),
 (2, 'SG11112', 1, 'Road', 1, 1, 1461214049, 1461926225,0),
-(3, 'SG11113', 21, 'Road', 1, 1, 1461214049, 1461926225,0),
+(3, 'SG11113', 2, 'Road', 1, 1, 1461214049, 1461926225,0),
 (4, 'SG11114', 2, 'Hybrid', 1, 2, 1461214049, 1461926225,0),
-(5, 'SG11115', 22, 'Road', 2, 2, 1461214049, 1461926225,0),
+(5, 'SG11115', 2, 'Road', 2, 2, 1461214049, 1461926225,0),
 (6, 'SG11116', 2, 'Hybrid', 2, 2, 1461214049, 1461926225,0),
 (7, 'SG11117', 3, 'Road', 2, 3, 1461214049, 1461926225,0),
-(8, 'SG11118', 23, 'Hybrid', 2, 3, 1461214049, 1461926225,0),
+(8, 'SG11118', 3, 'Hybrid', 2, 3, 1461214049, 1461926225,0),
 (9, 'SG11119', 3, 'Road', 3, 4, 1461214049, 1461926225,0),
 (10, 'SG11121', 4, 'Hybrid', 3, 4, 1461214049, 1461926225,0),
-(11, 'SG11122', 24, 'BMX', 3, 4, 1461214049, 1461926225,4),
+(11, 'SG11122', 4, 'BMX', 3, 4, 1461214049, 1461926225,4),
 (12, 'SG11123', 4, 'Road', 3, 4, 1461214049, 1461926225,4),
 (13, 'SG11124', 5, 'Hybrid', 4, 5, 1461214049, 1461926225,4),
-(14, 'SG11125', 25, 'Kids Bicycles', 4, 5, 1461214049, 1461926225,4),
+(14, 'SG11125', 5, 'Kids Bicycles', 4, 5, 1461214049, 1461926225,4),
 (15, 'SG11126', 5, 'Road', 4, 5, 1461214049, 1461926225,4),
 (16, 'SG11127', 6, 'Hybrid', 4, 5, 1461214049, 1461926225,4),
-(17, 'SG11128', 26, 'Road', 4, 1, 1461214049, 1461926225,0),
+(17, 'SG11128', 6, 'Road', 4, 1, 1461214049, 1461926225,0),
 (18, 'SG11129', 6, 'BMX', 4, 1, 1461214049, 1461926225,0),
 (19, 'SG11131', 7, 'Road', 1, 1, 1461214049, 1461926225,0),
 (20, 'SG11132', 7, 'Kids Bicycles', 1, 2, 1461214049, 1461926225,0),
@@ -110,12 +110,12 @@ INSERT INTO `bicycle` (`id`, `serial`, `bicycle_type_id`, `desc`, `station_id`, 
 (26, 'SG11138', 9, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
 (27, 'SG11139', 9, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
 (28, 'SG11141', 10, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
-(29, 'SG11142', 11, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
-(30, 'SG11143', 12, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
-(31, 'SG11144', 13, 'Kids Bicycles', 3, 3, 1461214049, 1461926225,0),
-(32, 'SG11145', 14, 'Kids Bicycles', 3, 5, 1461214049, 1461926225,0),
-(33, 'SG11146', 15, 'Kids Bicycles', 3, 5, 1461214049, 1461926225,0),
-(34, 'SG11147', 16, 'Kids Bicycles', 3, 5, 1461214049, 1461926225,0);
+(29, 'SG11142', 10, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
+(30, 'SG11143', 10, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
+(31, 'SG11144', 10, 'Kids Bicycles', 3, 3, 1461214049, 1461926225,0),
+(32, 'SG11145', 1, 'Kids Bicycles', 3, 5, 1461214049, 1461926225,0),
+(33, 'SG11146', 1, 'Kids Bicycles', 3, 5, 1461214049, 1461926225,0),
+(34, 'SG11147', 1, 'Kids Bicycles', 3, 5, 1461214049, 1461926225,0);
 
 -- --------------------------------------------------------
 
@@ -166,23 +166,23 @@ INSERT INTO `bicycle_type` (`id`, `brand`, `model`, `created_at`, `updated_at`, 
 (7, 'Cannondale', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
 (8, 'Cannondale', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
 (9, 'Felt', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(10, 'Felt', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(11, 'Felt', 'BMX', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(12, 'Gary Fisher Bicycles', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(13, 'Gary Fisher Bicycles', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(14, 'Fuji', 'Kids Bicycles', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(15, 'Fuji', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(16, 'Fuji', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(17, 'Giant', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(18, 'Giant', 'BMX', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(19, 'Klein', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(20, 'Kona', 'Kids Bicycles', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(21, 'Merida Bikes', 'Electric', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(22, 'Merida Bikes', 'Kids Bicycles', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(23, 'Raleigh Bicycles', 'Electric', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(24, 'Specialized Bikes', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(25, 'Specialized Bikes', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(26, 'Trek Bicycles', 'Kids Bicycles', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.');
+(10, 'Felt', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.');
+-- (11, 'Felt', 'BMX', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (12, 'Gary Fisher Bicycles', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (13, 'Gary Fisher Bicycles', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (14, 'Fuji', 'Kids Bicycles', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (15, 'Fuji', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (16, 'Fuji', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (17, 'Giant', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (18, 'Giant', 'BMX', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (19, 'Klein', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (20, 'Kona', 'Kids Bicycles', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (21, 'Merida Bikes', 'Electric', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (22, 'Merida Bikes', 'Kids Bicycles', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (23, 'Raleigh Bicycles', 'Electric', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (24, 'Specialized Bikes', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (25, 'Specialized Bikes', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (26, 'Trek Bicycles', 'Kids Bicycles', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.');
 
 -- --------------------------------------------------------
 
@@ -217,10 +217,38 @@ CREATE TABLE IF NOT EXISTS `image` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `data` blob NOT NULL,
-  `created_at` int(11) unsigned NOT NULL,
-  `updated_at` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
+  `bicycle_type_id` int(11) unsigned DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `image_ibfk_1` (`bicycle_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+
+--
+-- Dumping data for table `image`
+--
+
+INSERT INTO `image` (`id`, `name`, `data`, `bicycle_type_id`, `created_at`, `updated_at`) VALUES
+(1, 'bike 1', 'uploads/images/bike-1.jpg', 1, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(2, 'bike 2', 'uploads/images/bike-2.jpg', 2, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(3, 'bike 3', 'uploads/images/bike-3.jpg', 3, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(4, 'bike 1', 'uploads/images/bike-1.jpg', 4, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(5, 'bike 2', 'uploads/images/bike-2.jpg', 5, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(6, 'bike 3', 'uploads/images/bike-3.jpg', 6, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(7, 'bike 1', 'uploads/images/bike-1.jpg', 7, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(8, 'bike 2', 'uploads/images/bike-2.jpg', 8, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(9, 'bike 3', 'uploads/images/bike-3.jpg', 9, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(10, 'bike 1', 'uploads/images/bike-1.jpg', 10, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(11, 'bike 2', 'uploads/images/bike-2.jpg', 1, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(12, 'bike 3', 'uploads/images/bike-3.jpg', 2, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(13, 'bike 1', 'uploads/images/bike-1.jpg', 3, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(14, 'bike 2', 'uploads/images/bike-2.jpg', 4, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(15, 'bike 3', 'uploads/images/bike-3.jpg', 5, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(16, 'bike 1', 'uploads/images/bike-1.jpg', 6, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(17, 'bike 2', 'uploads/images/bike-2.jpg', 7, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(18, 'bike 3', 'uploads/images/bike-3.jpg', 8, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(19, 'bike 1', 'uploads/images/bike-1.jpg', 9, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+(20, 'bike 2', 'uploads/images/bike-2.jpg', 10, '2016-08-02 15:24:56', '2016-08-02 15:24:56');
 
 -- --------------------------------------------------------
 
@@ -372,7 +400,7 @@ CREATE TABLE IF NOT EXISTS `feedback` (
   `updated_at` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `rental_id` (`rental_id`),
-  KEY `rental_ibfk_3` (`rental_id`)
+  KEY `feedback_ibfk_1` (`rental_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
@@ -386,9 +414,6 @@ INSERT INTO `feedback` (`id`, `rental_id`, `issue`, `comment`, `rating`, `create
 (4, 4, 3, 'Comment 4', 3, 1461214049, 1461926225),
 (5, 5, 4, 'Comment 5', 4, 1461214049, 1461926225),
 (6, 6, 0, 'Comment 6', 5, 1461214049, 1461926225);
-
--- INSERT INTO `user_token` (`id`, `user_id`, `token`, `title`, `ip_address`, `expire_date`, `created_date`, `updated_date`, `action`) VALUES
--- (25, 1, '5f6DYh6wbpMx2t9jR0j44lXJLKmQ0Kbk', 'ACTION_ACCESS', '116.99.174.136', '2016-09-01 15:24:56', '2016-08-02 15:24:56', '2016-08-02 15:24:56', 4);
 
 --
 -- Constraints for dumped tables
@@ -432,7 +457,13 @@ ALTER TABLE `user_token`
 -- Constraints for table `feedback`
 --
 ALTER TABLE `feedback`
-  ADD CONSTRAINT `rental_ibfk_3` FOREIGN KEY (`rental_id`) REFERENCES `rental` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`rental_id`) REFERENCES `rental` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+  --
+-- Constraints for table `image`
+--
+ALTER TABLE `image`
+  ADD CONSTRAINT `image_ibfk_1` FOREIGN KEY (`bicycle_type_id`) REFERENCES `bicycle_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'data',
+            'bicycle_type_id',
             'created_at',
             'updated_at',
         ],
