@@ -621,7 +621,7 @@ Authorization: 'Bearer <token>'
 ```
 {
   rentalId: 10,
-  issue: 1,
+  listIssue: [1, 2],
   comment: 'This is a comment',
   rating: 5
 }

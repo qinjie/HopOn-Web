@@ -50,17 +50,17 @@ class FeedbackController extends CustomActiveController {
         $userId = Yii::$app->user->identity->id;
         $bodyParams = Yii::$app->request->bodyParams;
         $rentalId = $bodyParams['rentalId'];
-        $issue = $bodyParams['issue'];
+        $listIssue = $bodyParams['listIssue'];
         $comment = $bodyParams['comment'];
         $rating = $bodyParams['rating'];
 
         $rental = Rental::findOne(['id' => $rentalId]);
-        if ($rental->user_id != $userId)
+        if (!$rental || $rental->user_id != $userId)
             throw new BadRequestHttpException('Invalid booking id');
 
         $feedback = new Feedback();
         $feedback->rental_id = $rentalId;
-        $feedback->issue = $issue;
+        $feedback->issue = '['.implode(',', $listIssue).']';
         $feedback->comment = $comment;
         $feedback->rating = $rating;
         if ($feedback->save())

@@ -393,7 +393,7 @@ CREATE TABLE IF NOT EXISTS `user_token` (
 CREATE TABLE IF NOT EXISTS `feedback` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `rental_id` int(11) unsigned NOT NULL,
-  `issue` smallint(6) DEFAULT 0,
+  `issue` varchar(100) DEFAULT 0,
   `comment` varchar(1000) NOT NULL,
   `rating` smallint(6) NOT NULL,
   `created_at` int(11) unsigned DEFAULT NULL,
@@ -408,12 +408,12 @@ CREATE TABLE IF NOT EXISTS `feedback` (
 --
 
 INSERT INTO `feedback` (`id`, `rental_id`, `issue`, `comment`, `rating`, `created_at`, `updated_at`) VALUES
-(1, 1, 0, 'Comment 1', 0, 1461214049, 1461926225),
-(2, 2, 1, 'Comment 2', 1, 1461214049, 1461926225),
-(3, 3, 2, 'Comment 3', 2, 1461214049, 1461926225),
-(4, 4, 3, 'Comment 4', 3, 1461214049, 1461926225),
-(5, 5, 4, 'Comment 5', 4, 1461214049, 1461926225),
-(6, 6, 0, 'Comment 6', 5, 1461214049, 1461926225);
+(1, 1, '[0,1]', 'Comment 1', 0, 1461214049, 1461926225),
+(2, 2, '[1,2]', 'Comment 2', 1, 1461214049, 1461926225),
+(3, 3, '[2,3]', 'Comment 3', 2, 1461214049, 1461926225),
+(4, 4, '[3,4]', 'Comment 4', 3, 1461214049, 1461926225),
+(5, 5, '[4,5]', 'Comment 5', 4, 1461214049, 1461926225),
+(6, 6, '[5,0]', 'Comment 6', 5, 1461214049, 1461926225);
 
 --
 -- Constraints for dumped tables
