@@ -532,7 +532,7 @@ Authorization: 'Bearer <token>'
 
 ###POST ```rental/history```
 ```
-=> History of booking of current user
+=> History of booking of current user. Sorted from newest to oldest by return at
 ```
 ####Header:
 ```
