@@ -92,8 +92,8 @@ class RentalController extends CustomActiveController
         $time = strtotime($currentBooking['book_at']);
         $currentBooking['book_at'] = date('h:i A, d M Y', $time);
         if ($currentBooking['pickup_at']) {
-          $time = strtotime($currentBooking['pickup_at']);
-          $currentBooking['pickup_at'] = date('h:i A, d M Y', $time);
+            $time = strtotime($currentBooking['pickup_at']);
+            $currentBooking['pickup_at'] = date('h:i A, d M Y', $time);
         }
         return $currentBooking;
     }
@@ -127,18 +127,20 @@ class RentalController extends CustomActiveController
              join station as s2 on rental.return_station_id = s2.id
              where user_id = :userId
              and return_at is not null
+             order by return_at desc
         ')
         ->bindValue(':userId', $userId)
         ->queryAll();
 
         for ($iter = 0; $iter < count($history); ++$iter) {
-          $time = strtotime($history[$iter]['book_at']);
-          $history[$iter]['book_at'] = date('h:i A, d M Y', $time);
-          $time = strtotime($history[$iter]['pickup_at']);
-          $history[$iter]['pickup_at'] = date('h:i A, d M Y', $time);
-          $time = strtotime($history[$iter]['return_at']);
-          $history[$iter]['return_at'] = date('h:i A, d M Y', $time);
+            $time = strtotime($history[$iter]['book_at']);
+            $history[$iter]['book_at'] = date('h:i A, d M Y', $time);
+            $time = strtotime($history[$iter]['pickup_at']);
+            $history[$iter]['pickup_at'] = date('h:i A, d M Y', $time);
+            $time = strtotime($history[$iter]['return_at']);
+            $history[$iter]['return_at'] = date('h:i A, d M Y', $time);
         }
+
         return $history;
     }
 
