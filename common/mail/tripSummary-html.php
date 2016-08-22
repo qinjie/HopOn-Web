@@ -106,7 +106,7 @@ use yii\helpers\Html;
                         Booking ID:
                       </td>
                       <td>
-                        <strong><?= Html::encode($rental->id) ?></strong>
+                        <strong><?= Html::encode($booking['booking_id']) ?></strong>
                       </td>
                     </tr>
                     <tr>
@@ -114,7 +114,7 @@ use yii\helpers\Html;
                         Bicycle Brand / Model:
                       </td>
                       <td>
-                        <strong><?= Html::encode($bicycle['brand']) ?> / <?= Html::encode($bicycle['model']) ?></strong>
+                        <strong><?= Html::encode($booking['brand']) ?> / <?= Html::encode($booking['model']) ?></strong>
                       </td>
                     </tr>
                     <tr>
@@ -122,7 +122,7 @@ use yii\helpers\Html;
                         Pick up Station:
                       </td>
                       <td>
-                        <strong><?= Html::encode($bicycle['station_name']) ?> - <?= Html::encode($bicycle['address']) ?>, <?= Html::encode($bicycle['postal']) ?></strong>
+                        <strong><?= Html::encode($booking['pickup_station_name']) ?> - <?= Html::encode($booking['pickup_station_address']) ?>, <?= Html::encode($booking['pickup_station_postal']) ?></strong>
                       </td>
                     </tr>
                     <tr>
@@ -130,7 +130,7 @@ use yii\helpers\Html;
                         Booked Time:
                       </td>
                       <td>
-                        <strong><?= Html::encode(date('h:i A, d M Y', strtotime($rental->book_at))) ?></strong>
+                        <strong><?= Html::encode(date('h:i A, d M Y', strtotime($booking['book_at']))) ?></strong>
                       </td>
                     </tr>
                     <tr>
@@ -138,7 +138,7 @@ use yii\helpers\Html;
                         Pick up Time:
                       </td>
                       <td>
-                        <strong><?= Html::encode(date('h:i A, d M Y', strtotime($rental->book_at))) ?></strong>
+                        <strong><?= Html::encode(date('h:i A, d M Y', strtotime($booking['pickup_at']))) ?></strong>
                       </td>
                     </tr>
                     <tr>
@@ -146,7 +146,7 @@ use yii\helpers\Html;
                         Return Station:
                       </td>
                       <td>
-                        <strong><?= Html::encode(date('h:i A, d M Y', strtotime($rental->book_at))) ?></strong>
+                        <strong><?= Html::encode($booking['return_station_name']) ?> - <?= Html::encode($booking['return_station_address']) ?>, <?= Html::encode($booking['return_station_postal']) ?></strong>
                       </td>
                     </tr>
                     <tr>
@@ -154,15 +154,15 @@ use yii\helpers\Html;
                         Return Time:
                       </td>
                       <td>
-                        <strong><?= Html::encode(date('h:i A, d M Y', strtotime($rental->book_at))) ?></strong>
+                        <strong><?= Html::encode(date('h:i A, d M Y', strtotime($booking['return_at']))) ?></strong>
                       </td>
                     </tr>
                     <tr>
                       <td width="20%">
-                        Estimated Trip Duration:
+                        Loan Duration:
                       </td>
                       <td>
-                        <strong><?= Html::encode(date('h:i A, d M Y', strtotime($rental->book_at))) ?></strong>
+                        <strong><?= Html::encode($booking['duration']) ?> minute<?= $booking['duration'] > 1 ? 's' : '' ?></strong>
                       </td>
                     </tr>
                   </table>

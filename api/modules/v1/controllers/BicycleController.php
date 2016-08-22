@@ -162,49 +162,40 @@ class BicycleController extends CustomActiveController
 
         if ($rental->save() && $bicycle->save() 
             && $this->addBicycleLocation($bicycleId, $latitude, $longitude)) {
-            // $result = Yii::$app->db->createCommand('
-            //     select rental.id as booking_id,
-            //            bicycle_id,
-            //            bicycle.serial as bicycle_serial,
-            //            bicycle.desc,
-            //            bicycle_type.brand,
-            //            bicycle_type.model,
-            //            s1.name as pickup_station_name,
-            //            s1.address as pickup_station_address,
-            //            s1.postal as pickup_station_postal,
-            //            s1.latitude as pickup_station_lat,
-            //            s1.longitude as pickup_station_lng,
-            //            rental.book_at,
-            //            rental.pickup_at,
-            //            rental.return_at,
-            //            rental.duration,
-            //            s2.name as return_station_name,
-            //            s2.address as return_station_address,
-            //            s2.postal as return_station_postal,
-            //            s2.latitude as return_station_lat,
-            //            s2.longitude as return_station_lng
-            //      from rental join bicycle on rental.bicycle_id = bicycle.id
-            //      join bicycle_type on bicycle.bicycle_type_id = bicycle_type.id
-            //      join station as s1 on bicycle.station_id = s1.id
-            //      join station as s2 on rental.return_station_id = s2.id
-            //      where user_id = :userId
-            //      and rental.id = :rentalId
-            //      and return_at is not null
-            // ')
-            // ->bindValue(':userId', $userId)
-            // ->bindValue(':rentalId', $rental->id)
-            // ->queryOne();
-            // $user = Yii::$app->user->identity;
+            $result = Yii::$app->db->createCommand('
+                select rental.id as booking_id,
+                       bicycle_type.brand,
+                       bicycle_type.model,
+                       s1.name as pickup_station_name,
+                       s1.address as pickup_station_address,
+                       s1.postal as pickup_station_postal,
+                       rental.book_at,
+                       rental.pickup_at,
+                       rental.return_at,
+                       rental.duration,
+                       s2.name as return_station_name,
+                       s2.address as return_station_address,
+                       s2.postal as return_station_postal
+                from rental join bicycle on rental.bicycle_id = bicycle.id
+                join bicycle_type on bicycle.bicycle_type_id = bicycle_type.id
+                join station as s1 on bicycle.station_id = s1.id
+                join station as s2 on rental.return_station_id = s2.id
+                where user_id = :userId
+                and rental.id = :rentalId
+            ')
+            ->bindValue(':userId', $userId)
+            ->bindValue(':rentalId', $rental->id)
+            ->queryOne();
+            $user = Yii::$app->user->identity;
 
-            // Yii::$app->mailer->compose(['html' => '@common/mail/bookingDetail-html'], [
-            //         'bicycle' => $bicycle, 
-            //         'rental' => $rental,
-            //         'user' => $user,
-            //     ])
-            //     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-            //     ->setTo($user->email)
-            //     ->setSubject('Booking Detail From ' . Yii::$app->name)
-            //     ->send();
+            Yii::$app->mailer->compose(['html' => '@common/mail/tripSummary-html'], [
+                    'booking' => $result,
+                    'user' => $user,
+                ])
+                ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                ->setTo($user->email)
+                ->setSubject('Trip Summary From ' . Yii::$app->name)
+                ->send();
             return $rental;
         }
         throw new BadRequestHttpException('Return fail');
