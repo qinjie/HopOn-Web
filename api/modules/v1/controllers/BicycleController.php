@@ -218,14 +218,20 @@ class BicycleController extends CustomActiveController
 
         if ($rental->pickup_at) {
             $bicycle->status = Bicycle::STATUS_UNLOCKED;
-            if ($bicycle->save() && $this->addBicycleLocation($bicycleId, $latitude, $longitude))
+            if ($bicycle->save() && $this->addBicycleLocation($bicycleId, $latitude, $longitude)) {
+                $time = strtotime($rental->pickup_at);
+                $rental->pickup_at = date('h:i A, d M Y', $time);
                 return $rental;
+            }
         } else {
             $rental->pickup_at = date('Y-m-d H:i:s');
             $bicycle->status = Bicycle::STATUS_UNLOCKED;
             if ($rental->save() && $bicycle->save()
-                && $this->addBicycleLocation($bicycleId, $latitude, $longitude))
+                && $this->addBicycleLocation($bicycleId, $latitude, $longitude)) {
+                $time = strtotime($rental->pickup_at);
+                $rental->pickup_at = date('h:i A, d M Y', $time);
                 return $rental;
+            }
         }
         throw new BadRequestHttpException('unlock fail');
     }

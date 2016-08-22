@@ -413,7 +413,7 @@ Authorization: 'Bearer <token>'
   "pickup_station_lat": "1.374542",
   "pickup_station_lng": "103.843353",
   "book_at": "02:28 PM, 11 Aug 2016",
-  "pickup_at": "2016-08-11 14:41:32",
+  "pickup_at": "02:41 PM, 11 Aug 2016",
   "beacon_station_uuid": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
   "beacon_station_major": "33078",
   "beacon_station_minor": "31465",
@@ -487,11 +487,12 @@ Authorization: 'Bearer <token>'
 {
   "id": 13,
   "user_id": 1,
-  "bicycle_id": 17,
-  "serial": "SG11128",
-  "book_at": "2016-08-11 14:28:08",
-  "pickup_at": "2016-08-11 14:41:32",
+  "bicycle_id": 2,
+  "serial": "SG11112",
+  "book_at": "2016-08-22 15:24:06",
+  "pickup_at": "03:24 PM, 22 Aug 2016",
   "return_at": null,
+  "return_station_id": null,
   "duration": null
 }
 ```
@@ -519,11 +520,12 @@ Authorization: 'Bearer <token>'
 {
   "id": 13,
   "user_id": 1,
-  "bicycle_id": 17,
-  "serial": "SG11128",
-  "book_at": "2016-08-11 14:28:08",
-  "pickup_at": "2016-08-11 14:41:32",
+  "bicycle_id": 2,
+  "serial": "SG11112",
+  "book_at": "2016-08-22 15:24:06",
+  "pickup_at": "03:24 PM, 22 Aug 2016",
   "return_at": null,
+  "return_station_id": null,
   "duration": null
 }
 ```
