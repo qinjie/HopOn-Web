@@ -17,6 +17,19 @@ class BicycleLocation extends ActiveRecord
         return 'bicycle_location';
     }
 
+    public function rules()
+    {
+        return [
+            [['bicycle_id', 'user_id'], 'required'],
+            [['bicycle_id', 'user_id'], 'integer'],
+
+            [['latitude', 'longitude'], 'double'],
+            [['latitude', 'longitude'], 'required'],
+
+            [['updated_at', 'created_at'], 'safe'],
+        ];
+    }
+
     public function fields() {
         $fields = parent::fields();
         unset($fields['created_at'], $fields['updated_at']);

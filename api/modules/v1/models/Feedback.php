@@ -23,6 +23,38 @@ class Feedback extends ActiveRecord
         return 'feedback';
     }
 
+    public function rules()
+    {
+        return [
+            ['rental_id', 'required'],
+            ['rental_id', 'integer'],
+
+            ['issue', 'integer'],
+            ['issue', 'default', 'value' => self::ISSUE_OTHERS],
+            ['issue', 'in', 'range' => array_keys(self::getIssuesArray())],
+
+            ['comment', 'required'],
+            ['comment', 'string', 'max' => 1000],
+
+            ['rating', 'required'],
+            ['rating', 'integer'],
+            ['rating', 'in', 'range' => [0, 1, 2, 3, 4, 5]],
+
+            [['updated_at', 'created_at'], 'safe'],
+        ];
+    }
+
+    public static function getIssuesArray()
+    {
+        return [
+            self::ISSUE_OTHERS => 'Others',
+            self::ISSUE_BREAK_NOT_EFFECTIVE => 'Break not effective',
+            self::ISSUE_TYRE_FLAT => 'Tyre(s) flat',
+            self::ISSUE_CHAIN_GEARS_FAULTY => 'Chain, gears faulty',
+            self::ISSUE_PARTS_LOOSE => 'Parts loose/dented/scratched, e.g. basket',
+        ];
+    }
+
     public function fields() {
         $fields = parent::fields();
         unset($fields['created_at'], $fields['updated_at']);

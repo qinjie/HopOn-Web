@@ -18,6 +18,21 @@ class Rental extends ActiveRecord
         return 'rental';
     }
 
+    public function rules()
+    {
+        return [
+            [['bicycle_id', 'user_id'], 'required'],
+            [['bicycle_id', 'user_id', 'return_station_id'], 'integer'],
+
+            ['serial', 'required'],
+            ['serial', 'string', 'max' => 50],
+
+            ['duration', 'integer'],
+
+            [['book_at', 'pickup_at', 'return_at', 'updated_at', 'created_at'], 'safe'],
+        ];
+    }
+
     public function fields() {
         $fields = parent::fields();
         unset($fields['created_at'], $fields['updated_at']);

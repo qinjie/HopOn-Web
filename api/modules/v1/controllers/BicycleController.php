@@ -69,6 +69,7 @@ class BicycleController extends CustomActiveController
             'bicycle_type_id' => $bicycleTypeId,
             'status' => Bicycle::STATUS_FREE,
         ]);
+        // return $listBicycle;
         $randomNumber = rand(0, count($listBicycle) - 1);
         $selectedBicycle = $listBicycle[$randomNumber];
         $selectedBicycle->status = Bicycle::STATUS_BOOKED;
@@ -107,6 +108,7 @@ class BicycleController extends CustomActiveController
                 ->send();
             return $selectedBicycle;
         }
+        throw new BadRequestHttpException('Cannot save database');
     }
 
     private function addBicycleLocation($bicycleId, $latitude, $longitude) {

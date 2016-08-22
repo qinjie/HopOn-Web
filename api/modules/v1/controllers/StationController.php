@@ -116,7 +116,6 @@ class StationController extends CustomActiveController
                     from image 
                     where image.bicycle_type_id = bicycle_type.id) as listImageUrl
              from bicycle_type join bicycle on bicycle.bicycle_type_id = bicycle_type.id
-             join image on bicycle_type.id = image.bicycle_type_id
              where station_id = :stationId
              group by bicycle_type_id, brand, model
              having availableBicycle > 0

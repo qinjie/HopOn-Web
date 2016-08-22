@@ -18,6 +18,23 @@ class Station extends ActiveRecord
         return 'station';
     }
 
+    public function rules()
+    {
+        return [
+            ['beacon_id', 'required'],
+            [['beacon_id', 'bicycle_count'], 'integer'],
+
+            [['latitude', 'longitude'], 'double'],
+
+            [['name', 'address', 'postal'], 'required'],
+            ['name', 'string', 'max' => 20],
+            ['address', 'string', 'max' => 120],
+            ['postal', 'string', 'max' => 10],
+
+            [['updated_at', 'created_at'], 'safe'],
+        ];
+    }
+
     public function fields() {
         $fields = parent::fields();
         unset($fields['created_at'], $fields['updated_at']);

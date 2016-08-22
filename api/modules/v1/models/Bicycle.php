@@ -23,6 +23,36 @@ class Bicycle extends ActiveRecord
         return 'bicycle';
     }
 
+    public function rules()
+    {
+        return [
+            ['bicycle_type_id', 'required'],
+            ['bicycle_type_id', 'integer'],
+
+            [['desc'], 'string', 'max' => 50],
+
+            ['status', 'integer'],
+            ['status', 'default', 'value' => self::STATUS_FREE],
+            ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
+
+            [['station_id', 'beacon_id'], 'required'],
+            [['station_id', 'beacon_id'], 'integer'],
+
+            [['updated_at', 'created_at'], 'safe'],
+        ];
+    }
+
+    public static function getStatusesArray()
+    {
+        return [
+            self::STATUS_FREE => 'Free',
+            self::STATUS_MAINTENANCE => 'Maintenance',
+            self::STATUS_LOCKED => 'Locked',
+            self::STATUS_UNLOCKED => 'Unlocked',
+            self::STATUS_BOOKED => 'Booked'
+        ];
+    }
+
     public function fields() {
         $fields = parent::fields();
         unset($fields['created_at'], $fields['updated_at']);
