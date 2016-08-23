@@ -195,7 +195,7 @@ resend email
 
 ###POST ```user/change-email```
 ```
-=> Change new email. An activation email will be sent.
+=> Change new email.
 ```
 ####Header:
 ```
@@ -210,10 +210,47 @@ Authorization: 'Bearer <token>'
 ```
 ####Response:
 ```
-'change email successfully'
+{
+  "id": 1,
+  "fullname": "ADRIAN YOO",
+  "email": "canhnht1709@gmail.com",
+  "mobile": "12345678",
+  "status": 10,
+  "role": 10,
+  "name": "user"
+}
 ```
 
 ***
+
+###POST ```user/change-mobile```
+```
+=> Change new mobile phone.
+```
+####Header:
+```
+Authorization: 'Bearer <token>'
+```
+####Request:
+```
+{
+    newMobile: '12345678',
+    password: '123456'
+}
+```
+####Response:
+```
+{
+  "id": 1,
+  "fullname": "ADRIAN YOO",
+  "email": "canhnht1709@gmail.com",
+  "mobile": "12345678",
+  "status": 10,
+  "role": 10,
+  "name": "user"
+}
+```
+
 ***
 
 ###POST ```user/activate-email```

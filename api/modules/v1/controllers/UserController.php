@@ -12,6 +12,7 @@ use api\common\models\LoginModel;
 use api\common\models\ChangePasswordModel;
 use api\common\models\PasswordResetModel;
 use api\common\models\ChangeEmailModel;
+use api\common\models\ChangeMobileModel;
 
 use Yii;
 use yii\filters\auth\HttpBearerAuth;
@@ -34,6 +35,7 @@ class UserController extends CustomActiveController
     const CODE_INVALID_EMAIL = 10;
     const CODE_INVALID_PHONE = 11;
     const CODE_INVALID_FULLNAME = 12;
+    const CODE_INVALID_MOBILE = 13;
     
     public function behaviors() {
         $behaviors = parent::behaviors();
@@ -58,7 +60,7 @@ class UserController extends CustomActiveController
                 ],
                 [
                     'actions' => ['logout', 'change-password', 'profile', 
-                        'change-email'],
+                        'change-email', 'change-mobile'],
                     'allow' => true,
                     'roles' => ['@'],
                 ]
@@ -216,16 +218,15 @@ class UserController extends CustomActiveController
     }
 
     public function actionChangeEmail() {
-        $user = Yii::$app->user->identity;
         $bodyParams = Yii::$app->request->bodyParams;
         $newEmail = $bodyParams['newEmail'];
         $password = $bodyParams['password'];
 
-        $model = new ChangeEmailModel($user);
+        $model = new ChangeEmailModel(Yii::$app->user->identity);
         $model->email = $newEmail;
         $model->password = $password;
-        if ($model->changeEmail()) {
-            return 'change email successfully';
+        if ($user = $model->changeEmail()) {
+            return $user;
         } else {
             if (isset($model->errors['email']))
                 throw new BadRequestHttpException(null, self::CODE_INVALID_EMAIL);
@@ -235,24 +236,23 @@ class UserController extends CustomActiveController
         throw new BadRequestHttpException('Invalid data');
     }
 
-    public function actionActivateEmail() {
+    public function actionChangeMobile() {
         $bodyParams = Yii::$app->request->bodyParams;
-        $token = $bodyParams['token'];
-        $userId = TokenHelper::authenticateToken($token, true, TokenHelper::TOKEN_ACTION_CHANGE_EMAIL);
-        $user = User::findOne([
-            'id' => $userId, 
-            'status' => User::STATUS_WAIT_EMAIL,
-        ]);
-        if (!$user) throw new BadRequestHttpException('Invalid token');
-        $user->status = User::STATUS_ACTIVE;
-        UserToken::deleteAll([
-            'user_id' => $user->id, 
-            'action' => [TokenHelper::TOKEN_ACTION_CHANGE_EMAIL, TokenHelper::TOKEN_ACTION_ACCESS],
-        ]);
-        if ($user->save()) {
-            return 'activate email successfully';
+        $newMobile = $bodyParams['newMobile'];
+        $password = $bodyParams['password'];
+
+        $model = new ChangeMobileModel(Yii::$app->user->identity);
+        $model->mobile = $newMobile;
+        $model->password = $password;
+        if ($user = $model->changeMobile()) {
+            return $user;
+        } else {
+            if (isset($model->errors['mobile']))
+                throw new BadRequestHttpException(null, self::CODE_INVALID_MOBILE);
+            if (isset($model->errors['password']))
+                throw new BadRequestHttpException(null, self::CODE_INCORRECT_PASSWORD);
         }
-        throw new BadRequestHttpException('Cannot activate email');       
+        throw new BadRequestHttpException('Invalid data');
     }
 
     public function actionProfile() {

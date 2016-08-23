@@ -9,9 +9,9 @@ use Yii;
 use yii\base\Model;
 
 
-class ChangeEmailModel extends Model
+class ChangeMobileModel extends Model
 {
-    public $email;
+    public $mobile;
     public $password;
     public $user;
 
@@ -24,12 +24,11 @@ class ChangeEmailModel extends Model
     public function rules()
     {
         return [
-            [['email', 'password'], 'required'],
-            ['email', 'filter', 'filter' => 'trim'],
+            [['mobile', 'password'], 'required'],
+            ['mobile', 'filter', 'filter' => 'trim'],
             ['password', 'validatePassword'],
-            ['email', 'email'],
-            ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => 'api\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['mobile', 'string', 'min' => 8],
+            ['mobile', 'unique', 'targetClass' => 'api\common\models\User', 'message' => 'This mobile phone has already been taken.'],
         ];
     }
 
@@ -41,10 +40,10 @@ class ChangeEmailModel extends Model
         }
     }
 
-    public function changeEmail() {
+    public function changeMobile() {
         if ($this->validate()) {
             $user = $this->user;
-            $user->email = $this->email;
+            $user->mobile = $this->mobile;
             if ($user->save()) {
                 return $user;
             }
