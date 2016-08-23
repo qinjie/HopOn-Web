@@ -404,7 +404,7 @@ CREATE TABLE IF NOT EXISTS `feedback` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `rental_id` int(11) unsigned NOT NULL,
   `issue` varchar(100) DEFAULT 0,
-  `comment` varchar(1000) NOT NULL,
+  `comment` varchar(1000) DEFAULT NULL,
   `rating` double NOT NULL,
   `created_at` int(11) unsigned DEFAULT NULL,
   `updated_at` int(11) unsigned DEFAULT NULL,

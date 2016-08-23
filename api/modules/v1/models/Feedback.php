@@ -32,7 +32,6 @@ class Feedback extends ActiveRecord
             ['issue', 'required'],
             ['issue', 'string'],
 
-            ['comment', 'required'],
             ['comment', 'string', 'max' => 1000],
 
             ['rating', 'required'],
