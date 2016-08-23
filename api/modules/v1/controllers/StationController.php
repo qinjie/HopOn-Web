@@ -60,19 +60,18 @@ class StationController extends CustomActiveController
         $origin = $latitude.','.$longitude;
 
         $listStation = Yii::$app->db->createCommand('
-            select id, 
+            select station.id, 
                    name, 
                    address, 
                    latitude, 
                    longitude, 
                    postal, 
                    bicycle_count, 
-                   (select count(bicycle.id)
-                    from bicycle
-                    where station_id = station.id 
-                    and status = :status) as available_bicycle 
-             from station
-             where available_bicycle > 0
+                   count(bicycle.id) as available_bicycle
+             from station join bicycle on bicycle.station_id = station.id
+             where status = :status
+             group by station.id, name, address, latitude, longitude, postal, bicycle_count
+             having available_bicycle > 0
         ')
         ->bindValue(':status', Bicycle::STATUS_FREE)
         ->queryAll();
