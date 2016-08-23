@@ -37,7 +37,7 @@ class Feedback extends ActiveRecord
             ['comment', 'string', 'max' => 1000],
 
             ['rating', 'required'],
-            ['rating', 'integer'],
+            ['rating', 'double'],
             ['rating', 'in', 'range' => [0, 1, 2, 3, 4, 5]],
 
             [['updated_at', 'created_at'], 'safe'],
