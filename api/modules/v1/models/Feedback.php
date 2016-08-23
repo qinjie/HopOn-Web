@@ -29,16 +29,15 @@ class Feedback extends ActiveRecord
             ['rental_id', 'required'],
             ['rental_id', 'integer'],
 
-            ['issue', 'integer'],
-            ['issue', 'default', 'value' => self::ISSUE_OTHERS],
-            ['issue', 'in', 'range' => array_keys(self::getIssuesArray())],
+            ['issue', 'required'],
+            ['issue', 'string'],
 
             ['comment', 'required'],
             ['comment', 'string', 'max' => 1000],
 
             ['rating', 'required'],
-            ['rating', 'double'],
-            ['rating', 'in', 'range' => [0, 1, 2, 3, 4, 5]],
+            ['rating', 'double', 'min' => 0],
+            ['rating', 'double', 'max' => 5],
 
             [['updated_at', 'created_at'], 'safe'],
         ];
