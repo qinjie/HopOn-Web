@@ -401,27 +401,32 @@ Authorization: 'Bearer <token>'
 ####Response:
 ```
 {
-  "booking_id": "13",
-  "bicycle_id": "17",
-  "bicycle_serial": "SG11128",
+  "booking_id": "11",
+  "bicycle_id": "15",
+  "bicycle_serial": "SG11126",
   "desc": "Road",
-  "brand": "Trek Bicycles",
-  "model": "Kids Bicycles",
+  "brand": "Bianchi",
+  "model": "Road",
   "pickup_station_name": "Ang Mo Kio Garden",
   "pickup_station_address": "Opposite Ang Mo Kio Town Library, Ang Mo Kio Avenue 6",
   "pickup_station_postal": "567740",
   "pickup_station_lat": "1.374542",
   "pickup_station_lng": "103.843353",
-  "book_at": "02:28 PM, 11 Aug 2016",
-  "pickup_at": "02:41 PM, 11 Aug 2016",
-  "beacon_station_uuid": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-  "beacon_station_major": "33078",
-  "beacon_station_minor": "31465",
-  "beacon_bicycle_uuid": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-  "beacon_bicycle_major": "52689",
-  "beacon_bicycle_minor": "51570",
+  "book_at": "02:00 PM, 12 Aug 2016",
+  "pickup_at": null,
+  "beacon_station_uuid": "23A01AF0-232A-4518-9C0E-323FB773F5EF",
+  "beacon_station_major": "59687",
+  "beacon_station_minor": "27425",
+  "beacon_bicycle_uuid": "23A01AF0-232A-4518-9C0E-323FB773F5EF",
+  "beacon_bicycle_major": "13595",
+  "beacon_bicycle_minor": "47423",
   "bicycle_count": "25",
-  "available_bicycle": "1"
+  "available_bicycle": "2",
+  "listImageUrl": [
+    "http://localhost/hopon-web/backend/web/uploads/images/bike-2.jpg",
+    "http://localhost/hopon-web/backend/web/uploads/images/bike-3.jpg",
+    "http://localhost/hopon-web/backend/web/uploads/images/bike-3.jpg"
+  ]
 }
 ```
 

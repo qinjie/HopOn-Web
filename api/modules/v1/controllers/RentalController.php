@@ -54,29 +54,32 @@ class RentalController extends CustomActiveController
         $userId = Yii::$app->user->identity->id;
         $currentBooking = Yii::$app->db->createCommand('
             select rental.id as booking_id,
-                   bicycle_id,
-                   bicycle.serial as bicycle_serial,
-                   bicycle.desc,
-                   bicycle_type.brand,
-                   bicycle_type.model,
-                   station.name as pickup_station_name,
-                   station.address as pickup_station_address,
-                   station.postal as pickup_station_postal,
-                   station.latitude as pickup_station_lat,
-                   station.longitude as pickup_station_lng,
-                   rental.book_at,
-                   rental.pickup_at,
-                   b1.uuid as beacon_station_uuid,
-                   b1.major as beacon_station_major,
-                   b1.minor as beacon_station_minor,
-                   b2.uuid as beacon_bicycle_uuid,
-                   b2.major as beacon_bicycle_major,
-                   b2.minor as beacon_bicycle_minor,
-                   bicycle_count, 
-                   (select count(b1.id)
+                  bicycle_id,
+                  bicycle.serial as bicycle_serial,
+                  bicycle.desc,
+                  bicycle_type.brand,
+                  bicycle_type.model,
+                  station.name as pickup_station_name,
+                  station.address as pickup_station_address,
+                  station.postal as pickup_station_postal,
+                  station.latitude as pickup_station_lat,
+                  station.longitude as pickup_station_lng,
+                  rental.book_at,
+                  rental.pickup_at,
+                  b1.uuid as beacon_station_uuid,
+                  b1.major as beacon_station_major,
+                  b1.minor as beacon_station_minor,
+                  b2.uuid as beacon_bicycle_uuid,
+                  b2.major as beacon_bicycle_major,
+                  b2.minor as beacon_bicycle_minor,
+                  bicycle_count, 
+                  (select count(b1.id)
                     from bicycle as b1
                     where b1.station_id = station.id 
-                    and b1.status = :status) as available_bicycle
+                    and b1.status = :status) as available_bicycle,
+                  (select group_concat(data separator \' \') 
+                    from image 
+                    where image.bicycle_type_id = bicycle_type.id) as listImageUrl
              from rental join bicycle on rental.bicycle_id = bicycle.id
              join bicycle_type on bicycle.bicycle_type_id = bicycle_type.id
              join station on bicycle.station_id = station.id
@@ -94,6 +97,10 @@ class RentalController extends CustomActiveController
         if ($currentBooking['pickup_at']) {
             $time = strtotime($currentBooking['pickup_at']);
             $currentBooking['pickup_at'] = date('h:i A, d M Y', $time);
+        }
+        $currentBooking['listImageUrl'] = explode(' ', $currentBooking['listImageUrl']);
+        for ($iterUrl = 0; $iterUrl < count($currentBooking['listImageUrl']); ++$iterUrl) {
+            $currentBooking['listImageUrl'][$iterUrl] = Yii::$app->params['BACKEND_BASEURL'].$currentBooking['listImageUrl'][$iterUrl];
         }
         return $currentBooking;
     }
