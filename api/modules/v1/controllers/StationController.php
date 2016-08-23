@@ -72,6 +72,7 @@ class StationController extends CustomActiveController
                     where station_id = station.id 
                     and status = :status) as available_bicycle 
              from station
+             where available_bicycle > 0
         ')
         ->bindValue(':status', Bicycle::STATUS_FREE)
         ->queryAll();
