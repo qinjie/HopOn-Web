@@ -47,6 +47,7 @@ AppAsset::register($this);
                 ['label' => 'Bicycle loaction', 'url' => ['/bicycle-location']],
                 ['label' => 'Bicycle type', 'url' => ['/bicycle-type']],
                 ['label' => 'Image', 'url' => ['/image']],
+                ['label' => 'Feedback', 'url' => ['/feedback']],
             ]
         ];
         $menuItems[] = ['label' => 'User', 'url' => ['/user-model']];
