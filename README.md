@@ -497,12 +497,16 @@ Authorization: 'Bearer <token>'
 {
   "id": 13,
   "user_id": 1,
-  "bicycle_id": 17,
-  "serial": "SG11128",
-  "book_at": "2016-08-11 14:28:08",
-  "pickup_at": "2016-08-11 14:41:32",
-  "return_at": null,
-  "duration": null
+  "bicycle_id": 2,
+  "serial": "SG11112",
+  "book_at": "2016-08-31 14:28:14",
+  "pickup_at": "2016-08-31 14:29:02",
+  "return_at": "2016-08-31 14:42:02",
+  "return_station_id": "1",
+  "duration": 14,
+  "created_at": 1472624894,
+  "updated_at": 1472625722,
+  "enc": "2246dfab3d04dab07d7069368487513cdf58616d50cad7ec452be9782afff6d8"
 }
 ```
 
@@ -531,11 +535,14 @@ Authorization: 'Bearer <token>'
   "user_id": 1,
   "bicycle_id": 2,
   "serial": "SG11112",
-  "book_at": "2016-08-22 15:24:06",
-  "pickup_at": "03:24 PM, 22 Aug 2016",
-  "return_at": null,
-  "return_station_id": null,
-  "duration": null
+  "book_at": "2016-08-31 14:28:14",
+  "pickup_at": "2016-08-31 14:29:02",
+  "return_at": "2016-08-31 14:42:02",
+  "return_station_id": "1",
+  "duration": 14,
+  "created_at": 1472624894,
+  "updated_at": 1472625722,
+  "enc": "2246dfab3d04dab07d7069368487513cdf58616d50cad7ec452be9782afff6d8"
 }
 ```
 
@@ -564,11 +571,14 @@ Authorization: 'Bearer <token>'
   "user_id": 1,
   "bicycle_id": 2,
   "serial": "SG11112",
-  "book_at": "2016-08-22 15:24:06",
-  "pickup_at": "03:24 PM, 22 Aug 2016",
-  "return_at": null,
-  "return_station_id": null,
-  "duration": null
+  "book_at": "2016-08-31 14:28:14",
+  "pickup_at": "2016-08-31 14:29:02",
+  "return_at": "2016-08-31 14:42:02",
+  "return_station_id": "1",
+  "duration": 14,
+  "created_at": 1472624894,
+  "updated_at": 1472625722,
+  "enc": "2246dfab3d04dab07d7069368487513cdf58616d50cad7ec452be9782afff6d8"
 }
 ```
 
