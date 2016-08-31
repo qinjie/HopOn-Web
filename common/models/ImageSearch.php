@@ -18,7 +18,7 @@ class ImageSearch extends Image
     public function rules()
     {
         return [
-            [['id', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'created_at', 'updated_at', 'bicycle_type_id'], 'integer'],
             [['name', 'data'], 'safe'],
         ];
     }
@@ -62,6 +62,7 @@ class ImageSearch extends Image
             'id' => $this->id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'bicycle_type_id' => $this->bicycle_type_id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
