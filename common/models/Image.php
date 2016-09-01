@@ -15,6 +15,7 @@ use yii\db\Expression;
  * @property resource $data
  * @property integer $created_at
  * @property integer $updated_at
+ * @property integer $bicycle_type_id
  */
 class Image extends \yii\db\ActiveRecord
 {
