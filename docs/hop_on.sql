@@ -43,11 +43,16 @@ CREATE TABLE IF NOT EXISTS `beacon` (
 --
 
 INSERT INTO `beacon` (`id`, `uuid`, `major`, `minor`, `created_at`, `updated_at`) VALUES
-(1, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '31483', '13575', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
-(2, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '6146', '27736', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
+(1, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '6146', '27736', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
+(2, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '13595', '47423', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
 (3, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '61997', '33888', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
-(4, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '59687', '27425', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
-(5, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '13595', '47423', '0000-00-00 00:00:00', '2016-04-26 03:09:19');
+
+(4, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '31483', '13575', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
+(5, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '59687', '27425', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
+(6, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '37002', '8442', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
+(7, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '41487', '60463', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
+(8, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '61667', '30640', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
+(9, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '49256', '38045', '0000-00-00 00:00:00', '2016-04-26 03:09:19');
 
 -- (4, 'B9407F30-F5F8-466E-AFF9-25556B57FE6D', '33078', '31465', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
 -- (5, 'B9407F30-F5F8-466E-AFF9-25556B57FE6D', '58949', '29933', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
@@ -82,40 +87,40 @@ CREATE TABLE IF NOT EXISTS `bicycle` (
 --
 
 INSERT INTO `bicycle` (`id`, `serial`, `bicycle_type_id`, `desc`, `station_id`, `beacon_id`, `created_at`, `updated_at`, `status`) VALUES
-(1, 'SG11111', 1, 'Hybrid', 1, 1, 1461214049, 1461926225,0),
-(2, 'SG11112', 1, 'Road', 1, 1, 1461214049, 1461926225,0),
-(3, 'SG11113', 2, 'Road', 1, 1, 1461214049, 1461926225,0),
-(4, 'SG11114', 2, 'Hybrid', 1, 2, 1461214049, 1461926225,0),
-(5, 'SG11115', 2, 'Road', 2, 2, 1461214049, 1461926225,0),
-(6, 'SG11116', 2, 'Hybrid', 2, 2, 1461214049, 1461926225,0),
-(7, 'SG11117', 3, 'Road', 2, 3, 1461214049, 1461926225,0),
-(8, 'SG11118', 3, 'Hybrid', 2, 3, 1461214049, 1461926225,0),
-(9, 'SG11119', 3, 'Road', 3, 4, 1461214049, 1461926225,0),
-(10, 'SG11121', 4, 'Hybrid', 3, 4, 1461214049, 1461926225,0),
-(11, 'SG11122', 4, 'BMX', 3, 4, 1461214049, 1461926225,4),
-(12, 'SG11123', 4, 'Road', 3, 4, 1461214049, 1461926225,4),
-(13, 'SG11124', 5, 'Hybrid', 4, 5, 1461214049, 1461926225,4),
-(14, 'SG11125', 5, 'Kids Bicycles', 4, 5, 1461214049, 1461926225,4),
-(15, 'SG11126', 5, 'Road', 4, 5, 1461214049, 1461926225,4),
-(16, 'SG11127', 6, 'Hybrid', 4, 5, 1461214049, 1461926225,4),
-(17, 'SG11128', 6, 'Road', 4, 1, 1461214049, 1461926225,0),
-(18, 'SG11129', 6, 'BMX', 4, 1, 1461214049, 1461926225,0),
-(19, 'SG11131', 7, 'Road', 1, 1, 1461214049, 1461926225,0),
-(20, 'SG11132', 7, 'Kids Bicycles', 1, 2, 1461214049, 1461926225,0),
-(21, 'SG11133', 7, 'Electric', 1, 2, 1461214049, 1461926225,0),
-(22, 'SG11134', 8, 'Kids Bicycles', 1, 2, 1461214049, 1461926225,0),
-(23, 'SG11135', 8, 'Electric', 2, 3, 1461214049, 1461926225,0),
-(24, 'SG11136', 8, 'Road', 2, 4, 1461214049, 1461926225,0),
-(25, 'SG11137', 9, 'Hybrid', 2, 3, 1461214049, 1461926225,0),
-(26, 'SG11138', 9, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
-(27, 'SG11139', 9, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
-(28, 'SG11141', 10, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
-(29, 'SG11142', 10, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
-(30, 'SG11143', 10, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
-(31, 'SG11144', 10, 'Kids Bicycles', 3, 3, 1461214049, 1461926225,0),
-(32, 'SG11145', 1, 'Kids Bicycles', 3, 5, 1461214049, 1461926225,0),
-(33, 'SG11146', 1, 'Kids Bicycles', 3, 5, 1461214049, 1461926225,0),
-(34, 'SG11147', 1, 'Kids Bicycles', 3, 5, 1461214049, 1461926225,0);
+(1, 'SG11111', 1, 'Hybrid', 1, 4, 1461214049, 1461926225,0),
+(2, 'SG11112', 1, 'Road', 1, 5, 1461214049, 1461926225,0),
+(3, 'SG11113', 2, 'Road', 3, 6, 1461214049, 1461926225,0),
+(4, 'SG11114', 2, 'Hybrid', 3, 7, 1461214049, 1461926225,0),
+(5, 'SG11115', 3, 'Road', 5, 8, 1461214049, 1461926225,0),
+(6, 'SG11116', 3, 'Hybrid', 5, 9, 1461214049, 1461926225,0);
+-- (7, 'SG11117', 4, 'Road', 3, 3, 1461214049, 1461926225,0),
+-- (8, 'SG11118', 3, 'Hybrid', 2, 3, 1461214049, 1461926225,0),
+-- (9, 'SG11119', 3, 'Road', 3, 4, 1461214049, 1461926225,0),
+-- (10, 'SG11121', 4, 'Hybrid', 3, 4, 1461214049, 1461926225,0),
+-- (11, 'SG11122', 4, 'BMX', 3, 4, 1461214049, 1461926225,4),
+-- (12, 'SG11123', 4, 'Road', 3, 4, 1461214049, 1461926225,4),
+-- (13, 'SG11124', 5, 'Hybrid', 4, 5, 1461214049, 1461926225,4),
+-- (14, 'SG11125', 5, 'Kids Bicycles', 4, 5, 1461214049, 1461926225,4),
+-- (15, 'SG11126', 5, 'Road', 4, 5, 1461214049, 1461926225,4),
+-- (16, 'SG11127', 6, 'Hybrid', 4, 5, 1461214049, 1461926225,4),
+-- (17, 'SG11128', 6, 'Road', 4, 1, 1461214049, 1461926225,0),
+-- (18, 'SG11129', 6, 'BMX', 4, 1, 1461214049, 1461926225,0),
+-- (19, 'SG11131', 7, 'Road', 1, 1, 1461214049, 1461926225,0),
+-- (20, 'SG11132', 7, 'Kids Bicycles', 1, 2, 1461214049, 1461926225,0),
+-- (21, 'SG11133', 7, 'Electric', 1, 2, 1461214049, 1461926225,0),
+-- (22, 'SG11134', 8, 'Kids Bicycles', 1, 2, 1461214049, 1461926225,0),
+-- (23, 'SG11135', 8, 'Electric', 2, 3, 1461214049, 1461926225,0),
+-- (24, 'SG11136', 8, 'Road', 2, 4, 1461214049, 1461926225,0),
+-- (25, 'SG11137', 9, 'Hybrid', 2, 3, 1461214049, 1461926225,0),
+-- (26, 'SG11138', 9, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
+-- (27, 'SG11139', 9, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
+-- (28, 'SG11141', 10, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
+-- (29, 'SG11142', 10, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
+-- (30, 'SG11143', 10, 'Kids Bicycles', 2, 3, 1461214049, 1461926225,0),
+-- (31, 'SG11144', 10, 'Kids Bicycles', 5, 3, 1461214049, 1461926225,0),
+-- (32, 'SG11145', 1, 'Kids Bicycles', 5, 5, 1461214049, 1461926225,0),
+-- (33, 'SG11146', 1, 'Kids Bicycles', 5, 5, 1461214049, 1461926225,0),
+-- (34, 'SG11147', 1, 'Kids Bicycles', 5, 5, 1461214049, 1461926225,0);
 
 -- --------------------------------------------------------
 
@@ -159,14 +164,14 @@ CREATE TABLE IF NOT EXISTS `bicycle_type` (
 INSERT INTO `bicycle_type` (`id`, `brand`, `model`, `created_at`, `updated_at`, `desc`) VALUES
 (1, 'Apollo Bikes', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
 (2, 'Apollo Bikes', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(3, 'Avanti Bikes', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(4, 'Avanti Bikes', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(5, 'Bianchi', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(6, 'Bianchi', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(7, 'Cannondale', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(8, 'Cannondale', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(9, 'Felt', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
-(10, 'Felt', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.');
+(3, 'Avanti Bikes', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.');
+-- (4, 'Avanti Bikes', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.');
+-- (5, 'Bianchi', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (6, 'Bianchi', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (7, 'Cannondale', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (8, 'Cannondale', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (9, 'Felt', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
+-- (10, 'Felt', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.');
 -- (11, 'Felt', 'BMX', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
 -- (12, 'Gary Fisher Bicycles', 'Road', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
 -- (13, 'Gary Fisher Bicycles', 'Hybrid', 1461214049, 1461926225, 'Bicycles are built to handle all the use and abuse you can throw at them, with minimal service.'),
@@ -232,33 +237,33 @@ INSERT INTO `image` (`id`, `name`, `data`, `bicycle_type_id`, `created_at`, `upd
 (1, 'bike 1', 'uploads/images/bike-1.jpg', 1, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
 (2, 'bike 2', 'uploads/images/bike-2.jpg', 2, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
 (3, 'bike 3', 'uploads/images/bike-3.jpg', 3, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(4, 'bike 1', 'uploads/images/bike-1.jpg', 4, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(5, 'bike 2', 'uploads/images/bike-2.jpg', 5, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(6, 'bike 3', 'uploads/images/bike-3.jpg', 6, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(7, 'bike 1', 'uploads/images/bike-1.jpg', 7, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(8, 'bike 2', 'uploads/images/bike-2.jpg', 8, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(9, 'bike 3', 'uploads/images/bike-3.jpg', 9, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(10, 'bike 1', 'uploads/images/bike-1.jpg', 10, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (4, 'bike 1', 'uploads/images/bike-1.jpg', 4, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (5, 'bike 2', 'uploads/images/bike-2.jpg', 5, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (6, 'bike 3', 'uploads/images/bike-3.jpg', 6, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (7, 'bike 1', 'uploads/images/bike-1.jpg', 7, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (8, 'bike 2', 'uploads/images/bike-2.jpg', 8, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (9, 'bike 3', 'uploads/images/bike-3.jpg', 9, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (10, 'bike 1', 'uploads/images/bike-1.jpg', 10, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
 (11, 'bike 2', 'uploads/images/bike-2.jpg', 1, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
 (12, 'bike 3', 'uploads/images/bike-3.jpg', 2, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
 (13, 'bike 1', 'uploads/images/bike-1.jpg', 3, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(14, 'bike 2', 'uploads/images/bike-2.jpg', 4, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(15, 'bike 3', 'uploads/images/bike-3.jpg', 5, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(16, 'bike 1', 'uploads/images/bike-1.jpg', 6, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(17, 'bike 2', 'uploads/images/bike-2.jpg', 7, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(18, 'bike 3', 'uploads/images/bike-3.jpg', 8, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(19, 'bike 1', 'uploads/images/bike-1.jpg', 9, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(20, 'bike 2', 'uploads/images/bike-2.jpg', 10, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (14, 'bike 2', 'uploads/images/bike-2.jpg', 4, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (15, 'bike 3', 'uploads/images/bike-3.jpg', 5, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (16, 'bike 1', 'uploads/images/bike-1.jpg', 6, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (17, 'bike 2', 'uploads/images/bike-2.jpg', 7, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (18, 'bike 3', 'uploads/images/bike-3.jpg', 8, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (19, 'bike 1', 'uploads/images/bike-1.jpg', 9, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (20, 'bike 2', 'uploads/images/bike-2.jpg', 10, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
 (21, 'bike 2', 'uploads/images/bike-2.jpg', 1, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
 (22, 'bike 3', 'uploads/images/bike-3.jpg', 2, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(23, 'bike 1', 'uploads/images/bike-1.jpg', 3, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(24, 'bike 2', 'uploads/images/bike-2.jpg', 4, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(25, 'bike 3', 'uploads/images/bike-3.jpg', 5, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(26, 'bike 1', 'uploads/images/bike-1.jpg', 6, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(27, 'bike 2', 'uploads/images/bike-2.jpg', 7, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(28, 'bike 3', 'uploads/images/bike-3.jpg', 8, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(29, 'bike 1', 'uploads/images/bike-1.jpg', 9, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
-(30, 'bike 2', 'uploads/images/bike-2.jpg', 10, '2016-08-02 15:24:56', '2016-08-02 15:24:56');
+(23, 'bike 1', 'uploads/images/bike-1.jpg', 3, '2016-08-02 15:24:56', '2016-08-02 15:24:56');
+-- (24, 'bike 2', 'uploads/images/bike-2.jpg', 4, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (25, 'bike 3', 'uploads/images/bike-3.jpg', 5, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (26, 'bike 1', 'uploads/images/bike-1.jpg', 6, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (27, 'bike 2', 'uploads/images/bike-2.jpg', 7, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (28, 'bike 3', 'uploads/images/bike-3.jpg', 8, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (29, 'bike 1', 'uploads/images/bike-1.jpg', 9, '2016-08-02 15:24:56', '2016-08-02 15:24:56'),
+-- (30, 'bike 2', 'uploads/images/bike-2.jpg', 10, '2016-08-02 15:24:56', '2016-08-02 15:24:56');
 
 -- --------------------------------------------------------
 
@@ -293,13 +298,13 @@ INSERT INTO `rental` (`id`, `user_id`, `bicycle_id`, `serial`, `book_at`, `retur
 (3, 3, 3, 'RENT113', '2016-08-01 12:00:00', '2016-08-01 13:00:00', 60, 1461214049, 1461926225,'2016-08-01 12:05:00',5),
 (4, 1, 4, 'RENT114', '2016-08-02 10:00:00', '2016-08-01 10:30:00', 30, 1461214049, 1461926225,'2016-08-02 10:05:00',5),
 (5, 2, 5, 'RENT115', '2016-08-02 14:00:00', '2016-08-01 14:30:00', 30, 1461214049, 1461926225,'2016-08-02 14:05:00',5),
-(6, 3, 6, 'RENT116', '2016-08-02 12:00:00', '2016-08-01 12:30:00', 30, 1461214049, 1461926225,'2016-08-02 12:05:00',5),
+(6, 3, 6, 'RENT116', '2016-08-02 12:00:00', '2016-08-01 12:30:00', 30, 1461214049, 1461926225,'2016-08-02 12:05:00',5);
 -- (7, 1, 11, 'RENT121', '2016-08-11 15:00:00', NULL, 90, 1461214049, 1461926225,NULL,5),
 -- (8, 2, 12, 'RENT122', '2016-08-11 14:00:00', NULL, 30, 1461214049, 1461926225,NULL,5),
 -- (9, 3, 13, 'RENT123', '2016-08-11 12:00:00', NULL, 60, 1461214049, 1461926225,NULL,5),
 -- (10, 1, 14, 'RENT124', '2016-08-12 10:00:00', NULL, 30, 1461214049, 1461926225,NULL,5),
-(11, 2, 15, 'RENT125', '2016-08-12 14:00:00', NULL, NULL, 1461214049, 1461926225,NULL,NULL),
-(12, 3, 16, 'RENT126', '2016-08-12 12:00:00', NULL, NULL, 1461214049, 1461926225,NULL,NULL);
+-- (11, 2, 15, 'RENT125', '2016-08-12 14:00:00', NULL, NULL, 1461214049, 1461926225,NULL,NULL),
+-- (12, 3, 16, 'RENT126', '2016-08-12 12:00:00', NULL, NULL, 1461214049, 1461926225,NULL,NULL);
 
 -- --------------------------------------------------------
 
@@ -327,11 +332,11 @@ CREATE TABLE IF NOT EXISTS `station` (
 --
 
 INSERT INTO `station` (`id`, `name`, `address`, `latitude`, `longitude`, `postal`, `beacon_id`, `bicycle_count`, `created_at`, `updated_at`) VALUES
-(1, 'Ang Mo Kio', 'Ang Mo Kio MRT', 1.370015, 103.849446, '', 1, 30, 1461214049, 1461926225),
-(2, 'Mayflower', '253 Ang Mo Kio Street 21', 1.369732, 103.835231, '560253', 2, 20, 1461214049, 1461926225),
-(3, 'Yio Chu Kang', '3000 Ang Mo Kio Avenue 8', 1.381841, 103.844959, '569813', 3, 30, 1461214049, 1461926225),
-(4, 'Ang Mo Kio Garden', 'Opposite Ang Mo Kio Town Library, Ang Mo Kio Avenue 6', 1.374542, 103.843353, '567740', 4, 25, 1461214049, 1461926225),
-(5, 'NP Main Gate', '535 Clementi Road', 1.334284, 103.776649, '234235', 5, 10, 1461214049, 1461926225);
+(1, 'Ang Mo Kio', 'Ang Mo Kio MRT', 1.370015, 103.849446, '', 1, 10, 1461214049, 1461926225),
+-- (2, 'Mayflower', '253 Ang Mo Kio Street 21', 1.369732, 103.835231, '560253', 2, 20, 1461214049, 1461926225),
+(3, 'Yio Chu Kang', '3000 Ang Mo Kio Avenue 8', 1.381841, 103.844959, '569813', 2, 10, 1461214049, 1461926225),
+-- (4, 'Ang Mo Kio Garden', 'Opposite Ang Mo Kio Town Library, Ang Mo Kio Avenue 6', 1.374542, 103.843353, '567740', 4, 25, 1461214049, 1461926225),
+(5, 'NP Main Gate', '535 Clementi Road', 1.334284, 103.776649, '234235', 3, 10, 1461214049, 1461926225);
 
 -- --------------------------------------------------------
 
@@ -364,7 +369,8 @@ INSERT INTO `user` (`id`, `fullname`, `auth_key`, `password_hash`, `email`, `mob
 (1, 'ADRIAN YOO', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '1@mail.com', '1111', 10, 10, 'user', 1461214049, 1461926225),
 (2, 'MICHAEL YOO', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '2@mail.com', '2222', 10, 10, 'user', 1461214049, 1461926225),
 (3, 'ANTHONY CHEN', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '3@mail.com', '3333', 10, 10, 'user', 1461214049, 1461926225),
-(4, 'DUCDD', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', 'congaductq@gmail.com', 'dddd', 10, 10, 'user', 1461214049, 1461926225);
+(4, 'DUCDD', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', 'congaductq@gmail.com', 'dddd', 10, 10, 'user', 1461214049, 1461926225),
+(5, 'ECE IoT', '3omKLUGUbNItniqEcacbmG8ATK4zt0bO', '$2y$13$3eQNXkrRhnTpJnyht6fOUO6k8oAK7OBNrTtBRSnCHst5f7OcV2Flu', 'eceiot@gmail.com', '12345678', 10, 10, 'user', 1461214049, 1461926225);
 
 -- --------------------------------------------------------
 
