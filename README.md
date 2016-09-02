@@ -414,13 +414,16 @@ Authorization: 'Bearer <token>'
 ####Response:
 ```
 {
-  "id": 17,
-  "serial": "SG11128",
-  "bicycle_type_id": 26,
-  "desc": "Road",
+  "id": 1,
+  "serial": "SG11111",
+  "bicycle_type_id": 1,
+  "desc": "Hybrid",
   "status": 4,
-  "station_id": 4,
-  "beacon_id": 1
+  "station_id": 1,
+  "beacon_id": 5,
+  "created_at": 1461214049,
+  "updated_at": 1472780124,
+  "enc": "782f66ea8fc539ba0a8cec1383060559"
 }
 ```
 
@@ -503,10 +506,7 @@ Authorization: 'Bearer <token>'
   "pickup_at": "2016-08-31 14:29:02",
   "return_at": "2016-08-31 14:42:02",
   "return_station_id": "1",
-  "duration": 14,
-  "created_at": 1472624894,
-  "updated_at": 1472625722,
-  "enc": "2246dfab3d04dab07d7069368487513cdf58616d50cad7ec452be9782afff6d8"
+  "duration": 14
 }
 ```
 
@@ -539,10 +539,7 @@ Authorization: 'Bearer <token>'
   "pickup_at": "2016-08-31 14:29:02",
   "return_at": "2016-08-31 14:42:02",
   "return_station_id": "1",
-  "duration": 14,
-  "created_at": 1472624894,
-  "updated_at": 1472625722,
-  "enc": "2246dfab3d04dab07d7069368487513cdf58616d50cad7ec452be9782afff6d8"
+  "duration": 14
 }
 ```
 
@@ -575,10 +572,7 @@ Authorization: 'Bearer <token>'
   "pickup_at": "2016-08-31 14:29:02",
   "return_at": "2016-08-31 14:42:02",
   "return_station_id": "1",
-  "duration": 14,
-  "created_at": 1472624894,
-  "updated_at": 1472625722,
-  "enc": "2246dfab3d04dab07d7069368487513cdf58616d50cad7ec452be9782afff6d8"
+  "duration": 14
 }
 ```
 

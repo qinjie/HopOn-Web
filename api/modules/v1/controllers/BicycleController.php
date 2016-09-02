@@ -107,7 +107,9 @@ class BicycleController extends CustomActiveController
                 ->setTo($user->email)
                 ->setSubject('Booking Detail From ' . Yii::$app->name)
                 ->send();
-            return $selectedBicycle;
+            $result = $selectedBicycle->attributes;
+            $result['enc'] = md5($selectedBicycle->serial.','.$userId);
+            return $result;
         }
         throw new BadRequestHttpException('Cannot save database');
     }
@@ -198,10 +200,11 @@ class BicycleController extends CustomActiveController
                 ->setSubject('Trip Summary From ' . Yii::$app->name)
                 ->send();
 
-            $aes = new AES('bicycleId='.$bicycleId.',action=return', Yii::$app->params['AES_KEY'], 128);
-            $result = $rental->attributes;
-            $result['enc'] = bin2hex(base64_decode($aes->encrypt()));
-            return $result;
+            // $aes = new AES('bicycleId='.$bicycleId.',action=return', Yii::$app->params['AES_KEY'], 128);
+            // $result = $rental->attributes;
+            // $result['enc'] = bin2hex(base64_decode($aes->encrypt()));
+            // $result['enc'] = md5($bicycle->serial.','.$userId);
+            return $rental;
         }
         throw new BadRequestHttpException('Return fail');
     }
@@ -221,14 +224,15 @@ class BicycleController extends CustomActiveController
         if (!$rental) throw new BadRequestHttpException('Cannot unlock bicycle');
         $bicycle = Bicycle::findOne(['id' => $bicycleId]);
 
-        $aes = new AES('bicycleId='.$bicycleId.',action=unlock', Yii::$app->params['AES_KEY'], 128);
+        // $aes = new AES('bicycleId='.$bicycleId.',action=unlock', Yii::$app->params['AES_KEY'], 128);
         if ($rental->pickup_at) {
             $bicycle->status = Bicycle::STATUS_UNLOCKED;
             if ($bicycle->save() && $this->addBicycleLocation($bicycleId, $latitude, $longitude)) {
                 $time = strtotime($rental->pickup_at);
                 $rental->pickup_at = date('h:i A, d M Y', $time);
                 $result = $rental->attributes;
-                $result['enc'] = bin2hex(base64_decode($aes->encrypt()));
+                // $result['enc'] = bin2hex(base64_decode($aes->encrypt()));
+                $result['enc'] = md5($bicycleId.',unlock,'.$userId);
                 return $result;
             }
         } else {
@@ -238,9 +242,10 @@ class BicycleController extends CustomActiveController
                 && $this->addBicycleLocation($bicycleId, $latitude, $longitude)) {
                 $time = strtotime($rental->pickup_at);
                 $rental->pickup_at = date('h:i A, d M Y', $time);
-                $result = $rental->attributes;
-                $result['enc'] = bin2hex(base64_decode($aes->encrypt()));
-                return $result;
+                // $result = $rental->attributes;
+                // $result['enc'] = bin2hex(base64_decode($aes->encrypt()));
+                // $result['enc'] = md5($bicycle->serial.','.$userId);
+                return $rental;
             }
         }
         throw new BadRequestHttpException('unlock fail');
@@ -262,11 +267,12 @@ class BicycleController extends CustomActiveController
         $bicycle = Bicycle::findOne(['id' => $bicycleId]);
         $bicycle->status = Bicycle::STATUS_LOCKED;
 
-        $aes = new AES('bicycleId='.$bicycleId.',action=lock', Yii::$app->params['AES_KEY'], 128);
+        // $aes = new AES('bicycleId='.$bicycleId.',action=lock', Yii::$app->params['AES_KEY'], 128);
         if ($bicycle->save() && $this->addBicycleLocation($bicycleId, $latitude, $longitude)) {
-            $result = $rental->attributes;
-            $result['enc'] = bin2hex(base64_decode($aes->encrypt()));
-            return $result;
+            // $result = $rental->attributes;
+            // $result['enc'] = bin2hex(base64_decode($aes->encrypt()));
+            // $result['enc'] = md5($bicycle->serial.','.$userId);
+            return $rental;
         }
         throw new BadRequestHttpException('unlock fail');
     }
