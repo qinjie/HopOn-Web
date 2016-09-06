@@ -102,6 +102,8 @@ class RentalController extends CustomActiveController
         for ($iterUrl = 0; $iterUrl < count($currentBooking['listImageUrl']); ++$iterUrl) {
             $currentBooking['listImageUrl'][$iterUrl] = Yii::$app->params['BACKEND_BASEURL'].$currentBooking['listImageUrl'][$iterUrl];
         }
+        $currentBooking['user_id'] = $userId;
+        $currentBooking['enc'] = md5($currentBooking['bicycle_serial'].','.$userId);
         return $currentBooking;
     }
 
