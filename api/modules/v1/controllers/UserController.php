@@ -9,6 +9,7 @@ use api\common\models\User;
 use api\common\components\AccessRule;
 use api\common\models\SignupModel;
 use api\common\models\LoginModel;
+use api\common\models\LoginModelTest;
 use api\common\models\ChangePasswordModel;
 use api\common\models\PasswordResetModel;
 use api\common\models\ChangeEmailModel;
@@ -119,7 +120,7 @@ class UserController extends CustomActiveController
         $username = $bodyParams['username'];
         $password = $bodyParams['password'];
 
-        $model = new LoginModel();
+        $model = new LoginModelTest();
         $model->username = $username;
         $model->password = $password;
         echo '95------', time(), PHP_EOL;
