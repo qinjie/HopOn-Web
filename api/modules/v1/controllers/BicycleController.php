@@ -131,6 +131,11 @@ class BicycleController extends CustomActiveController
         $latitude = $bodyParams['latitude'];
         $longitude = $bodyParams['longitude'];
         $listBeacons = $bodyParams['listBeacons'];
+        $beaconsRSSI = [];
+        for ($iter = 0; $iter < count($listBeacons); ++$iter) {
+            $key = $listBeacons[$iter]['uuid'].','.$listBeacons[$iter]['major'].','.$listBeacons[$iter]['minor'];
+            $beaconsRSSI[$key] = $listBeacons[$iter]['rssi'];
+        }
 
         $rental = Rental::findOne([
             'user_id' => $userId, 
@@ -141,7 +146,7 @@ class BicycleController extends CustomActiveController
 
         $bicycle = Bicycle::findOne(['id' => $bicycleId]);
 
-        $sql = 'select station.id from station join beacon on station.beacon_id = beacon.id where (uuid = "" and major = "" and minor = "")';
+        $sql = 'select station.id, uuid, major, minor from station join beacon on station.beacon_id = beacon.id where (uuid = "" and major = "" and minor = "")';
         for ($iter = 0; $iter < count($listBeacons); ++$iter) {
             $uuid = $listBeacons[$iter]['uuid'];
             $major = $listBeacons[$iter]['major'];
@@ -150,18 +155,32 @@ class BicycleController extends CustomActiveController
         }
         $sql = $sql.';';
 
-        $station = Yii::$app->db->createCommand($sql)->queryOne();
-        if (!$station && $rental->pickup_at)
-            throw new BadRequestHttpException('Invalid beacon data');
-
-        $rental->return_at = date('Y-m-d H:i:s');
-        if ($station)
+        $listStation = Yii::$app->db->createCommand($sql)->queryAll();
+        $station = null;
+        for ($iter = 0; $iter < count($listStation); ++$iter) {
+            $key = $listStation[$iter]['uuid'].','.$listStation[$iter]['major'].','.$listStation[$iter]['minor'];
+            if (!$station) {
+                $station = $listStation[$iter];
+                $station['rssi'] = $beaconsRSSI[$key];
+            } else if ($station['rssi'] < $beaconsRSSI[$key]) {
+                $station = $listStation[$iter];
+                $station['rssi'] = $beaconsRSSI[$key];
+            }
+        }
+        
+        if ($rental->pickup_at) {
+            if (!$station) throw new BadRequestHttpException('Invalid beacon data');
+            $rental->return_at = date('Y-m-d H:i:s');
             $rental->return_station_id = $station['id'];
-        else
+            $rental->duration = intval(ceil((strtotime($rental->return_at) - strtotime($rental->book_at)) / 60));
+            $bicycle->status = Bicycle::STATUS_FREE;
+            $bicycle->station_id = $station['id'];
+        } else {
+            $rental->return_at = date('Y-m-d H:i:s');
             $rental->return_station_id = $bicycle->station_id;
-        $rental->duration = intval(ceil((strtotime($rental->return_at) - strtotime($rental->book_at)) / 60));
-        $bicycle->status = Bicycle::STATUS_FREE;
-        $bicycle->station_id = $station['id'];
+            $rental->duration = intval(ceil((strtotime($rental->return_at) - strtotime($rental->book_at)) / 60));
+            $bicycle->status = Bicycle::STATUS_FREE;
+        }
 
         if ($rental->save() && $bicycle->save() 
             && $this->addBicycleLocation($bicycleId, $latitude, $longitude)) {
