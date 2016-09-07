@@ -43,7 +43,7 @@ class UserController extends CustomActiveController
         $behaviors['authenticator'] = [
             'class' => HttpBearerAuth::className(),
             'except' => ['login', 'signup', 'reset-password',
-                'resend-email', 'activate', 'activate-email'],
+                'resend-email', 'activate', 'activate-email', 'login-test'],
         ];
 
         $behaviors['access'] = [
@@ -54,7 +54,7 @@ class UserController extends CustomActiveController
             'rules' => [
                 [   
                     'actions' => ['login', 'signup', 'reset-password',
-                        'resend-email', 'activate', 'activate-email'],
+                        'resend-email', 'activate', 'activate-email', 'login-test'],
                     'allow' => true,
                     'roles' => ['?'],
                 ],
@@ -83,6 +83,7 @@ class UserController extends CustomActiveController
     }
 
     public function actionLogin() {
+        echo '86------', time(), PHP_EOL;
     	$request = Yii::$app->request;
     	$bodyParams = $request->bodyParams;
         $username = $bodyParams['username'];
@@ -91,12 +92,17 @@ class UserController extends CustomActiveController
     	$model = new LoginModel();
     	$model->username = $username;
     	$model->password = $password;
+        echo '95------', time(), PHP_EOL;
     	if ($user = $model->login()) {
+            echo '97------', time(), PHP_EOL;
             if ($user->status == User::STATUS_WAIT_EMAIL)
                 throw new BadRequestHttpException(null, self::CODE_UNVERIFIED_EMAIL);
             if ($user->status == User::STATUS_ACTIVE) {
                 UserToken::deleteAll(['user_id' => $user->id, 'action' => TokenHelper::TOKEN_ACTION_ACCESS]);
+                echo '102------', time(), PHP_EOL;
                 $token = TokenHelper::createUserToken($user->id);
+                echo '104------', time(), PHP_EOL;
+                // die();
                 return [
                     'user_id' => $user->id,
                     'token' => $token->token,
@@ -104,6 +110,42 @@ class UserController extends CustomActiveController
                 ];
             } else throw new BadRequestHttpException(null, self::CODE_INVALID_ACCOUNT);
     	} else {
+            if (isset($model->errors['username']))
+                throw new BadRequestHttpException(null, self::CODE_INCORRECT_USERNAME);
+            if (isset($model->errors['password']))
+                throw new BadRequestHttpException(null, self::CODE_INCORRECT_PASSWORD);
+        }
+        throw new BadRequestHttpException('Invalid data');
+    }
+
+    public function actionLoginTest() {
+        echo '86------', time(), PHP_EOL;
+        $request = Yii::$app->request;
+        $bodyParams = $request->bodyParams;
+        $username = $bodyParams['username'];
+        $password = $bodyParams['password'];
+
+        $model = new LoginModel();
+        $model->username = $username;
+        $model->password = $password;
+        echo '95------', time(), PHP_EOL;
+        if ($user = $model->login()) {
+            echo '97------', time(), PHP_EOL;
+            if ($user->status == User::STATUS_WAIT_EMAIL)
+                throw new BadRequestHttpException(null, self::CODE_UNVERIFIED_EMAIL);
+            if ($user->status == User::STATUS_ACTIVE) {
+                UserToken::deleteAll(['user_id' => $user->id, 'action' => TokenHelper::TOKEN_ACTION_ACCESS]);
+                echo '102------', time(), PHP_EOL;
+                $token = TokenHelper::createUserToken($user->id);
+                echo '104------', time(), PHP_EOL;
+                die();
+                return [
+                    'user_id' => $user->id,
+                    'token' => $token->token,
+                    'fullname' => $user->fullname,
+                ];
+            } else throw new BadRequestHttpException(null, self::CODE_INVALID_ACCOUNT);
+        } else {
             if (isset($model->errors['username']))
                 throw new BadRequestHttpException(null, self::CODE_INCORRECT_USERNAME);
             if (isset($model->errors['password']))
