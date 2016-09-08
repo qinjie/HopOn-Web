@@ -492,7 +492,8 @@ Authorization: 'Bearer <token>'
     {
       uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
       major: '58949',
-      minor: '29933'
+      minor: '29933',
+      rssi: -10
     }
   ]
 }
