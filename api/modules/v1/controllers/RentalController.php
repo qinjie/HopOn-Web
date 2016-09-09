@@ -53,7 +53,8 @@ class RentalController extends CustomActiveController
     public function actionCurrentBooking() {
         $userId = Yii::$app->user->identity->id;
         $currentBooking = Yii::$app->db->createCommand('
-            select rental.id as booking_id,
+            select rental.id as rental_id,
+                  rental.booking_id,
                   bicycle_id,
                   bicycle.serial as bicycle_serial,
                   bicycle.desc,
@@ -113,7 +114,8 @@ class RentalController extends CustomActiveController
     public function actionHistory() {
         $userId = Yii::$app->user->identity->id;
         $history = Yii::$app->db->createCommand('
-            select rental.id as booking_id,
+            select rental.id as rental_id,
+                   rental.booking_id,
                    bicycle_id,
                    bicycle.serial as bicycle_serial,
                    bicycle.desc,

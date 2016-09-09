@@ -76,6 +76,7 @@ class BicycleController extends CustomActiveController
         $selectedBicycle->status = Bicycle::STATUS_BOOKED;
 
         $rental = new Rental();
+        $rental->booking_id = strtoupper(uniqid("SG"));
         $rental->user_id = $userId;
         $rental->bicycle_id = $selectedBicycle->id;
         $rental->serial = $selectedBicycle->serial;
