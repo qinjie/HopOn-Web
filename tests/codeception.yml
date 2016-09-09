@@ -1,8 +1,8 @@
 include:
-  - codeception/common
-  - codeception/console
+  # - codeception/common
+  # - codeception/console
   - codeception/backend
-  - codeception/frontend
+  # - codeception/frontend
 
 paths:
   log: codeception/_output
