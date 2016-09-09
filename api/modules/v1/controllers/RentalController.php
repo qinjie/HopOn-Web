@@ -72,6 +72,8 @@ class RentalController extends CustomActiveController
                   b2.uuid as beacon_bicycle_uuid,
                   b2.major as beacon_bicycle_major,
                   b2.minor as beacon_bicycle_minor,
+                  bean2.name as bean_bicycle_name,
+                  bean2.address as bean_bicycle_address,
                   bicycle_count, 
                   (select count(b1.id)
                     from bicycle as b1
@@ -85,6 +87,7 @@ class RentalController extends CustomActiveController
              join station on bicycle.station_id = station.id
              join beacon as b1 on b1.id = station.beacon_id
              join beacon as b2 on b2.id = bicycle.beacon_id
+             join bean as bean2 on bean2.id = b2.bean_id
              where user_id = :userId
              and return_at is null
         ')
