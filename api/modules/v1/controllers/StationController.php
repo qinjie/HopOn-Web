@@ -68,7 +68,7 @@ class StationController extends CustomActiveController
                    postal, 
                    bicycle_count, 
                    count(case status when :status then 1 else null end) as available_bicycle
-             from station join bicycle on bicycle.station_id = station.id
+             from station left join bicycle on bicycle.station_id = station.id
              group by station.id, name, address, latitude, longitude, postal, bicycle_count
         ')
         ->bindValue(':status', Bicycle::STATUS_FREE)
