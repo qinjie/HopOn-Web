@@ -1,5 +1,5 @@
 #Hop On
-**Server**: ```128.199.209.229/hopon-web/api/web/index.php/v1/```
+**Server**: ```188.166.247.154/hopon-web/api/web/index.php/v1/```
 ##CODES
 ###Status of bicycles:
 ```
