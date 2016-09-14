@@ -149,8 +149,10 @@ class RentalController extends CustomActiveController
         for ($iter = 0; $iter < count($history); ++$iter) {
             $time = strtotime($history[$iter]['book_at']);
             $history[$iter]['book_at'] = date('h:i A, d M Y', $time);
-            $time = strtotime($history[$iter]['pickup_at']);
-            $history[$iter]['pickup_at'] = date('h:i A, d M Y', $time);
+            if ($history[$iter]['pickup_at']) {
+              $time = strtotime($history[$iter]['pickup_at']);
+              $history[$iter]['pickup_at'] = date('h:i A, d M Y', $time);
+            }
             $time = strtotime($history[$iter]['return_at']);
             $history[$iter]['return_at'] = date('h:i A, d M Y', $time);
         }
