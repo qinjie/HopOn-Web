@@ -13,9 +13,9 @@ use yii\db\Expression;
 class Bicycle extends ActiveRecord
 {
     const STATUS_FREE = 0;
-    const STATUS_MAINTENANCE = 1;
-    const STATUS_LOCKED = 2;
-    const STATUS_UNLOCKED = 3;
+    const STATUS_LOCKED = 1;
+    const STATUS_UNLOCKED = 2;
+    const STATUS_MAINTENANCE = 3;
     const STATUS_BOOKED = 4;
 
     public static function tableName()

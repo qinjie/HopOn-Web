@@ -99,6 +99,7 @@ class UserController extends CustomActiveController
                 $token = TokenHelper::createUserToken($user->id);
                 return [
                     'user_id' => $user->id,
+                    'auth_key' => $user->auth_key,
                     'token' => $token->token,
                     'fullname' => $user->fullname,
                 ];

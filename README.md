@@ -50,8 +50,10 @@ CODE_INVALID_PASSWORD = 8;
 - Success: 200
 ```
 {
-    token: '3kj2rh3k2rhk2j3hkj42hk43h2kh4j32',
-    fullname: 'Tan Ah Boy'
+  "user_id": 1,
+  "auth_key": "ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA",
+  "token": "Br9UTkeDWrrUs-_FkojG1duzSpEsSA4T",
+  "fullname": "ADRIAN YOO"
 }
 ```
 - Error: 400
@@ -442,7 +444,7 @@ Authorization: 'Bearer <token>'
 ```
 {
   "rental_id": "6",
-  "booking_id": "SG57D2533A3BC57",
+  "booking_id": "SG57DA45CAB601E",
   "bicycle_id": "1",
   "bicycle_serial": "SG11111",
   "desc": "Hybrid",
@@ -453,7 +455,7 @@ Authorization: 'Bearer <token>'
   "pickup_station_postal": "",
   "pickup_station_lat": "1.370015",
   "pickup_station_lng": "103.849446",
-  "book_at": "02:14 PM, 09 Sep 2016",
+  "book_at": "02:55 PM, 15 Sep 2016",
   "pickup_at": null,
   "beacon_station_uuid": "23A01AF0-232A-4518-9C0E-323FB773F5EF",
   "beacon_station_major": "61667",
@@ -461,16 +463,16 @@ Authorization: 'Bearer <token>'
   "beacon_bicycle_uuid": "23A01AF0-232A-4518-9C0E-323FB773F5EF",
   "beacon_bicycle_major": "31483",
   "beacon_bicycle_minor": "13575",
-  "bean_bicycle_name": "SG11116",
-  "bean_bicycle_address": "88:C2:55:AC:27:07",
-  "bicycle_count": "10",
-  "available_bicycle": "0",
+  "bean_bicycle_name": "SG11111",
+  "bean_bicycle_address": "88:C2:55:AC:35:5F",
+  "status": "4",
   "listImageUrl": [
     "http://localhost/hopon-web/backend/web/uploads/images/bike-1.jpg",
     "http://localhost/hopon-web/backend/web/uploads/images/bike-2.jpg",
     "http://localhost/hopon-web/backend/web/uploads/images/bike-2.jpg"
   ],
   "user_id": 1,
+  "auth_key": "ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA",
   "enc": "441a96b31571f9a3d4a20daa1a0ca1e2"
 }
 ```

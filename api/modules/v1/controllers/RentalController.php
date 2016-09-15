@@ -75,11 +75,7 @@ class RentalController extends CustomActiveController
                   b2.minor as beacon_bicycle_minor,
                   bean2.name as bean_bicycle_name,
                   bean2.address as bean_bicycle_address,
-                  bicycle_count, 
-                  (select count(b1.id)
-                    from bicycle as b1
-                    where b1.station_id = station.id 
-                    and b1.status = :status) as available_bicycle,
+                  status,
                   (select group_concat(data separator \' \') 
                     from image 
                     where image.bicycle_type_id = bicycle_type.id) as listImageUrl
@@ -93,7 +89,6 @@ class RentalController extends CustomActiveController
              and return_at is null
         ')
         ->bindValue(':userId', $userId)
-        ->bindValue(':status', Bicycle::STATUS_FREE)
         ->queryOne();
         if (!$currentBooking) throw new BadRequestHttpException('No booking');
         $time = strtotime($currentBooking['book_at']);
@@ -107,6 +102,7 @@ class RentalController extends CustomActiveController
             $currentBooking['listImageUrl'][$iterUrl] = Yii::$app->params['BACKEND_BASEURL'].$currentBooking['listImageUrl'][$iterUrl];
         }
         $currentBooking['user_id'] = $userId;
+        $currentBooking['auth_key'] = Yii::$app->user->identity->auth_key;
         $currentBooking['enc'] = md5($currentBooking['bicycle_serial'].','.$userId);
         return $currentBooking;
     }
