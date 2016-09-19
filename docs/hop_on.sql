@@ -403,11 +403,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `fullname`, `auth_key`, `password_hash`, `email`, `mobile`, `status`, `role`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'ADRIAN YOO', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '1@mail.com', '1111', 10, 10, 'user', 1461214049, 1461926225),
-(2, 'MICHAEL YOO', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '2@mail.com', '2222', 10, 10, 'user', 1461214049, 1461926225),
-(3, 'ANTHONY CHEN', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '3@mail.com', '3333', 10, 10, 'user', 1461214049, 1461926225),
-(4, 'DUCDD', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', 'congaductq@gmail.com', 'dddd', 10, 10, 'user', 1461214049, 1461926225),
-(5, 'ECE IoT', '3omKLUGUbNItniqEcacbmG8ATK4zt0bO', '$2y$13$3eQNXkrRhnTpJnyht6fOUO6k8oAK7OBNrTtBRSnCHst5f7OcV2Flu', 'eceiot@gmail.com', '12345678', 10, 10, 'user', 1461214049, 1461926225);
+(1, 'ADRIAN YOO', 'qNaHSMonX_k7Zgze', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '1@mail.com', '1111', 10, 10, 'user', 1461214049, 1461926225),
+(2, 'MICHAEL YOO', 'qNaHSMonX_k7Zgzd', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '2@mail.com', '2222', 10, 10, 'user', 1461214049, 1461926225),
+(3, 'ANTHONY CHEN', 'qNaHSMonX_k7Zgzc', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '3@mail.com', '3333', 10, 10, 'user', 1461214049, 1461926225),
+(4, 'DUCDD', 'qNaHSMonX_k7Zgzb', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', 'congaductq@gmail.com', 'dddd', 10, 10, 'user', 1461214049, 1461926225),
+(5, 'ECE IoT', 'qNaHSMonX_k7Zgza', '$2y$13$3eQNXkrRhnTpJnyht6fOUO6k8oAK7OBNrTtBRSnCHst5f7OcV2Flu', 'eceiot@gmail.com', '12345678', 10, 10, 'user', 1461214049, 1461926225);
 
 -- --------------------------------------------------------
 
