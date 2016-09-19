@@ -102,8 +102,9 @@ class RentalController extends CustomActiveController
             $currentBooking['listImageUrl'][$iterUrl] = Yii::$app->params['BACKEND_BASEURL'].$currentBooking['listImageUrl'][$iterUrl];
         }
         $currentBooking['user_id'] = $userId;
-        $currentBooking['auth_key'] = Yii::$app->user->identity->auth_key;
-        $currentBooking['enc'] = md5($currentBooking['bicycle_serial'].','.$userId);
+        $authKey = Yii::$app->user->identity->auth_key;
+        $currentBooking['auth_key'] = $authKey;
+        $currentBooking['enc'] = md5($currentBooking['bicycle_serial'].','.$authKey);
         return $currentBooking;
     }
 

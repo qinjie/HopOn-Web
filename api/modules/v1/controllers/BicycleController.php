@@ -109,7 +109,7 @@ class BicycleController extends CustomActiveController
                 ->setSubject('Booking Detail From ' . Yii::$app->name)
                 ->send();
             $result = $selectedBicycle->attributes;
-            $result['enc'] = md5($selectedBicycle->serial.','.$userId);
+            $result['enc'] = md5($selectedBicycle->serial.','.Yii::$app->user->identity->auth_key);
             return $result;
         }
         throw new BadRequestHttpException('Cannot save database');
