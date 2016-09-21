@@ -9,9 +9,11 @@
 class_name: FunctionalTester
 modules:
     enabled:
-      - Filesystem
-      - Yii2
-      - tests\codeception\common\_support\FixtureHelper
+        - Filesystem
+        - REST:
+            url: http://localhost/hopon-web/api/web/index-test.php/v1/
+            depends: Yii2
+            part: Json
     config:
         Yii2:
             configFile: '../config/api/functional.php'

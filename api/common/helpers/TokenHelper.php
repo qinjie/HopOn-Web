@@ -38,7 +38,7 @@ class TokenHelper
         $model->expire_date = date('Y-m-d H:i:s', time() + $interval);
         $model->action = is_null($action) ? self::TOKEN_ACTION_ACCESS : $action;
         $model->title = self::$actions[$model->action];
-        $model->ip_address = \Yii::$app->getRequest()->getUserIP();
+        $model->ip_address = Yii::$app->getRequest()->getUserIP();
         if ($model->validate() && $model->save())
             return $model;
         else

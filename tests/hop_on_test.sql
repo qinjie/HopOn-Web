@@ -17,7 +17,7 @@ DROP DATABASE /*!32312 IF EXISTS*/`hop_on_test`;
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `hop_on`
+-- Database: `hop_on_test`
 --
 CREATE DATABASE IF NOT EXISTS `hop_on_test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `hop_on_test`;
@@ -33,32 +33,64 @@ CREATE TABLE IF NOT EXISTS `beacon` (
   `uuid` varchar(100) NOT NULL,
   `major` varchar(10) DEFAULT NULL,
   `minor` varchar(10) DEFAULT NULL,
+  `bean_id` int(11) unsigned DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `bean_id` (`bean_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `beacon`
 --
 
-INSERT INTO `beacon` (`id`, `uuid`, `major`, `minor`, `created_at`, `updated_at`) VALUES
-(1, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '61667', '30640', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
-(2, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '49256', '38045', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
-(3, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '6146', '27736', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
-(4, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '61997', '33888', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
+INSERT INTO `beacon` (`id`, `uuid`, `major`, `minor`, `created_at`, `updated_at`, `bean_id`) VALUES
+(1, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '61667', '30640', '0000-00-00 00:00:00', '2016-04-26 03:09:19', NULL),
+(2, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '49256', '38045', '0000-00-00 00:00:00', '2016-04-26 03:09:19', NULL),
+(3, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '6146', '27736', '0000-00-00 00:00:00', '2016-04-26 03:09:19', NULL),
+(4, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '61997', '33888', '0000-00-00 00:00:00', '2016-04-26 03:09:19', NULL),
 
-(5, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '31483', '13575', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
-(6, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '59687', '27425', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
-(7, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '37002', '8442', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
-(8, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '41487', '60463', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
-(9, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '13595', '47423', '0000-00-00 00:00:00', '2016-04-26 03:09:19');
+(5, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '31483', '13575', '0000-00-00 00:00:00', '2016-04-26 03:09:19', 1),
+(6, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '59687', '27425', '0000-00-00 00:00:00', '2016-04-26 03:09:19', 2),
+(7, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '37002', '8442', '0000-00-00 00:00:00', '2016-04-26 03:09:19', 3),
+(8, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '41487', '60463', '0000-00-00 00:00:00', '2016-04-26 03:09:19', 4),
+(9, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '13595', '47423', '0000-00-00 00:00:00', '2016-04-26 03:09:19', 5),
+(10, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '31483', '13575', '0000-00-00 00:00:00', '2016-04-26 03:09:19', 6),
+(11, '23A01AF0-232A-4518-9C0E-323FB773F5EF', '31483', '13575', '0000-00-00 00:00:00', '2016-04-26 03:09:19', 7);
 
 -- (4, 'B9407F30-F5F8-466E-AFF9-25556B57FE6D', '33078', '31465', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
 -- (5, 'B9407F30-F5F8-466E-AFF9-25556B57FE6D', '58949', '29933', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
 -- (6, 'B9407F30-F5F8-466E-AFF9-25556B57FE6D', '52689', '51570', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
 -- (7, 'B9407F30-F5F8-466E-AFF9-25556B57FE6D', '16717', '179', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
 -- (8, 'B9407F30-F5F8-466E-AFF9-25556B57FE6D', '23254', '34430', '0000-00-00 00:00:00', '2016-04-26 03:09:19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bean`
+--
+
+CREATE TABLE IF NOT EXISTS `bean` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `address` varchar(100) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `bean`
+--
+
+INSERT INTO `bean` (`id`, `address`, `name`, `created_at`, `updated_at`) VALUES
+(1, '88:C2:55:AC:35:5F', 'SG11111', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
+(2, '88:C2:55:AC:30:7D', 'SG11112', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
+(3, '98:7B:F3:75:14:EC', 'SG11113', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
+(4, '98:7B:F3:75:17:26', 'SG11114', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
+(5, '88:C2:55:AC:34:90', 'SG11115', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
+(6, '88:C2:55:AC:27:07', 'SG11116', '0000-00-00 00:00:00', '2016-04-26 03:09:19'),
+(7, '88:C2:55:AC:28:13', 'SG11117', '0000-00-00 00:00:00', '2016-04-26 03:09:19');
 
 -- --------------------------------------------------------
 
@@ -79,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `bicycle` (
   PRIMARY KEY (`id`),
   KEY `bicycle_type_id` (`bicycle_type_id`),
   KEY `station_id` (`station_id`),
-  KEY `beacon_id` (`beacon_id`)
+  UNIQUE KEY `beacon_id` (`beacon_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -88,6 +120,9 @@ CREATE TABLE IF NOT EXISTS `bicycle` (
 
 INSERT INTO `bicycle` (`id`, `serial`, `bicycle_type_id`, `desc`, `station_id`, `beacon_id`, `created_at`, `updated_at`, `status`) VALUES
 (1, 'SG11111', 1, 'Hybrid', 1, 5, 1461214049, 1461926225,0),
+(6, 'SG11116', 2, 'Road', 1, 10, 1461214049, 1461926225,0),
+(7, 'SG11117', 3, 'Road', 1, 11, 1461214049, 1461926225,0),
+
 (2, 'SG11112', 1, 'Road', 2, 6, 1461214049, 1461926225,0),
 (3, 'SG11113', 2, 'Road', 3, 7, 1461214049, 1461926225,0),
 (4, 'SG11114', 2, 'Hybrid', 3, 8, 1461214049, 1461926225,0),
@@ -273,6 +308,7 @@ INSERT INTO `image` (`id`, `name`, `data`, `bicycle_type_id`, `created_at`, `upd
 
 CREATE TABLE IF NOT EXISTS `rental` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `booking_id` varchar(50) NOT NULL,
   `user_id` int(11) NOT NULL,
   `bicycle_id` int(11) unsigned NOT NULL,
   `serial` varchar(50) NOT NULL,
@@ -284,6 +320,7 @@ CREATE TABLE IF NOT EXISTS `rental` (
   `created_at` int(11) unsigned NOT NULL,
   `updated_at` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `booking_id` (`booking_id`),
   KEY `user_id` (`user_id`),
   KEY `bicycle_id` (`bicycle_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -292,12 +329,12 @@ CREATE TABLE IF NOT EXISTS `rental` (
 -- Dumping data for table `rental`
 --
 
-INSERT INTO `rental` (`id`, `user_id`, `bicycle_id`, `serial`, `book_at`, `return_at`, `duration`, `created_at`, `updated_at`, `pickup_at`, `return_station_id`) VALUES
-(1, 1, 1, 'RENT111', '2016-08-01 15:00:00', '2016-08-01 16:30:00', 90, 1461214049, 1461926225,'2016-08-01 15:05:00',5),
-(2, 2, 2, 'RENT112', '2016-08-01 14:00:00', '2016-08-01 14:30:00', 30, 1461214049, 1461926225,'2016-08-01 14:05:00',5),
-(3, 3, 3, 'RENT113', '2016-08-01 12:00:00', '2016-08-01 13:00:00', 60, 1461214049, 1461926225,'2016-08-01 12:05:00',5),
-(4, 1, 4, 'RENT114', '2016-08-02 10:00:00', '2016-08-01 10:30:00', 30, 1461214049, 1461926225,'2016-08-02 10:05:00',5),
-(5, 2, 5, 'RENT115', '2016-08-02 14:00:00', '2016-08-01 14:30:00', 30, 1461214049, 1461926225,'2016-08-02 14:05:00',5);
+INSERT INTO `rental` (`id`, `booking_id`, `user_id`, `bicycle_id`, `serial`, `book_at`, `return_at`, `duration`, `created_at`, `updated_at`, `pickup_at`, `return_station_id`) VALUES
+(1, 'A1234B1111C', 1, 1, 'RENT111', '2016-08-01 15:00:00', '2016-08-01 16:30:00', 90, 1461214049, 1461926225,'2016-08-01 15:05:00',5),
+(2, 'A1234B2222C', 2, 2, 'RENT112', '2016-08-01 14:00:00', '2016-08-01 14:30:00', 30, 1461214049, 1461926225,'2016-08-01 14:05:00',5),
+(3, 'A1234B3333C', 3, 3, 'RENT113', '2016-08-01 12:00:00', '2016-08-01 13:00:00', 60, 1461214049, 1461926225,'2016-08-01 12:05:00',5),
+(4, 'A1234B4444C', 1, 4, 'RENT114', '2016-08-02 10:00:00', '2016-08-01 10:30:00', 30, 1461214049, 1461926225,'2016-08-02 10:05:00',5),
+(5, 'A1234B5555C', 2, 5, 'RENT115', '2016-08-02 14:00:00', '2016-08-01 14:30:00', 30, 1461214049, 1461926225,'2016-08-02 14:05:00',5);
 -- (6, 3, 6, 'RENT116', '2016-08-02 12:00:00', '2016-08-01 12:30:00', 30, 1461214049, 1461926225,'2016-08-02 12:05:00',5);
 -- (7, 1, 11, 'RENT121', '2016-08-11 15:00:00', NULL, 90, 1461214049, 1461926225,NULL,5),
 -- (8, 2, 12, 'RENT122', '2016-08-11 14:00:00', NULL, 30, 1461214049, 1461926225,NULL,5),
@@ -366,11 +403,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `fullname`, `auth_key`, `password_hash`, `email`, `mobile`, `status`, `role`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'ADRIAN YOO', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '1@mail.com', '1111', 10, 10, 'user', 1461214049, 1461926225),
-(2, 'MICHAEL YOO', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '2@mail.com', '2222', 10, 10, 'user', 1461214049, 1461926225),
-(3, 'ANTHONY CHEN', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '3@mail.com', '3333', 10, 10, 'user', 1461214049, 1461926225),
-(4, 'DUCDD', 'ZdHvM_ryoZgGJiNsQhh2y95vllLXVseA', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', 'congaductq@gmail.com', 'dddd', 10, 10, 'user', 1461214049, 1461926225),
-(5, 'ECE IoT', '3omKLUGUbNItniqEcacbmG8ATK4zt0bO', '$2y$13$3eQNXkrRhnTpJnyht6fOUO6k8oAK7OBNrTtBRSnCHst5f7OcV2Flu', 'eceiot@gmail.com', '12345678', 10, 10, 'user', 1461214049, 1461926225);
+(1, 'ADRIAN YOO', 'X_k7Zgze', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '1@mail.com', '1111', 10, 10, 'user', 1461214049, 1461926225),
+(2, 'MICHAEL YOO', 'X_k7Zgzd', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '2@mail.com', '2222', 10, 10, 'user', 1461214049, 1461926225),
+(3, 'ANTHONY CHEN', 'X_k7Zgzc', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', '3@mail.com', '3333', 10, 10, 'user', 1461214049, 1461926225),
+(4, 'DUCDD', 'X_k7Zgzb', '$2y$13$3p4KSrmepU5A8mduqEtz3eicSvfEskzLnnUsIukJayp3e7jDStnaa', 'congaductq@gmail.com', 'dddd', 10, 10, 'user', 1461214049, 1461926225),
+(5, 'ECE IoT', 'X_k7Zgza', '$2y$13$3eQNXkrRhnTpJnyht6fOUO6k8oAK7OBNrTtBRSnCHst5f7OcV2Flu', 'eceiot@gmail.com', '12345678', 10, 10, 'user', 1461214049, 1461926225);
 
 -- --------------------------------------------------------
 
@@ -383,7 +420,7 @@ CREATE TABLE IF NOT EXISTS `user_token` (
   `user_id` int(11) NOT NULL,
   `token` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `ip_address` varchar(255) NOT NULL,
+  `ip_address` varchar(255) DEFAULT NULL,
   `expire_date` datetime NOT NULL,
   `created_date` datetime NOT NULL,
   `updated_date` datetime NOT NULL,
@@ -438,6 +475,12 @@ CREATE TABLE IF NOT EXISTS `feedback` (
 --
 -- Constraints for table `bicycle`
 --
+ALTER TABLE `beacon`
+  ADD CONSTRAINT `beacon_ibfk_2` FOREIGN KEY (`bean_id`) REFERENCES `bean` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `bicycle`
+--
 ALTER TABLE `bicycle`
   ADD CONSTRAINT `bicycle_ibfk_1` FOREIGN KEY (`station_id`) REFERENCES `station` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `bicycle_ibfk_2` FOREIGN KEY (`beacon_id`) REFERENCES `beacon` (`id`) ON UPDATE CASCADE,
@@ -475,7 +518,7 @@ ALTER TABLE `user_token`
 ALTER TABLE `feedback`
   ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`rental_id`) REFERENCES `rental` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-  --
+--
 -- Constraints for table `image`
 --
 ALTER TABLE `image`
