@@ -133,7 +133,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function generateAuthKey()
     {
-        $this->auth_key = Yii::$app->security->generateRandomString(16);
+        $this->auth_key = Yii::$app->security->generateRandomString(8);
     }
 
     public function beforeSave($insert)
