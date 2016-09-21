@@ -1,5 +1,5 @@
 <?php
-namespace tests\codeception\backend;
+namespace tests\codeception\api;
 
 /**
  * Inherited Methods
