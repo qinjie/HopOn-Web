@@ -31,7 +31,7 @@ Hop-On server provides the following list of API
 ## API Details
 ### POST ```user/login```
 ```
-=> Login to app
+=> Login to app. Client will receive a token, which will be used for Bearer Authentication
 ```
 ####Header: None
 ####Request:
@@ -67,7 +67,7 @@ Hop-On server provides the following list of API
 
 ###GET ```user/logout```
 ```
-=> Log out app
+=> Log out app.
 ```
 ####Header:
 ```
@@ -117,7 +117,7 @@ register successfully
 
 ###POST ```user/reset-password```
 ```
-=> Reset password
+=> Reset password. An email containing reset password link will be sent.
 ```
 ####Header: None
 ####Request:
@@ -228,7 +228,7 @@ Authorization: 'Bearer <token>'
 
 ###POST ```user/resend-email```
 ```
-=> Resend activation email
+=> Resend activation email.
 ```
 ####Header: None
 ####Request:
@@ -246,7 +246,7 @@ resend email
 
 ###POST ```user/activate```
 ```
-=> Activate an account
+=> Activate an account. Client needs to send the confirmation code received in activation email.
 ```
 ####Header: None
 ####Request:
@@ -430,7 +430,7 @@ Authorization: 'Bearer <token>'
 
 ###POST ```bicycle/book```
 ```
-=> Book a bicycle
+=> Book a bicycle. Client sends station ID and bicycle type ID. Server will select a random available bicycle of received type in received station. Then server will return back information of selected bicycle. 
 ```
 ####Header:
 ```
@@ -618,7 +618,7 @@ Authorization: 'Bearer <token>'
 
 ###POST ```rental/history```
 ```
-=> History of booking of current user. Sorted from newest to oldest by return at
+=> History of booking of current user. Sorted from newest to oldest by return_at
 ```
 ####Header:
 ```

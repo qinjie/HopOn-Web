@@ -1,4 +1,4 @@
 # Hop-On: Database Reference
 
-## Database schema:
+## Database schema
 <img src="http://imgh.us/hopon-db.svg" alt="database schema" />
