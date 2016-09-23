@@ -12,8 +12,8 @@
 * **API URL**: ```188.166.247.154/hopon-web/api/web/index.php/v1/```
 
 ## Resources
-* [API Reference](/qinjie/HopOn-Web/blob/develop/API.md)
-* [Database Reference](/qinjie/HopOn-Web/blob/develop/Database.md)
+* [API Reference](https://github.com/qinjie/HopOn-Web/blob/develop/API.md)
+* [Database Reference](https://github.com/qinjie/HopOn-Web/blob/develop/Database.md)
 * [Yii2 documentation](http://www.yiiframework.com/doc-2.0/guide-index.html)
 
 ## Set up server in Ubuntu
