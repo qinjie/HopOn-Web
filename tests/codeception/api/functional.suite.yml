@@ -17,3 +17,4 @@ modules:
     config:
         Yii2:
             configFile: '../config/api/functional.php'
+            part: ORM

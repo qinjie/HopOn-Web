@@ -18,9 +18,26 @@ namespace tests\codeception\api;
 */
 class FunctionalTester extends \Codeception\Actor
 {
-    use _generated\FunctionalTesterActions;
+	use _generated\FunctionalTesterActions;
 
-   /**
+   	/**
     * Define custom actions here
     */
+
+   	public function login($username, $password) {
+   		$I = $this;
+   		$I->sendPOST('user/login', [
+            'username' => '1111',
+            'password' => '123456'
+        ]);
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseIsJson();
+        $I->seeResponseMatchesJsonType([
+            'user_id' => 'integer',
+            'auth_key' => 'string',
+            'token' => 'string',
+            'fullname' => 'string'
+        ]);
+        return json_decode($I->grabResponse());
+   	}
 }

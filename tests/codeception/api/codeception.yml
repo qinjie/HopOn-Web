@@ -20,3 +20,13 @@ coverage:
     whitelist:
         include:
             - ../../../api/modules/v1/*
+modules:
+    enabled:
+        - Db:
+            dsn: 'mysql:host=localhost;dbname=hop_on_test'
+            user: 'root'
+            password: ''
+            dump: '_data/dump.sql'
+            populate: true
+            cleanup: false
+            reconnect: true
