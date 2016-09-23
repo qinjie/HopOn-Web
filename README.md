@@ -18,6 +18,7 @@
 
 ## Set up server in Ubuntu
 Instructions for setting up server
+
 1. Install ```LAMP```. [Guide](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-14-04)
 2. Install ```Git```. [Guide](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-14-04)
 3. Run ```git clone https://github.com/qinjie/HopOn-Web.git```
