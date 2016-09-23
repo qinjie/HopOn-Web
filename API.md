@@ -1,6 +1,6 @@
 # Hop-On: API Reference
 Hop-On server provides the following list of API
-
+## User API
 - [Log in](#post-userlogin)
 - [Log out](#get-userlogout)
 - [Sign up](#post-usersignup)
@@ -11,18 +11,21 @@ Hop-On server provides the following list of API
 - [Resend activation email](#post-userresend-email)
 - [Activate account](#post-useractivate)
 - [Get user profile](#get-userprofile)
+## Station API
 - [Search nearest stations](#post-stationsearch)
 - [Get list of available bicycle types in a station](#get-stationdetailstationid1)
+- [Get list of all stations](#get-stationget-all)
+## Bicycle API
 - [Book bicycle](#post-bicyclebook)
 - [Get current booking information](#get-rentalcurrent-booking)
 - [Return bicycle](#post-bicyclereturn)
 - [Lock bicycle](#post-bicyclelock)
 - [Unlock bicycle](#post-bicycleunlock)
 - [Get booking history](#post-rentalhistory)
-- [Get list of all stations](#get-stationget-all)
+## Feedback API
 - [Submit a feedback](#post-feedbacknew)
 
-
+## API Details
 ### POST ```user/login```
 ```
 => Login to app
@@ -387,6 +390,41 @@ Authorization: 'Bearer <token>'
 
 ***
 
+###GET ```station/get-all```
+```
+=> Get all stations
+```
+####Header:
+```
+Authorization: 'Bearer <token>'
+```
+####Request: None
+####Response:
+```
+[
+  {
+    "id": "1",
+    "name": "Ang Mo Kio",
+    "address": "Ang Mo Kio MRT",
+    "latitude": "1.370015",
+    "longitude": "103.849446",
+    "postal": "",
+    "bicycle_count": "30"
+  },
+  {
+    "id": "2",
+    "name": "Mayflower",
+    "address": "253 Ang Mo Kio Street 21",
+    "latitude": "1.369732",
+    "longitude": "103.835231",
+    "postal": "560253",
+    "bicycle_count": "20"
+  }
+]
+```
+
+***
+
 ###POST ```bicycle/book```
 ```
 => Book a bicycle
@@ -609,41 +647,6 @@ Authorization: 'Bearer <token>'
     "return_station_postal": "234235",
     "return_station_lat": "1.334284",
     "return_station_lng": "103.776649"
-  }
-]
-```
-
-***
-
-###GET ```station/get-all```
-```
-=> Get all stations
-```
-####Header:
-```
-Authorization: 'Bearer <token>'
-```
-####Request: None
-####Response:
-```
-[
-  {
-    "id": "1",
-    "name": "Ang Mo Kio",
-    "address": "Ang Mo Kio MRT",
-    "latitude": "1.370015",
-    "longitude": "103.849446",
-    "postal": "",
-    "bicycle_count": "30"
-  },
-  {
-    "id": "2",
-    "name": "Mayflower",
-    "address": "253 Ang Mo Kio Street 21",
-    "latitude": "1.369732",
-    "longitude": "103.835231",
-    "postal": "560253",
-    "bicycle_count": "20"
   }
 ]
 ```
