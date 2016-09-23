@@ -26,7 +26,9 @@ Instructions for setting up server
 5. Go to repository directory. Run ```php init```
 6. Run this sql file ```docs/hop_on.sql``` in repository directory.
 7. Edit database configuration in ```common/config/main-local.php```
-8. Add local parameters in file ```common/config/params-local.php``` as following:
+8. Change permissions of these folders to be writable. Run ```chmod -R 777 api/runtime api/web/assets backend/runtime backend/web/assets frontend/runtime frontend/web/assets console/runtime``` in repository directory.
+9. Run ```composer install```.
+10. Add local parameters in file ```common/config/params-local.php``` as following:
 ```
 <?php
 return [
@@ -35,5 +37,4 @@ return [
     'BACKEND_BASEURL' => 'http://localhost/hopon-web/backend/web/',
 ];
 ```
-9. Change permissions of these folders to be writable. Run ```chmod -R 777 api/runtime api/web/assets backend/runtime backend/web/assets frontend/runtime frontend/web/assets console/runtime``` in repository directory.
-10. Run ```composer install```.
+
