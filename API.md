@@ -11,10 +11,12 @@ Hop-On server provides the following list of API
 - [Resend activation email](#post-userresend-email)
 - [Activate account](#post-useractivate)
 - [Get user profile](#get-userprofile)
+
 ## Station API
 - [Search nearest stations](#post-stationsearch)
 - [Get list of available bicycle types in a station](#get-stationdetailstationid1)
 - [Get list of all stations](#get-stationget-all)
+
 ## Bicycle API
 - [Book bicycle](#post-bicyclebook)
 - [Get current booking information](#get-rentalcurrent-booking)
@@ -22,6 +24,7 @@ Hop-On server provides the following list of API
 - [Lock bicycle](#post-bicyclelock)
 - [Unlock bicycle](#post-bicycleunlock)
 - [Get booking history](#post-rentalhistory)
+
 ## Feedback API
 - [Submit a feedback](#post-feedbacknew)
 
