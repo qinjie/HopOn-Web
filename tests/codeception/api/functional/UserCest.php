@@ -7,6 +7,8 @@ use Codeception\Util\Debug;
 
 class UserCest
 {
+    private $accessToken;
+
     public function _before(FunctionalTester $I)
     {
     }
@@ -18,14 +20,13 @@ class UserCest
     public function testLogin(FunctionalTester $I)
     {
         $I->wantTo('login');
-        $I->login('1111', '123456');
+        $this->accessToken = $I->login('1111', '123456')->token;
     }
 
     public function testGetProfile(FunctionalTester $I)
     {
-        $token = $I->login('1111', '123456')->token;
         $I->wantTo('get my profile');
-        $I->amBearerAuthenticated($token);
+        $I->amBearerAuthenticated($this->accessToken);
         $I->sendGET('user/profile');
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
@@ -38,9 +39,8 @@ class UserCest
 
     public function testChangePassword(FunctionalTester $I)
     {
-        $token = $I->login('1111', '123456')->token;
         $I->wantTo('change password');
-        $I->amBearerAuthenticated($token);
+        $I->amBearerAuthenticated($this->accessToken);
         $I->sendPOST('user/change-password', [
             'oldPassword' => '123456',
             'newPassword' => '654321',
@@ -57,9 +57,8 @@ class UserCest
 
     public function testChangeEmail(FunctionalTester $I)
     {
-        $token = $I->login('1111', '123456')->token;
         $I->wantTo('change email');
-        $I->amBearerAuthenticated($token);
+        $I->amBearerAuthenticated($this->accessToken);
         $I->sendPOST('user/change-email', [
             'newEmail' => '123456@mail.com',
             'password' => '123456',
@@ -73,20 +72,10 @@ class UserCest
         ]);
     } 
 
-    public function testLogout(FunctionalTester $I)
-    {
-        $token = $I->login('1111', '123456')->token;
-        $I->wantTo('logout');
-        $I->amBearerAuthenticated($token);
-        $I->sendGET('user/logout');
-        $I->seeResponseCodeIs(200);
-    }    
-
     public function testChangeMobilePhone(FunctionalTester $I)
     {
-        $token = $I->login('1111', '123456')->token;
         $I->wantTo('change mobile phone');
-        $I->amBearerAuthenticated($token);
+        $I->amBearerAuthenticated($this->accessToken);
         $I->sendPOST('user/change-mobile', [
             'newMobile' => '88888888',
             'password' => '123456',
@@ -95,8 +84,13 @@ class UserCest
         $I->seeResponseMatchesJsonType([
             'mobile' => 'string',
         ]);
-        $I->seeResponseContainsJson([
-            'mobile' => '88888888',
-        ]);
     } 
+
+    public function testLogout(FunctionalTester $I)
+    {
+        $I->wantTo('logout');
+        $I->amBearerAuthenticated($this->accessToken);
+        $I->sendGET('user/logout');
+        $I->seeResponseCodeIs(200);
+    }    
 }
