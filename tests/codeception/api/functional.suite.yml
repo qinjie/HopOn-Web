@@ -14,7 +14,17 @@ modules:
             url: http://localhost/hopon-web/api/web/index-test.php/v1/
             depends: Yii2
             part: Json
+        - Db
+        - Asserts
     config:
         Yii2:
             configFile: '../config/api/functional.php'
             part: ORM
+        Db:
+            dsn: 'mysql:host=localhost;dbname=hop_on_test'
+            user: 'root'
+            password:
+            dump: '_data/dump.sql'
+            populate: true
+            cleanup: false
+            reconnect: true
