@@ -2,11 +2,13 @@
 namespace tests\codeception\api;
 use tests\codeception\api\FunctionalTester;
 use api\modules\v1\models\Bicycle;
+use api\modules\v1\models\Feedback;
 
 class BicycleCest
 {
     private $accessToken;
     private $bookedBicycleId;
+    private $rentalId;
     
     public function _before(FunctionalTester $I)
     {
@@ -81,6 +83,8 @@ class BicycleCest
             'auth_key' => 'string',
             'enc' => 'string',
         ]);
+        $response = json_decode($I->grabResponse());
+        $this->rentalId = $response->rental_id;
     }
 
     public function testUnlockBicycle(FunctionalTester $I)
@@ -163,5 +167,23 @@ class BicycleCest
             'serial' => 'SG11111',
             'return_station_id' => 1,
         ]);
+    }
+
+    public function testSubmitFeedbackAfterReturn(FunctionalTester $I)
+    {
+        $I->wantTo('provide feedback after returning bicycle');
+        $I->amBearerAuthenticated($this->accessToken);
+        $I->sendPOST('feedback/new', [
+            'rentalId' => $this->rentalId,
+            'listIssue' => [
+                Feedback::ISSUE_BREAK_NOT_EFFECTIVE,
+                Feedback::ISSUE_TYRE_FLAT,
+            ],
+            'comment' => 'a test comment',
+            'rating' => 4.5,
+        ]);
+        $I->seeResponseCodeIs(200);
+        $response = json_decode($I->grabResponse());
+        $I->assertEquals('Feedback saved', $response);
     }
 }
