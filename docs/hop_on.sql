@@ -111,7 +111,8 @@ CREATE TABLE IF NOT EXISTS `bicycle` (
   PRIMARY KEY (`id`),
   KEY `bicycle_type_id` (`bicycle_type_id`),
   KEY `station_id` (`station_id`),
-  UNIQUE KEY `beacon_id` (`beacon_id`)
+  UNIQUE KEY `beacon_id` (`beacon_id`),
+  UNIQUE KEY `serial` (`serial`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --

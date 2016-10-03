@@ -27,7 +27,6 @@ class StationCest
         $response = json_decode($I->grabResponse());
         $this->listStation = $response;
         $I->assertLessThanOrEqual(10, count($response));
-        codecept_debug($response);
         $I->seeResponseMatchesJsonType([
             'id' => 'string',
             'name' => 'string',
@@ -51,7 +50,6 @@ class StationCest
         ]);
         $response = json_decode($I->grabResponse());
         $I->assertGreaterThanOrEqual(1, count($response));
-        codecept_debug($response);
         $I->seeResponseMatchesJsonType([
             'bicycle_type_id' => 'string',
             'brand' => 'string',

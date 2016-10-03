@@ -92,5 +92,5 @@ class UserCest
         $I->amBearerAuthenticated($this->accessToken);
         $I->sendGET('user/logout');
         $I->seeResponseCodeIs(200);
-    }    
+    }
 }
