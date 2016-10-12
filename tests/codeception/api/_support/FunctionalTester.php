@@ -31,7 +31,6 @@ class FunctionalTester extends \Codeception\Actor
 	  	'password' => '123456'
     ]);
     $I->seeResponseCodeIs(200);
-    $I->seeResponseIsJson();
     $I->seeResponseMatchesJsonType([
       'user_id' => 'integer',
       'auth_key' => 'string',

@@ -23,7 +23,7 @@ modules:
         Db:
             dsn: 'mysql:host=localhost;dbname=hop_on_test'
             user: 'root'
-            password:
+            password: ''
             dump: '_data/dump.sql'
             populate: true
             cleanup: false
