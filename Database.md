@@ -10,4 +10,4 @@ password: abcd1234
 ```
 
 ## Database schema
-<img src="hopon-db.svg" alt="database schema" />
+<img src="http://imgh.us/hopon-db.svg" alt="database schema" />
