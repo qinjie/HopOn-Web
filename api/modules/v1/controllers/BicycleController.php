@@ -70,13 +70,13 @@ class BicycleController extends CustomActiveController
             'bicycle_type_id' => $bicycleTypeId,
             'status' => Bicycle::STATUS_FREE,
         ]);
-        // return $listBicycle;
         $randomNumber = rand(0, count($listBicycle) - 1);
         $selectedBicycle = $listBicycle[$randomNumber];
         $selectedBicycle->status = Bicycle::STATUS_BOOKED;
 
         $rental = new Rental();
         $rental->booking_id = strtoupper(uniqid("SG"));
+        $rental->pickup_station_id = $stationId;
         $rental->user_id = $userId;
         $rental->bicycle_id = $selectedBicycle->id;
         $rental->serial = $selectedBicycle->serial;
@@ -201,7 +201,7 @@ class BicycleController extends CustomActiveController
                        s2.postal as return_station_postal
                 from rental join bicycle on rental.bicycle_id = bicycle.id
                 join bicycle_type on bicycle.bicycle_type_id = bicycle_type.id
-                join station as s1 on bicycle.station_id = s1.id
+                join station as s1 on rental.pickup_station_id = s1.id
                 join station as s2 on rental.return_station_id = s2.id
                 where user_id = :userId
                 and rental.id = :rentalId

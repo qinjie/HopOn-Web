@@ -22,7 +22,7 @@ class Rental extends ActiveRecord
     {
         return [
             [['bicycle_id', 'user_id'], 'required'],
-            [['bicycle_id', 'user_id', 'return_station_id'], 'integer'],
+            [['bicycle_id', 'user_id', 'return_station_id', 'pickup_station_id'], 'integer'],
 
             ['serial', 'required'],
             ['serial', 'string', 'max' => 50],

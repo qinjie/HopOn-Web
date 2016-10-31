@@ -81,7 +81,7 @@ class RentalController extends CustomActiveController
                     where image.bicycle_type_id = bicycle_type.id) as listImageUrl
              from rental join bicycle on rental.bicycle_id = bicycle.id
              join bicycle_type on bicycle.bicycle_type_id = bicycle_type.id
-             join station on bicycle.station_id = station.id
+             join station on rental.pickup_station_id = station.id
              join beacon as b1 on b1.id = station.beacon_id
              join beacon as b2 on b2.id = bicycle.beacon_id
              join bean as bean2 on bean2.id = b2.bean_id
@@ -134,7 +134,7 @@ class RentalController extends CustomActiveController
                    s2.longitude as return_station_lng
              from rental join bicycle on rental.bicycle_id = bicycle.id
              join bicycle_type on bicycle.bicycle_type_id = bicycle_type.id
-             join station as s1 on bicycle.station_id = s1.id
+             join station as s1 on rental.pickup_station_id = s1.id
              join station as s2 on rental.return_station_id = s2.id
              where user_id = :userId
              and return_at is not null
