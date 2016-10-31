@@ -38,3 +38,12 @@ return [
 ];
 ```
 
+## Testing
+Instructions for testing server code
+
+1. Install [codeception](http://codeception.com/install)
+2. From repository directory, go to ```tests/codeception/api```
+3. Run ```codecept build``` to init tests
+4. Run ```codecept run functional``` to run tests
+5. You can write tests in directory ```tests/codeception/api/functional```
+6. Run ```codecept run functional AttendanceCest``` to run test file ```AttendanceCest.php```
