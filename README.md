@@ -39,7 +39,8 @@ return [
 ```
 
 ## Testing
-Instructions for testing server code
+Instructions for testing server code.
+Database for testing is in ```tests/codeception/api/_data/dump.sql```.
 
 1. Install [codeception](http://codeception.com/install)
 2. From repository directory, go to ```tests/codeception/api```
